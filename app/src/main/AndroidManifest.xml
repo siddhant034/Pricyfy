@@ -18,7 +18,7 @@
         </activity>
         <activity
             android:name=".homeScreen"
-            android:label="@string/title_activity_home_screen"
+            android:label=""
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
