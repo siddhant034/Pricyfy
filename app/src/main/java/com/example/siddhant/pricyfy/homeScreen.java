@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,54 +81,54 @@ public class homeScreen extends AppCompatActivity
         int width = displayMetrics.widthPixels;
         int height = 200;
 
-        Button b = (Button)findViewById(R.id.button0);
-        b.setWidth(width/4);
-        b.setHeight(height/2);
+        ImageButton b = (ImageButton)findViewById(R.id.imageButton5);
+        b.setMaxWidth(width/4);
+        b.setMaxHeight(height/2);
 
-        b = (Button)findViewById(R.id.button1);
-        b.setWidth(width/4);
-        b.setHeight(height/2);
+        b = (ImageButton)findViewById(R.id.imageButton5);
+        b.setMaxWidth(width/4);
+        b.setMaxHeight(height/2);
 
-        b = (Button)findViewById(R.id.button2);
-        b.setWidth(width/4);
-        b.setHeight(height/2);
+        b = (ImageButton)findViewById(R.id.imageButton5);
+        b.setMaxWidth(width/4);
+        b.setMaxHeight(height/2);
 
-        b = (Button)findViewById(R.id.button3);
-        b.setWidth(width/4);
-        b.setHeight(height/2);
+        b = (ImageButton)findViewById(R.id.imageButton5);
+        b.setMaxWidth(width/4);
+        b.setMaxHeight(height/2);
 
-        b = (Button)findViewById(R.id.button4);
-        b.setWidth(width/4);
-        b.setHeight(height/2);
+        b = (ImageButton)findViewById(R.id.imageButton5);
+        b.setMaxWidth(width/4);
+        b.setMaxHeight(height/2);
 
-        b = (Button)findViewById(R.id.button5);
-        b.setWidth(width/4);
-        b.setHeight(height/2);
+        b = (ImageButton)findViewById(R.id.imageButton5);
+        b.setMaxWidth(width/4);
+        b.setMaxHeight(height/2);
 
-        b = (Button)findViewById(R.id.button6);
-        b.setWidth(width/4);
-        b.setHeight(height/2);
+        b = (ImageButton)findViewById(R.id.imageButton5);
+        b.setMaxWidth(width/4);
+        b.setMaxHeight(height/2);
 
-        b = (Button)findViewById(R.id.button7);
-        b.setWidth(width/4);
-        b.setHeight(height/2);
+        b = (ImageButton)findViewById(R.id.imageButton5);
+        b.setMaxWidth(width/4);
+        b.setMaxHeight(height/2);
+
     }
 
     private void addBottomDots(int currentPage) {
         dots = new TextView[layouts.length];
 
-       // int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
-       // int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
+      //  int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
+      //  int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
 
         dotsLayout.removeAllViews();
         for (int i = 0; i < dots.length; i++) {
             dots[i] = new TextView(this);
             dots[i].setText(Html.fromHtml("&#8226;"));
-            dots[i].setTextSize(35);
+            dots[i].setTextSize(25);
            // dots[i].setTextColor(colorsInactive[currentPage]);
             dotsLayout.addView(dots[i]);
         }
-
        // if (dots.length > 0)
            // dots[currentPage].setTextColor(colorsActive[currentPage]);
     }
@@ -199,17 +200,17 @@ public class homeScreen extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.homeDecor) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.men) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.mobilesandTablets) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.cameras) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.dealandOffers) {
 
         }
 

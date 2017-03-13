@@ -12,91 +12,318 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="com.example.siddhant.pricyfy.homeScreen"
-        tools:showIn="@layout/app_bar_home_screen">
+        tools:context="com.example.siddhant.pricyfy.homeScreen">
 
 
         <android.support.v4.view.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_height="125dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="0dp"
-            android:clickable="true">
+            android:layout_marginBottom="0dp"
+            android:clickable="true"
+            android:paddingBottom="0dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
         </android.support.v4.view.ViewPager>
 
         <LinearLayout
             android:id="@+id/layoutDots"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="20dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/view_pager"
+            android:layout_marginTop="0dp"
             android:gravity="center"
-            android:orientation="horizontal"/>
+            android:orientation="horizontal"
+            android:paddingBottom="0dp"
+            android:paddingTop="0dp"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
 
-        <View
-            android:layout_width="368dp"
-            android:layout_height="1dp"
-            android:alpha=".5"
-            android:layout_above="@id/layoutDots"
-            android:background="@android:color/white"
-            />
 
 
-        <android.support.v7.widget.GridLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/gridLayout"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/layoutDots">
+            android:layout_below="@+id/layoutDots"
+            android:layout_marginTop="0dp"
+            android:id="@+id/relativeLayout2">
+
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="75dp"
+                android:layout_height="99dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_margin="1dp"
+                android:layout_marginTop="1dp"
+                android:paddingTop="10dp"
+                android:background="#ffffff"
+                app:srcCompat="@drawable/icon" />
+
+            <ImageButton
+                android:id="@+id/imageButton8"
+                android:layout_width="75dp"
+                android:layout_height="99dp"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="1dp"
+                android:layout_toEndOf="@+id/imageButton6"
+                android:layout_toRightOf="@+id/imageButton6"
+                android:background="#ffffff"
+                app:srcCompat="@drawable/icon" />
+
+            <ImageButton
+                android:id="@+id/imageButton7"
+                android:layout_width="75dp"
+                android:layout_height="99dp"
+                android:background="#ffffff"
+                app:srcCompat="@drawable/icon"
+                android:layout_below="@+id/imageButton2"
+                android:layout_alignLeft="@+id/imageButton2"
+                android:layout_alignStart="@+id/imageButton2" />
+
+            <ImageButton
+                android:id="@+id/imageButton6"
+                android:layout_width="75dp"
+                android:layout_height="99dp"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="1dp"
+                android:layout_toEndOf="@+id/imageButton7"
+                android:layout_toRightOf="@+id/imageButton7"
+                android:background="#ffffff"
+                app:srcCompat="@drawable/icon" />
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="75dp"
+                android:layout_height="99dp"
+                android:layout_alignParentTop="true"
+                android:layout_margin="1dp"
+                android:layout_toEndOf="@+id/imageButton"
+                android:layout_toRightOf="@+id/imageButton"
+                android:background="#ffffff"
+                app:srcCompat="@drawable/icon" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="75dp"
+                android:layout_height="99dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="1dp"
+                android:background="#ffffff"
+                app:srcCompat="@drawable/icon" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="75dp"
+                android:layout_height="99dp"
+                android:layout_alignParentTop="true"
+                android:layout_margin="1dp"
+                android:layout_toEndOf="@+id/imageButton3"
+                android:layout_toRightOf="@+id/imageButton3"
+                android:background="#ffffff"
+                app:srcCompat="@drawable/icon" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="75dp"
+                android:layout_height="99dp"
+                android:layout_alignParentTop="true"
+                android:layout_margin="1dp"
+                android:layout_toEndOf="@+id/imageButton2"
+                android:layout_toRightOf="@+id/imageButton2"
+                android:background="#ffffff"
+                app:srcCompat="@drawable/icon" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/deals"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/relativeLayout2"
+            android:layout_centerHorizontal="true">
+
 
             <Button
-                android:id="@+id/button0"
-                android:layout_weight="1"
-                android:text="Button" />
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:textColor="#112233"
+                android:text="Deals of the day"
+                android:textAlignment="viewStart"
+                android:gravity="start"
+                android:background="#ffffff"
+                android:elevation="0dp"
+                android:textSize="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:id="@+id/horizontalScrollView">
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    
+                   <Button
+                       android:layout_width="120dp"
+                       android:layout_height="fill_parent" />
+
+                    <Button
+                        android:layout_width="120dp"
+                        android:layout_height="fill_parent" />
+
+                    <Button
+                        android:layout_width="120dp"
+                        android:layout_height="fill_parent" />
+
+                    <Button
+                        android:layout_width="120dp"
+                        android:layout_height="fill_parent" />
+
+                    <Button
+                        android:layout_width="120dp"
+                        android:layout_height="fill_parent" />
+
+                    <Button
+                        android:layout_width="120dp"
+                        android:layout_height="fill_parent" />
+
+                    <Button
+                        android:layout_width="120dp"
+                        android:layout_height="fill_parent" />
+
+                    <Button
+                        android:layout_width="120dp"
+                        android:layout_height="fill_parent" />
+
+                    <Button
+                        android:layout_width="120dp"
+                        android:layout_height="fill_parent" />
+
+                    <Button
+                        android:layout_width="120dp"
+                        android:layout_height="fill_parent" />
+
+                    <Button
+                        android:layout_width="120dp"
+                        android:layout_height="fill_parent" />
+
+                    <Button
+                        android:layout_width="120dp"
+                        android:layout_height="fill_parent" />
+
+                </LinearLayout>
+            </HorizontalScrollView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ad"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/deals">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/ad">
 
             <Button
-                android:id="@+id/button1"
-                android:layout_weight="1"
-                android:text="Button" />
+                android:id="@+id/buttonDeals"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="#ffffff"
+                android:elevation="0dp"
+                android:gravity="start"
+                android:text="Coupons"
+                android:textAlignment="viewStart"
+                android:textColor="#112233"
+                android:textSize="20dp" />
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_weight="1"
-                android:text="Button" />
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none">
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_weight="1"
-                android:text="Button" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                        <Button
+                            android:layout_width="240dp"
+                            android:layout_height="fill_parent" />
 
-            <Button
-                android:id="@+id/button4"
-                android:layout_weight="1"
-                android:text="Button" />
+                        <Button
+                            android:layout_width="240dp"
+                            android:layout_height="fill_parent" />
 
-            <Button
-                android:id="@+id/button5"
-                android:layout_weight="1"
-                android:text="Button" />
+                        <Button
+                            android:layout_width="240dp"
+                            android:layout_height="fill_parent" />
+                </LinearLayout>
+            </HorizontalScrollView>
+        </RelativeLayout>
 
-            <Button
-                android:id="@+id/button6"
-                android:layout_weight="1"
-                android:text="Button" />
+        <RelativeLayout
+            android:id="@+id/men499"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/ad">
 
-            <Button
-                android:id="@+id/button7"
-                android:layout_weight="1"
-                android:text="Button" />
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-        </android.support.v7.widget.GridLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/women499"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/ad">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

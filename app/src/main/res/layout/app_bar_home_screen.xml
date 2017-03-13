@@ -6,24 +6,46 @@
     android:layout_height="match_parent"
     tools:context="com.example.siddhant.pricyfy.homeScreen">
 
-    <android.support.design.widget.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorPrimaryDark"
         android:theme="@style/AppTheme.AppBarOverlay"
-        android:background="@color/colorPrimaryDark">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="0dp"
+        android:id="@+id/relativeLayout">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#ffffff"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            android:background="#123456"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:layout_alignParentLeft="true">
+
+            <android.support.v7.widget.SearchView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.SearchView>
 
         </android.support.v7.widget.Toolbar>
 
-    </android.support.design.widget.AppBarLayout>
+    </RelativeLayout>
 
-    <include layout="@layout/content_home_screen" />
+    <include
+        layout="@layout/content_home_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_alignRight="@+id/relativeLayout"
+        android:layout_alignEnd="@+id/relativeLayout"
+        android:layout_alignLeft="@+id/relativeLayout"
+        android:layout_alignStart="@+id/relativeLayout" />
 
 </RelativeLayout>
