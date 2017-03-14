@@ -12,24 +12,32 @@
         android:layout_margin="5dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/pricify_blue"
         android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="0dp"
-        android:id="@+id/relativeLayout">
+        android:id="@+id/relativeLayout"
+        android:clickable="true"
+        android:gravity="start">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#123456"
+            android:background="#ffffff"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:titleTextAppearance="@style/AppTheme"
+            app:contentInsetStartWithNavigation="0dp"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             android:layout_alignParentLeft="true">
 
             <android.support.v7.widget.SearchView
+                android:id="@+id/search_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true">
             </android.support.v7.widget.SearchView>
 
         </android.support.v7.widget.Toolbar>
@@ -47,5 +55,11 @@
         android:layout_alignEnd="@+id/relativeLayout"
         android:layout_alignLeft="@+id/relativeLayout"
         android:layout_alignStart="@+id/relativeLayout" />
+
+    <include
+        layout="@layout/app_footer"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content" />
+
 
 </RelativeLayout>

@@ -9,6 +9,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
     <string name="app_label">PRICYFY</string>
-    <string name="search_hint">Search for products of brands</string>
+    <string name="search_hint">Search for products or brands</string>
     <string name="menu_search">Search</string>
 </resources>

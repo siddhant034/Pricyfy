@@ -112,7 +112,6 @@ public class homeScreen extends AppCompatActivity
         b = (ImageButton)findViewById(R.id.imageButton5);
         b.setMaxWidth(width/4);
         b.setMaxHeight(height/2);
-
     }
 
     private void addBottomDots(int currentPage) {
