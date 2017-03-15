@@ -4,7 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/pricify_blue"
@@ -13,37 +13,30 @@
         android:clickable="true"
         android:layout_alignParentBottom="true">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarFooter"
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:background="@color/pricify_blue"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            android:layout_alignParentLeft="true">
+        <Button
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/icon"/>
 
-            <Button
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_menu_manage"/>
+        <Button
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/icon"/>
 
-            <Button
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_menu_camera"/>
+        <Button
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/icon"/>
 
-            <Button
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_menu_gallery"/>
+        <Button
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/icon"/>
 
-            <Button
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_menu_send"/>
-
-        </android.support.v7.widget.Toolbar>
-
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>
