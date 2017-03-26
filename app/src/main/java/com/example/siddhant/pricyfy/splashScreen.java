@@ -1,17 +1,47 @@
 package com.example.siddhant.pricyfy;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+
+import static com.example.siddhant.pricyfy.R.id.tv;
 
 public class splashScreen extends AppCompatActivity {
+
+    static public Request request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        new PrefetchData().execute();
+        TextView tv = (TextView)findViewById(R.id.tv);
+        if(!checkConnection())
+        {
+            tv.setText("No internet connection available");
+            tv.setBackgroundColor(Color.RED);
+        }
+        else new PrefetchData().execute();
+    }
+
+    public boolean checkConnection()
+    {
+        boolean connected=false;
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        }
+        return connected;
     }
 
     private class PrefetchData extends AsyncTask<Void, Void, Void> {
@@ -35,7 +65,9 @@ public class splashScreen extends AppCompatActivity {
              * 4. Sending device information to server
              * 5. etc.,
              */
-            
+            request = new Request.Builder()
+                    .url("https://pricyfy.com/db_connect.php?id=810494")
+                    .build();
             return null;
         }
 

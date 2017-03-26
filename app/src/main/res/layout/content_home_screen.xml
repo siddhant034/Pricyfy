@@ -60,35 +60,45 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/layoutDots"
             android:layout_marginTop="0dp"
-            android:id="@+id/relativeLayout2">
+            android:id="@+id/relativeLayout1">
 
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/button_deals"
                 android:layout_width="75dp"
                 android:layout_height="99dp"
                 android:layout_weight="1"
                 android:layout_alignParentTop="true"
                 android:layout_margin="1dp"
-                android:layout_toRightOf="@+id/imageButton2"
+                android:layout_toRightOf="@+id/cameras"
                 android:background="#ffffff"
-                app:srcCompat="@drawable/icon" />
+                android:onClick="openDealsPage"
+                android:src="@drawable/deals"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                />
 
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/mobiles"
                 android:layout_width="75dp"
                 android:layout_weight="1"
                 android:layout_height="99dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_margin="1dp"
-                android:layout_toRightOf="@+id/imageButton"
+                android:layout_toRightOf="@+id/dealandOffers"
                 android:background="#ffffff"
-                app:srcCompat="@drawable/icon" />
+                android:src="@drawable/mobiles_tablets"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:onClick="openAllProducts"
+                />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/laptops"
                 android:layout_width="75dp"
                 android:layout_weight="1"
                 android:layout_height="99dp"
@@ -96,29 +106,88 @@
                 android:layout_alignParentTop="true"
                 android:layout_margin="1dp"
                 android:background="#ffffff"
-                app:srcCompat="@drawable/icon" />
+                android:src="@drawable/laptops_peripherals"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:onClick="openAllProducts"
+                />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/cameras"
                 android:layout_width="75dp"
                 android:layout_weight="1"
                 android:layout_height="99dp"
                 android:layout_alignParentTop="true"
                 android:layout_margin="1dp"
-                android:layout_toRightOf="@+id/imageButton3"
+                android:layout_toRightOf="@+id/laptops"
                 android:background="#ffffff"
-                app:srcCompat="@drawable/icon" />
+                android:src="@drawable/camera_accessories"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:onClick="openAllProducts"
+                />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:id="@+id/linearLayout2"
+            android:orientation="horizontal"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/relativeLayout1"
+            android:layout_marginTop="0dp"
+            android:background="#ffffff"
+            android:layout_margin="1dp"
+            android:id="@+id/relativeLayout2"
+            >
+
+            <TextView
+                android:layout_width="75dp"
+                android:layout_height="24dp"
+                android:text="Deals"
+                android:textSize="10dp"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:layout_width="75dp"
+                android:layout_height="24dp"
+                android:text="Mobiles and Tablets"
+                android:textSize="10dp"
+                android:textAlignment="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="75dp"
+                android:layout_height="24dp"
+                android:text="Laptops and Accessories"
+                android:textSize="10dp"
+                android:textAlignment="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="75dp"
+                android:layout_height="24dp"
+                android:text="Cameras"
+                android:textAlignment="center"
+                android:textSize="10dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/linearLayout3"
             android:layout_height="100dp"
+            android:layout_marginTop="0dp"
             android:layout_below="@id/relativeLayout2">
 
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/tv"
                 android:layout_width="75dp"
                 android:layout_height="99dp"
                 android:layout_weight="1"
@@ -126,46 +195,112 @@
                 android:layout_alignParentLeft="true"
                 android:layout_margin="1dp"
                 android:background="#ffffff"
-                android:layout_below="@id/imageButton3"
-                app:srcCompat="@drawable/icon" />
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:src="@drawable/tv_entertainment"
+                android:layout_below="@id/laptops"
+                android:onClick="openAllProducts"
+                />
 
             <ImageButton
-                android:id="@+id/imageButton7"
+                android:id="@+id/men"
                 android:layout_width="75dp"
                 android:layout_height="99dp"
                 android:layout_weight="1"
                 android:background="#ffffff"
-                app:srcCompat="@drawable/icon"
+                android:src="@drawable/men"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
                 android:layout_margin="1dp"
-                android:layout_below="@+id/imageButton2"
-                android:layout_toRightOf="@id/imageButton5"
-                android:layout_alignParentBottom="true"/>
+                android:layout_below="@+id/cameras"
+                android:layout_toRightOf="@id/tv"
+                android:layout_alignParentBottom="true"
+                android:onClick="openAllProducts"
+                />
 
 
 
             <ImageButton
-                android:id="@+id/imageButton8"
+                android:id="@+id/women"
                 android:layout_width="75dp"
                 android:layout_height="99dp"
                 android:layout_weight="1"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="1dp"
-                android:layout_toRightOf="@+id/imageButton6"
+                android:layout_toRightOf="@+id/others"
                 android:background="#ffffff"
-                android:layout_below="@id/imageButton4"
-                app:srcCompat="@drawable/icon" />
+                android:src="@drawable/women"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:layout_below="@id/mobiles"
+                android:onClick="openAllProducts"
+                />
 
             <ImageButton
-                android:id="@+id/imageButton6"
+                android:id="@+id/others"
                 android:layout_width="75dp"
                 android:layout_height="99dp"
                 android:layout_weight="1"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="1dp"
-                android:layout_below="@id/imageButton"
-                android:layout_toRightOf="@+id/imageButton7"
+                android:layout_below="@id/dealandOffers"
+                android:layout_toRightOf="@+id/men"
                 android:background="#ffffff"
-                app:srcCompat="@drawable/icon" />
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:src="@drawable/other"
+                android:onClick="openAllProducts"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linearLayout3"
+            android:layout_marginTop="0dp"
+            android:background="#ffffff"
+            android:layout_margin="1dp"
+            android:id="@+id/relativeLayout4">
+
+            <TextView
+                android:layout_width="75dp"
+                android:layout_height="24dp"
+                android:text="TV and Entertainment"
+                android:textSize="10dp"
+                android:textAlignment="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="75dp"
+                android:layout_height="24dp"
+                android:text="Men"
+                android:textSize="10dp"
+                android:textAlignment="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="75dp"
+                android:layout_height="24dp"
+                android:text="Women"
+                android:textSize="10dp"
+                android:textAlignment="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="75dp"
+                android:layout_height="24dp"
+                android:text="Other products"
+                android:textAlignment="center"
+                android:textSize="10dp"
+                android:layout_weight="1"/>
 
         </LinearLayout>
 
@@ -173,8 +308,9 @@
             android:id="@+id/deals"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_below="@+id/linearLayout2"
+            android:layout_below="@+id/relativeLayout4"
             android:layout_margin="1dp"
+            android:layout_marginTop="2dp"
             android:layout_centerHorizontal="true">
 
 
@@ -281,7 +417,7 @@
             android:layout_below="@+id/ad">
 
             <Button
-                android:id="@+id/buttonDeals"
+                android:id="@+id/dealandOffers"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
@@ -301,7 +437,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="none"
-                android:layout_below="@id/buttonDeals">
+                android:layout_below="@id/dealandOffers">
 
                 <LinearLayout
                     android:layout_width="match_parent"

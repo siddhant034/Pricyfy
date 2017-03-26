@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="slide0" type="string">https://www.google.in</item>
+    <item name="slide1" type="string">https://www.facebook.com</item>
+    <item name="slide2" type="string">https://www.instagram.com</item>
+    <item name="slide3" type="string">https://quora.com</item>
+</resources>

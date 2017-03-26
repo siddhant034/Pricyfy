@@ -3,6 +3,7 @@ package com.example.siddhant.pricyfy;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,6 +23,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -37,9 +40,9 @@ public class homeScreen extends AppCompatActivity
     private TextView[] dots;
     private MyViewPagerAdapter myViewPagerAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -75,6 +78,10 @@ public class homeScreen extends AppCompatActivity
             }
         });
         // slider end
+
+        //to disable tinting of the navigation view icons
+        NavigationView mNavigationView = (NavigationView)findViewById(R.id.nav_view);
+        mNavigationView.setItemIconTintList(null);
     }
 
     private void addBottomDots(int currentPage) {
@@ -196,10 +203,16 @@ public class homeScreen extends AppCompatActivity
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getApplicationContext(),"hello",Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(homeScreen.this,homeScreen.class);
-                    startActivity(i);
-                    //Log.i("TAG","This page was clicked: " + position);
+                    String url="";
+                    switch(position)
+                    {
+                        case 0 : url = getResources().getString(R.string.slide0); break;
+                        case 1 : url = getResources().getString(R.string.slide1); break;
+                        case 2 : url = getResources().getString(R.string.slide2); break;
+                        case 3 : url = getResources().getString(R.string.slide3); break;
+                    }
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(browserIntent);
                 }
             });
 
@@ -224,5 +237,34 @@ public class homeScreen extends AppCompatActivity
             View view = (View) object;
             container.removeView(view);
         }
+    }
+
+    public void openDealsPage(View view)
+    {
+        Intent i = new Intent(this,dealsScreen.class);
+        startActivity(i);
+    }
+
+    public void openAllProducts(View view)
+    {
+        Intent i = new Intent(this,allProducts.class);
+        switch(view.getId())
+        {
+            case R.id.mobiles :
+                i.putExtra("URL","mobiles"); break;
+            case R.id.laptops :
+                i.putExtra("URL","laptops"); break;
+            case R.id.cameras :
+                i.putExtra("URL","cameras"); break;
+            case R.id.tv :
+                i.putExtra("URL","tv"); break;
+            case R.id.men :
+                i.putExtra("URL","men"); break;
+            case R.id.women :
+                i.putExtra("URL","women"); break;
+            case R.id.others :
+                i.putExtra("URL","others"); break;
+        }
+        startActivity(i);
     }
 }
