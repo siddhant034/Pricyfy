@@ -38,11 +38,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".dealsScreen"
-            android:theme="@style/Theme.AppCompat" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".productScreen" />
         <activity
             android:name=".allProducts"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".FooterTemplate"></activity>
     </application>
 
 </manifest>

@@ -1,18 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:background="@color/pricify_blue"
+<RelativeLayout android:background="@color/black_overlay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        card_view:cardUseCompatPadding="true"
-        card_view:cardElevation="4dp"
-        card_view:cardCornerRadius="4dp"
-        android:scrollbars="vertical" />
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/pricify_blue"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/relativeLayout"
+        android:clickable="true"
+        android:gravity="start">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#ffffff"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:titleTextAppearance="@style/AppTheme"
+            app:contentInsetStartWithNavigation="0dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:layout_alignParentLeft="true">
+
+            <android.support.v7.widget.SearchView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true">
+            </android.support.v7.widget.SearchView>
+
+        </android.support.v7.widget.Toolbar>
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/content_all_products"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_above="@+id/footer"
+        android:layout_alignRight="@+id/relativeLayout"
+        android:layout_alignEnd="@+id/relativeLayout"
+        android:layout_alignLeft="@+id/relativeLayout"
+        android:layout_alignStart="@+id/relativeLayout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/pricify_blue"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/footer"
+        android:clickable="true"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/icon"/>
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/icon"/>
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/icon"/>
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/icon"/>
+
+    </LinearLayout>
+
 </RelativeLayout>

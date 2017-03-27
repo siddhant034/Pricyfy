@@ -27,9 +27,17 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class homeScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -65,8 +73,6 @@ public class homeScreen extends AppCompatActivity
                 R.layout.slide2,
                 R.layout.slide3,
                 R.layout.slide4};
-        //adding bottom dots
-        addBottomDots(0);
 
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
@@ -82,6 +88,9 @@ public class homeScreen extends AppCompatActivity
         //to disable tinting of the navigation view icons
         NavigationView mNavigationView = (NavigationView)findViewById(R.id.nav_view);
         mNavigationView.setItemIconTintList(null);
+
+        CircleIndicator indicator = (CircleIndicator)findViewById(R.id.indicator);
+        indicator.setViewPager(viewPager);
     }
 
     private void addBottomDots(int currentPage) {
@@ -107,7 +116,6 @@ public class homeScreen extends AppCompatActivity
 
         @Override
         public void onPageSelected(int position) {
-            addBottomDots(position);
         }
 
         @Override
@@ -169,20 +177,46 @@ public class homeScreen extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.home) {
-            // Handle the camera action
-        } else if (id == R.id.homeDecor) {
-
-        } else if (id == R.id.men) {
-
-        } else if (id == R.id.mobilesandTablets) {
-
-        } else if (id == R.id.cameras) {
-
-        } else if (id == R.id.dealandOffers) {
-
+        if (id == R.id.home)
+        {
+            Intent i = new Intent(this,homeScreen.class);
+            startActivity(i);
         }
-
+        else if (id == R.id.dealandOffers)
+        {
+            Intent i = new Intent(this,homeScreen.class);
+            startActivity(i);
+        }
+        else if (id == R.id.mobilesandTablets)
+        {
+            Intent i = new Intent(this,allProducts.class);
+            i.putExtra("URL","mobiles");
+            startActivity(i);
+        }
+        else if (id == R.id.homeDecor)
+        {
+            Intent i = new Intent(this,allProducts.class);
+            i.putExtra("URL","others");
+            startActivity(i);
+        }
+        else if (id == R.id.men)
+        {
+            Intent i = new Intent(this,allProducts.class);
+            i.putExtra("URL","men");
+            startActivity(i);
+        }
+        else if (id == R.id.women)
+        {
+            Intent i = new Intent(this,allProducts.class);
+            i.putExtra("URL","women");
+            startActivity(i);
+        }
+        else if (id == R.id.laptops)
+        {
+            Intent i = new Intent(this,allProducts.class);
+            i.putExtra("URL","laptops");
+            startActivity(i);
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

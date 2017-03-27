@@ -10,14 +10,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Response;
 
 import static com.example.siddhant.pricyfy.R.id.tv;
 
 public class splashScreen extends AppCompatActivity {
 
     static public Request request;
+    public class links
+    {
+        String product_name, product_link,image_link;
+    }
+    ArrayList<links> linksArr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +78,29 @@ public class splashScreen extends AppCompatActivity {
              * 4. Sending device information to server
              * 5. etc.,
              */
-            request = new Request.Builder()
-                    .url("https://pricyfy.com/db_connect.php?id=810494")
+            Request request = new Request.Builder()
+                    .url("https://pricyfy.com/app_all_deals.php?id=0")
                     .build();
+            OkHttpClient client = new OkHttpClient();
+            try {
+                Response response = client.newCall(request).execute();
+
+                JSONArray array = new JSONArray(response.body().string());
+
+                for (int i = 0; i < array.length(); i++) {
+
+                    JSONObject object = array.getJSONObject(i);
+                    links l = new links();
+                    l.product_name=object.getString("product_name");
+                    l.product_link=object.getString("product_link");
+                    l.image_link=object.getString("image_link");
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return null;
         }
 
@@ -77,6 +110,7 @@ public class splashScreen extends AppCompatActivity {
             // After completing http call
             // will close this activity and lauch main activity
             Intent i = new Intent(splashScreen.this, homeScreen.class);
+            i.putExtra("linksArray",linksArr);
             startActivity(i);
             finish();
         }
