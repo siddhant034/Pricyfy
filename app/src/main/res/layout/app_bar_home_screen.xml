@@ -28,7 +28,8 @@
             app:titleTextAppearance="@style/AppTheme"
             app:contentInsetStartWithNavigation="0dp"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            android:layout_alignParentLeft="true">
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="0dp">
 
             <android.support.v7.widget.SearchView
                 android:id="@+id/search_view"

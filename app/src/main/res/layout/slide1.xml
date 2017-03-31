@@ -12,9 +12,11 @@
         android:background="#ffffff">
 
         <ImageView
+            android:id="@+id/slider1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/sliderimage" />
+            android:src="@drawable/slider1"
+            android:onClick="openDealsPage"/>
 
     </LinearLayout>
 

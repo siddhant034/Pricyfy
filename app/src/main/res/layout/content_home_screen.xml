@@ -38,7 +38,7 @@
             <me.relex.circleindicator.CircleIndicator
                 android:id="@+id/indicator"
                 android:layout_width="match_parent"
-                android:layout_height="15dp"
+                android:layout_height="20dp"
                 android:layout_gravity="bottom"
                 />
         </FrameLayout>
@@ -53,245 +53,257 @@
             android:layout_marginTop="0dp"
             android:id="@+id/relativeLayout1">
 
-
-            <ImageButton
+            <LinearLayout
                 android:id="@+id/button_deals"
-                android:layout_width="75dp"
-                android:layout_height="99dp"
-                android:layout_weight="1"
-                android:layout_alignParentTop="true"
-                android:layout_margin="1dp"
-                android:layout_toRightOf="@+id/cameras"
                 android:background="#ffffff"
-                android:onClick="openDealsPage"
-                android:src="@drawable/deals"
-                android:padding="10dp"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                />
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:layout_margin="2dp"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:onClick="openDealsPage">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:src="@drawable/deals"
+                    android:scaleType="fitCenter"/>
 
-            <ImageButton
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Deals"
+                    android:layout_weight="4"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/mobiles"
-                android:layout_width="75dp"
-                android:layout_weight="1"
-                android:layout_height="99dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_margin="1dp"
-                android:layout_toRightOf="@+id/dealandOffers"
                 android:background="#ffffff"
-                android:src="@drawable/mobiles_tablets"
-                android:padding="10dp"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:onClick="openAllProducts"
-                />
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:layout_margin="2dp"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:onClick="openAllProducts">
 
-            <ImageButton
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:src="@drawable/mobiles_tablets"
+                    android:scaleType="fitCenter"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Mobiles And Tablets"
+                    android:layout_weight="4"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/laptops"
-                android:layout_width="75dp"
-                android:layout_weight="1"
-                android:layout_height="99dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_margin="1dp"
+                android:layout_width="match_parent"
                 android:background="#ffffff"
-                android:src="@drawable/laptops_peripherals"
-                android:padding="10dp"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:onClick="openAllProducts"
-                />
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:layout_margin="2dp"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:onClick="openAllProducts">
 
-            <ImageButton
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:src="@drawable/laptops_peripherals"
+                    android:scaleType="fitCenter"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Laptops and Peripherals"
+                    android:layout_weight="4"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/cameras"
-                android:layout_width="75dp"
-                android:layout_weight="1"
-                android:layout_height="99dp"
-                android:layout_alignParentTop="true"
-                android:layout_margin="1dp"
-                android:layout_toRightOf="@+id/laptops"
+                android:layout_width="match_parent"
                 android:background="#ffffff"
-                android:src="@drawable/camera_accessories"
-                android:padding="10dp"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:onClick="openAllProducts"
-                />
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:padding="2dp"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:onClick="openAllProducts">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:src="@drawable/camera_accessories"
+                    android:scaleType="fitCenter"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Cameras"
+                    android:layout_weight="4"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="8dp" />
+            </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_height="24dp"
+            android:layout_height="100dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/relativeLayout1"
             android:layout_marginTop="0dp"
-            android:background="#ffffff"
-            android:layout_margin="1dp"
-            android:id="@+id/relativeLayout2"
-            >
+            android:id="@+id/relativeLayout2">
 
-            <TextView
-                android:layout_width="75dp"
-                android:layout_height="24dp"
-                android:text="Deals"
-                android:textSize="10dp"
-                android:textAlignment="center"
-                android:layout_weight="1"
-                />
-
-            <TextView
-                android:layout_width="75dp"
-                android:layout_height="24dp"
-                android:text="Mobiles and Tablets"
-                android:textSize="10dp"
-                android:textAlignment="center"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="75dp"
-                android:layout_height="24dp"
-                android:text="Laptops and Accessories"
-                android:textSize="10dp"
-                android:textAlignment="center"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="75dp"
-                android:layout_height="24dp"
-                android:text="Cameras"
-                android:textAlignment="center"
-                android:textSize="10dp"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:id="@+id/linearLayout3"
-            android:layout_height="100dp"
-            android:layout_marginTop="0dp"
-            android:layout_below="@id/relativeLayout2">
-
-            <ImageButton
+            <LinearLayout
                 android:id="@+id/tv"
-                android:layout_width="75dp"
-                android:layout_height="99dp"
-                android:layout_weight="1"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_margin="1dp"
                 android:background="#ffffff"
-                android:padding="10dp"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:src="@drawable/tv_entertainment"
-                android:layout_below="@id/laptops"
-                android:onClick="openAllProducts"
-                />
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:layout_margin="2dp"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:onClick="openAllProducts">
 
-            <ImageButton
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:src="@drawable/tv_entertainment"
+                    android:scaleType="fitCenter"/>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="TV and Entertainment"
+                    android:layout_weight="4"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/men"
-                android:layout_width="75dp"
-                android:layout_height="99dp"
-                android:layout_weight="1"
                 android:background="#ffffff"
-                android:src="@drawable/men"
-                android:padding="10dp"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:layout_margin="1dp"
-                android:layout_below="@+id/cameras"
-                android:layout_toRightOf="@id/tv"
-                android:layout_alignParentBottom="true"
-                android:onClick="openAllProducts"
-                />
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:layout_margin="2dp"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:onClick="openAllProducts">
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:src="@drawable/men"
+                    android:scaleType="fitCenter"/>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Men"
+                    android:layout_weight="4"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="8dp" />
+            </LinearLayout>
 
-            <ImageButton
+            <LinearLayout
                 android:id="@+id/women"
-                android:layout_width="75dp"
-                android:layout_height="99dp"
-                android:layout_weight="1"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="1dp"
-                android:layout_toRightOf="@+id/others"
+                android:layout_width="match_parent"
                 android:background="#ffffff"
-                android:src="@drawable/women"
-                android:padding="10dp"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:layout_below="@id/mobiles"
-                android:onClick="openAllProducts"
-                />
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:layout_margin="2dp"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:onClick="openAllProducts">
 
-            <ImageButton
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:src="@drawable/women"
+                    android:scaleType="fitCenter"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Women"
+                    android:layout_weight="4"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/others"
-                android:layout_width="75dp"
-                android:layout_height="99dp"
-                android:layout_weight="1"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="1dp"
-                android:layout_below="@id/dealandOffers"
-                android:layout_toRightOf="@+id/men"
+                android:layout_width="match_parent"
                 android:background="#ffffff"
-                android:padding="10dp"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:src="@drawable/other"
-                android:onClick="openAllProducts"
-                />
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:padding="2dp"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:onClick="openAllProducts">
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:src="@drawable/other"
+                    android:scaleType="fitCenter"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="24dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/linearLayout3"
-            android:layout_marginTop="0dp"
-            android:background="#ffffff"
-            android:layout_margin="1dp"
-            android:id="@+id/relativeLayout4">
-
-            <TextView
-                android:layout_width="75dp"
-                android:layout_height="24dp"
-                android:text="TV and Entertainment"
-                android:textSize="10dp"
-                android:textAlignment="center"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="75dp"
-                android:layout_height="24dp"
-                android:text="Men"
-                android:textSize="10dp"
-                android:textAlignment="center"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="75dp"
-                android:layout_height="24dp"
-                android:text="Women"
-                android:textSize="10dp"
-                android:textAlignment="center"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="75dp"
-                android:layout_height="24dp"
-                android:text="Other products"
-                android:textAlignment="center"
-                android:textSize="10dp"
-                android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Other products"
+                    android:layout_weight="4"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="8dp" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -299,14 +311,15 @@
             android:id="@+id/deals"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_below="@+id/relativeLayout4"
-            android:layout_margin="1dp"
+            android:layout_below="@+id/relativeLayout2"
+            android:layout_margin="2dp"
             android:layout_marginTop="2dp"
             android:layout_centerHorizontal="true">
 
 
             <Button
                 android:id="@+id/button"
+                android:backgroundTint="@color/pricify_blue"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
@@ -314,11 +327,12 @@
                 android:layout_alignParentTop="true"
                 android:textColor="#112233"
                 android:text="Deals of the day"
+                android:layout_margin="2dp"
                 android:textAlignment="viewStart"
                 android:gravity="start"
                 android:background="#ffffff"
                 android:elevation="0dp"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
@@ -335,56 +349,65 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/ll1"
                         android:layout_width="120dp"
-                        android:padding="1dp"
+                        android:padding="2dp"
+                        android:layout_margin="2dp"
                         android:layout_height="fill_parent"
                         android:orientation="vertical"
-                        android:background="@drawable/customborder">
+                        android:background="@drawable/customborder"
+                        android:clickable="true"
+                        android:backgroundTint="#ffffff"
+                        android:onClick="openDeal">
 
                             <ImageView
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="10dp"
-                                android:src="@drawable/deals"
-                                android:id="@+id/iv1"/>
+                                android:id="@+id/iv1"
+                                android:scaleType="fitCenter"/>
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="fill_parent"
-                                android:text="hello"
-                                android:layout_weight="4"
+                                android:layout_weight="5"
                                 android:textAlignment="center"
                                 android:textColor="#000000"
-                                android:textSize="15dp"
+                                android:textSize="10dp"
                                 android:id="@+id/tv1"/>
 
 
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll2"
                         android:layout_width="120dp"
-                        android:padding="1dp"
+                        android:padding="2dp"
                         android:layout_height="fill_parent"
                         android:orientation="vertical"
-                        android:background="@drawable/customborder">
+                        android:layout_margin="2dp"
+                        android:background="@drawable/customborder"
+                        android:clickable="true"
+                        android:backgroundTint="#ffffff"
+                        android:onClick="openDeal">
 
                         <ImageView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="10dp"
                             android:src="@drawable/deals"
-                            android:id="@+id/iv2"/>
+                            android:id="@+id/iv2"
+                            android:scaleType="fitCenter"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
-                            android:text="hello"
-                            android:layout_weight="4"
+                            android:layout_weight="5"
                             android:textAlignment="center"
                             android:textColor="#000000"
-                            android:textSize="15dp"
+                            android:textSize="10dp"
                             android:id="@+id/tv2"/>
 
 
@@ -392,290 +415,326 @@
 
 
                     <LinearLayout
+                        android:id="@+id/ll3"
                         android:layout_width="120dp"
-                        android:padding="1dp"
+                        android:padding="2dp"
                         android:layout_height="fill_parent"
                         android:orientation="vertical"
-                        android:background="@drawable/customborder">
+                        android:layout_margin="2dp"
+                        android:background="@drawable/customborder"
+                        android:clickable="true"
+                        android:onClick="openDeal"
+                        android:backgroundTint="#ffffff">
 
                         <ImageView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="10dp"
                             android:src="@drawable/deals"
-                            android:id="@+id/iv3"/>
+                            android:id="@+id/iv3"
+                            android:scaleType="fitCenter"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
-                            android:text="hello"
-                            android:layout_weight="4"
+                            android:layout_weight="5"
                             android:textAlignment="center"
                             android:textColor="#000000"
-                            android:textSize="15dp"
+                            android:textSize="10dp"
                             android:id="@+id/tv3"/>
                     </LinearLayout>
 
 
                     <LinearLayout
+                        android:id="@+id/ll4"
                         android:layout_width="120dp"
-                        android:padding="1dp"
+                        android:padding="2dp"
                         android:layout_height="fill_parent"
                         android:orientation="vertical"
-                        android:background="@drawable/customborder">
+                        android:layout_margin="2dp"
+                        android:background="@drawable/customborder"
+                        android:clickable="true"
+                        android:onClick="openDeal"
+                        android:backgroundTint="#ffffff">
 
                         <ImageView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="10dp"
                             android:src="@drawable/deals"
-                            android:id="@+id/iv4"/>
+                            android:id="@+id/iv4"
+                            android:scaleType="fitCenter"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
-                            android:text="hello"
-                            android:layout_weight="4"
+                            android:layout_weight="5"
                             android:textAlignment="center"
                             android:textColor="#000000"
-                            android:textSize="15dp"
+                            android:textSize="10dp"
                             android:id="@+id/tv4"/>
                     </LinearLayout>
 
 
                     <LinearLayout
+                        android:id="@+id/ll5"
                         android:layout_width="120dp"
-                        android:padding="1dp"
+                        android:padding="2dp"
                         android:layout_height="fill_parent"
                         android:orientation="vertical"
-                        android:background="@drawable/customborder">
+                        android:layout_margin="2dp"
+                        android:background="@drawable/customborder"
+                        android:clickable="true"
+                        android:onClick="openDeal"
+                        android:backgroundTint="#ffffff">
 
                         <ImageView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="10dp"
                             android:src="@drawable/deals"
-                            android:id="@+id/iv5"/>
+                            android:id="@+id/iv5"
+                            android:scaleType="fitCenter"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
-                            android:text="hello"
-                            android:layout_weight="4"
+                            android:layout_weight="5"
                             android:textAlignment="center"
                             android:textColor="#000000"
-                            android:textSize="15dp"
+                            android:textSize="10dp"
                             android:id="@+id/tv5"/>
                     </LinearLayout>
 
 
                     <LinearLayout
+                        android:id="@+id/ll6"
                         android:layout_width="120dp"
-                        android:padding="1dp"
+                        android:padding="2dp"
                         android:layout_height="fill_parent"
                         android:orientation="vertical"
-                        android:background="@drawable/customborder">
+                        android:layout_margin="2dp"
+                        android:background="@drawable/customborder"
+                        android:clickable="true"
+                        android:onClick="openDeal"
+                        android:backgroundTint="#ffffff">
 
                         <ImageView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="10dp"
                             android:src="@drawable/deals"
-                            android:id="@+id/iv6"/>
+                            android:id="@+id/iv6"
+                            android:scaleType="fitCenter"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
-                            android:text="hello"
-                            android:layout_weight="4"
+                            android:layout_weight="5"
                             android:textAlignment="center"
                             android:textColor="#000000"
-                            android:textSize="15dp"
+                            android:textSize="10dp"
                             android:id="@+id/tv6"/>
                     </LinearLayout>
 
 
                     <LinearLayout
+                        android:id="@+id/ll7"
                         android:layout_width="120dp"
-                        android:padding="1dp"
+                        android:padding="2dp"
                         android:layout_height="fill_parent"
                         android:orientation="vertical"
-                        android:background="@drawable/customborder">
+                        android:layout_margin="2dp"
+                        android:background="@drawable/customborder"
+                        android:clickable="true"
+                        android:onClick="openDeal"
+                        android:backgroundTint="#ffffff">
 
                         <ImageView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="10dp"
                             android:src="@drawable/deals"
-                            android:id="@+id/iv7"/>
+                            android:id="@+id/iv7"
+                            android:scaleType="fitCenter"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
-                            android:text="hello"
-                            android:layout_weight="4"
+                            android:layout_weight="5"
                             android:textAlignment="center"
                             android:textColor="#000000"
-                            android:textSize="15dp"
+                            android:textSize="10dp"
                             android:id="@+id/tv7"/>
                     </LinearLayout>
 
 
                     <LinearLayout
+                        android:id="@+id/ll8"
                         android:layout_width="120dp"
-                        android:padding="1dp"
+                        android:padding="2dp"
                         android:layout_height="fill_parent"
+                        android:layout_margin="2dp"
                         android:orientation="vertical"
-                        android:background="@drawable/customborder">
+                        android:background="@drawable/customborder"
+                        android:clickable="true"
+                        android:onClick="openDeal"
+                        android:backgroundTint="#ffffff">
 
                         <ImageView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="10dp"
                             android:src="@drawable/deals"
-                            android:id="@+id/iv8"/>
+                            android:id="@+id/iv8"
+                            android:scaleType="fitCenter"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
-                            android:text="hello"
-                            android:layout_weight="4"
+                            android:layout_weight="5"
                             android:textAlignment="center"
                             android:textColor="#000000"
-                            android:textSize="15dp"
+                            android:textSize="10dp"
                             android:id="@+id/tv8"/>
                     </LinearLayout>
 
 
                     <LinearLayout
+                        android:id="@+id/ll9"
                         android:layout_width="120dp"
-                        android:padding="1dp"
+                        android:padding="2dp"
                         android:layout_height="fill_parent"
                         android:orientation="vertical"
-                        android:background="@drawable/customborder">
+                        android:layout_margin="2dp"
+                        android:background="@drawable/customborder"
+                        android:clickable="true"
+                        android:onClick="openDeal"
+                        android:backgroundTint="#ffffff">
 
                         <ImageView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="10dp"
                             android:src="@drawable/deals"
-                            android:id="@+id/iv9"/>
+                            android:id="@+id/iv9"
+                            android:scaleType="fitCenter"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
-                            android:text="hello"
-                            android:layout_weight="4"
+                            android:layout_weight="5"
                             android:textAlignment="center"
                             android:textColor="#000000"
-                            android:textSize="15dp"
+                            android:textSize="10dp"
                             android:id="@+id/tv9"/>
                     </LinearLayout>
 
 
                     <LinearLayout
+                        android:id="@+id/ll10"
                         android:layout_width="120dp"
-                        android:padding="1dp"
+                        android:padding="2dp"
                         android:layout_height="fill_parent"
+                        android:layout_margin="2dp"
                         android:orientation="vertical"
-                        android:background="@drawable/customborder">
+                        android:background="@drawable/customborder"
+                        android:clickable="true"
+                        android:onClick="openDeal"
+                        android:backgroundTint="#ffffff">
 
                         <ImageView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="10dp"
                             android:src="@drawable/deals"
-                            android:id="@+id/iv10"/>
+                            android:id="@+id/iv10"
+                            android:scaleType="fitCenter"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
-                            android:text="hello"
-                            android:layout_weight="4"
+                            android:layout_weight="5"
                             android:textAlignment="center"
                             android:textColor="#000000"
-                            android:textSize="15dp"
+                            android:textSize="10dp"
                             android:id="@+id/tv10"/>
                     </LinearLayout>
 
 
                     <LinearLayout
+                        android:id="@+id/ll11"
                         android:layout_width="120dp"
-                        android:padding="1dp"
+                        android:padding="2dp"
                         android:layout_height="fill_parent"
                         android:orientation="vertical"
-                        android:background="@drawable/customborder">
+                        android:layout_margin="2dp"
+                        android:background="@drawable/customborder"
+                        android:clickable="true"
+                        android:onClick="openDeal"
+                        android:backgroundTint="#ffffff">
 
                         <ImageView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="10dp"
                             android:src="@drawable/deals"
-                            android:id="@+id/iv11"/>
+                            android:id="@+id/iv11"
+                            android:scaleType="fitCenter"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
-                            android:text="hello"
-                            android:layout_weight="4"
+                            android:layout_weight="5"
                             android:textAlignment="center"
                             android:textColor="#000000"
-                            android:textSize="15dp"
+                            android:textSize="10dp"
                             android:id="@+id/tv11"/>
                     </LinearLayout>
 
 
                     <LinearLayout
+                        android:id="@+id/ll12"
                         android:layout_width="120dp"
-                        android:padding="1dp"
+                        android:padding="2dp"
                         android:layout_height="fill_parent"
+                        android:layout_margin="2dp"
                         android:orientation="vertical"
-                        android:background="@drawable/customborder">
+                        android:background="@drawable/customborder"
+                        android:clickable="true"
+                        android:onClick="openDeal"
+                        android:backgroundTint="#ffffff">
 
                         <ImageView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="10dp"
                             android:src="@drawable/deals"
-                            android:id="@+id/iv12"/>
+                            android:id="@+id/iv12"
+                            android:scaleType="fitCenter"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="fill_parent"
-                            android:text="hello"
-                            android:layout_weight="4"
+                            android:layout_weight="5"
                             android:textAlignment="center"
                             android:textColor="#000000"
-                            android:textSize="15dp"
+                            android:textSize="10dp"
                             android:id="@+id/tv12"/>
                     </LinearLayout>
-
                 </LinearLayout>
             </HorizontalScrollView>
         </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/ad"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@+id/deals">
-
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </RelativeLayout>
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -683,11 +742,13 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/coupons"
-            android:layout_below="@+id/ad">
+            android:layout_margin="2dp"
+            android:layout_below="@+id/deals">
 
             <Button
                 android:id="@+id/dealandOffers"
                 android:layout_width="wrap_content"
+                android:backgroundTint="@color/pricify_blue"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
@@ -700,7 +761,7 @@
                 android:text="Coupons"
                 android:textAlignment="viewStart"
                 android:textColor="#112233"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -712,45 +773,2675 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-                        <Button
-                            android:layout_width="240dp"
-                            android:layout_height="fill_parent" />
 
-                        <Button
-                            android:layout_width="240dp"
-                            android:layout_height="fill_parent" />
+                    <LinearLayout
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:layout_margin="2dp"
+                        android:backgroundTint="#ffffff"
+                        android:orientation="vertical"
+                        android:onClick="openCouponsPage">
 
-                        <Button
-                            android:layout_width="240dp"
-                            android:layout_height="fill_parent" />
+                        <ImageView
+                            android:id="@+id/iv2_coupons"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv2_coupons"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:layout_margin="2dp"
+                        android:backgroundTint="#FFFFFF"
+                        android:orientation="vertical"
+                        android:onClick="openCouponsPage">
+
+                        <ImageView
+                            android:id="@+id/iv1_coupons"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv1_coupons"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="2dp"
+                        android:clickable="true"
+                        android:backgroundTint="#ffffff"
+                        android:orientation="vertical"
+                        android:onClick="openCouponsPage">
+
+                        <ImageView
+                            android:id="@+id/iv3_coupons"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv3_coupons"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/men499"
+            android:id="@+id/ad"
+            android:layout_margin="2dp"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:layout_below="@+id/coupons">
 
             <ImageButton
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="@drawable/ad_banner1"/>
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/women499"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_below="@+id/men499">
+            android:layout_margin="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/mobile_ranges_relative_layout"
+            android:layout_below="@+id/ad">
 
-            <ImageButton
+            <Button
+                android:id="@+id/mobile_ranges_button"
+                android:layout_width="wrap_content"
+                android:backgroundTint="@color/pricify_blue"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="#ffffff"
+                android:elevation="0dp"
+                android:gravity="start"
+                android:text="Desired Range of Mobile Phones"
+                android:textAlignment="viewStart"
+                android:textColor="#112233"
+                android:textSize="15dp"
+                android:onClick="openAllProducts"/>
+
+            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:layout_below="@+id/mobile_ranges_button">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll1_mobiles"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv1_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv1_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/mobile_mrp1"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll2_mobiles"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv2_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv2_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/mobile_mrp2"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll3_mobiles"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv3_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv3_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/mobile_mrp3"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll4_mobiles"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv4_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv4_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/mobile_mrp4"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll5_mobiles"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv5_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv5_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/mobile_mrp5"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll6_mobiles"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv6_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv6_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/mobile_mrp6"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll7_mobiles"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv7_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv7_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/mobile_mrp7"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll8_mobiles"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv8_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv8_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/mobile_mrp8"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll9_mobiles"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv9_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv9_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/mobile_mrp9"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll10_mobiles"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv10_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv10_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/mobile_mrp10"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll11_mobiles"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv11_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv11_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/mobile_mrp11"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll12_mobiles"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv12_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv12_mobiles"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"
+                            android:lines="1"/>
+                        <TextView
+                            android:id="@+id/mobile_mrp12"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="2dp"
+            android:layout_height="200dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/camera_ranges_relative_layout"
+            android:layout_below="@+id/mobile_ranges_relative_layout">
+
+            <Button
+                android:id="@+id/camera_ranges_button"
+                android:layout_width="wrap_content"
+                android:backgroundTint="@color/pricify_blue"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="#ffffff"
+                android:elevation="0dp"
+                android:gravity="start"
+                android:text="Desired Range of Cameras"
+                android:textAlignment="viewStart"
+                android:textColor="#112233"
+                android:textSize="15dp"
+                android:onClick="openAllProducts"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:layout_below="@+id/camera_ranges_button">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll1_cameras"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv1_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv1_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/cameras_mrp1"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll2_cameras"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv2_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv2_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/cameras_mrp2"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll3_cameras"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv3_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv3_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/cameras_mrp3"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll4_cameras"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv4_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv4_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/cameras_mrp4"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll5_cameras"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv5_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv5_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/cameras_mrp5"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll6_cameras"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv6_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv6_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/cameras_mrp6"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll7_cameras"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv7_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv7_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/cameras_mrp7"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll8_cameras"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv8_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv8_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/cameras_mrp8"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll9_cameras"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv9_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv9_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/cameras_mrp9"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll10_cameras"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv10_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv10_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/cameras_mrp10"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll11_cameras"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv11_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv11_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/cameras_mrp11"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll12_cameras"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv12_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv12_cameras"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"
+                            android:lines="1"/>
+                        <TextView
+                            android:id="@+id/cameras_mrp12"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ad_banner_relative_layout1"
+            android:layout_width="match_parent"
+            android:layout_margin="2dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/camera_ranges_relative_layout"
+            android:background="@drawable/ad_banner2"
+            android:clickable="true"
+            android:onClick="openAdBanner1">
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="2dp"
+            android:orientation="horizontal"
+            android:id="@+id/ad_banner_linear_layout1"
+            android:layout_below="@id/ad_banner_relative_layout1">
+            <RelativeLayout
+                android:id="@+id/ad_banner_relative_layout2"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="150dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/ad_banner15"
+                android:clickable="true"
+                android:onClick="openAdBanner1">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ad_banner_relative_layout3"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:layout_height="150dp"
+                android:background="@drawable/ad_banner3"
+                android:clickable="true"
+                android:onClick="openAdBanner1">
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/ad_banner_relative_layout4"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="2dp"
+            android:layout_below="@+id/ad_banner_linear_layout1"
+            android:background="@drawable/ad_banner4"
+            android:clickable="true"
+            android:onClick="openAdBanner1">
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="2dp"
+            android:layout_alignParentStart="true"
+            android:id="@+id/men_ranges_relative_layout"
+            android:layout_below="@+id/ad_banner_relative_layout4">
+
+            <Button
+                android:id="@+id/men_ranges_button"
+                android:layout_width="wrap_content"
+                android:backgroundTint="@color/pricify_blue"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="#ffffff"
+                android:elevation="0dp"
+                android:gravity="start"
+                android:text="Desired Range of Men's Clothing"
+                android:textAlignment="viewStart"
+                android:textColor="#112233"
+                android:textSize="15dp"
+                android:onClick="openAllProducts"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:layout_below="@+id/men_ranges_button">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll1_men"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv1_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv1_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/men_mrp1"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll2_men"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv2_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv2_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/men_mrp2"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll3_men"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv3_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv3_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/men_mrp3"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll4_men"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv4_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv4_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/men_mrp4"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll5_men"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv5_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv5_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/men_mrp5"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll6_men"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv6_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv6_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/men_mrp6"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll7_men"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv7_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv7_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/men_mrp7"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll8_men"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv8_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv8_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/men_mrp8"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll9_men"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv9_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv9_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/men_mrp9"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll10_men"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv10_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv10_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/men_mrp10"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll11_men"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv11_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv11_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/men_mrp11"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll12_men"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv12_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv12_men"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"
+                            android:lines="1"/>
+                        <TextView
+                            android:id="@+id/men_mrp12"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="horizontal"
+            android:layout_margin="2dp"
+            android:id="@+id/ad_banner_linear_layout2"
+            android:layout_below="@id/men_ranges_relative_layout">
+            <RelativeLayout
+                android:id="@+id/ad_banner_relative_layout5"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="150dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/ad_banner5"
+                android:clickable="true"
+                android:onClick="openAdBanner1">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ad_banner_relative_layout6"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:layout_height="150dp"
+                android:background="@drawable/ad_banner6"
+                android:clickable="true"
+                android:onClick="openAdBanner1">
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/ad_banner_relative_layout7"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="150dp"
+            android:layout_margin="2dp"
+            android:background="@drawable/ad_banner7"
+            android:clickable="true"
+            android:layout_below="@id/ad_banner_linear_layout2"
+            android:onClick="openAdBanner1">
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ad_banner_relative_layout8"
+            android:layout_below="@id/ad_banner_relative_layout7"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:layout_height="150dp"
+            android:background="@drawable/ad_banner8"
+            android:clickable="true"
+            android:onClick="openAdBanner1">
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="2dp"
+            android:layout_alignParentStart="true"
+            android:id="@+id/women_ranges_relative_layout"
+            android:layout_below="@+id/ad_banner_relative_layout8">
+
+            <Button
+                android:id="@+id/women_ranges_button"
+                android:layout_width="wrap_content"
+                android:backgroundTint="@color/pricify_blue"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="#ffffff"
+                android:elevation="0dp"
+                android:gravity="start"
+                android:text="Desired Range of Women's Clothing"
+                android:textAlignment="viewStart"
+                android:textColor="#112233"
+                android:textSize="15dp"
+                android:onClick="openAllProducts"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:layout_below="@+id/women_ranges_button">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll1_women"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv1_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv1_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/women_mrp1"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll2_women"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv2_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv2_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/women_mrp2"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll3_women"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv3_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv3_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/women_mrp3"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll4_women"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv4_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv4_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/women_mrp4"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll5_women"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv5_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv5_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/women_mrp5"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll6_women"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv6_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv6_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/women_mrp6"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll7_women"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv7_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv7_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/women_mrp7"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll8_women"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv8_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv8_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/women_mrp8"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll9_women"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv9_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv9_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/women_mrp9"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll10_women"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv10_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv10_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/women_mrp10"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll11_women"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv11_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv11_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/women_mrp11"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll12_women"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv12_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv12_women"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"
+                            android:lines="1"/>
+                        <TextView
+                            android:id="@+id/women_mrp12"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ad_banner_relative_layout9"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:layout_height="150dp"
+            android:layout_below="@id/women_ranges_relative_layout"
+            android:background="@drawable/ad_banner9"
+            android:clickable="true"
+            android:onClick="openAdBanner1">
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ad_banner_relative_layout10"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:layout_height="150dp"
+            android:layout_below="@id/ad_banner_relative_layout9"
+            android:background="@drawable/ad_banner10"
+            android:clickable="true"
+            android:onClick="openAdBanner1">
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="horizontal"
+            android:layout_margin="2dp"
+            android:id="@+id/ad_banner_linear_layout3"
+            android:layout_below="@+id/ad_banner_relative_layout10">
+            <RelativeLayout
+                android:id="@+id/ad_banner_relative_layout11"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:layout_height="150dp"
+                android:background="@drawable/ad_banner11"
+                android:clickable="true"
+                android:onClick="openAdBanner1">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ad_banner_relative_layout12"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="150dp"
+                android:background="@drawable/ad_banner12"
+                android:layout_margin="2dp"
+                android:clickable="true"
+                android:onClick="openAdBanner1">
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="2dp"
+            android:layout_alignParentStart="true"
+            android:id="@+id/footwear_ranges_relative_layout"
+            android:layout_below="@+id/ad_banner_linear_layout3">
+
+            <Button
+                android:id="@+id/footwear_ranges_button"
+                android:layout_width="wrap_content"
+                android:backgroundTint="@color/pricify_blue"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="#ffffff"
+                android:elevation="0dp"
+                android:gravity="start"
+                android:text="Desired Range of Women's Footwear"
+                android:textAlignment="viewStart"
+                android:textColor="#112233"
+                android:textSize="15dp"
+                android:onClick="openAllProducts"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:layout_below="@+id/footwear_ranges_button">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll1_footwear"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv1_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv1_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/footwear_mrp1"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll2_footwear"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv2_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv2_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/footwear_mrp2"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll3_footwear"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv3_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv3_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/footwear_mrp3"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll4_footwear"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv4_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv4_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/footwear_mrp4"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll5_footwear"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv5_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv5_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/footwear_mrp5"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll6_footwear"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv6_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv6_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/footwear_mrp6"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll7_footwear"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv7_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv7_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/footwear_mrp7"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll8_footwear"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv8_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv8_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/footwear_mrp8"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll9_footwear"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv9_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv9_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/footwear_mrp9"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll10_footwear"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv10_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv10_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/footwear_mrp10"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll11_footwear"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv11_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv11_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+                        <TextView
+                            android:id="@+id/footwear_mrp11"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll12_footwear"
+                        android:layout_width="120dp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:onClick="openMobilePage"
+                        android:background="@drawable/customborder">
+
+                        <ImageView
+                            android:id="@+id/iv12_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:src="@drawable/deals"
+                            android:scaleType="fitCenter"/>
+                        <TextView
+                            android:id="@+id/tv12_footwear"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"
+                            android:lines="1"/>
+                        <TextView
+                            android:id="@+id/footwear_mrp12"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="5"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="horizontal"
+            android:layout_margin="2dp"
+            android:id="@+id/ad_banner_linear_layout4"
+            android:layout_below="@id/footwear_ranges_relative_layout">
+            <RelativeLayout
+                android:id="@+id/ad_banner_relative_layout13"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:layout_height="150dp"
+                android:background="@drawable/ad_banner13"
+                android:clickable="true"
+                android:onClick="openAdBanner1">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ad_banner_relative_layout14"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:layout_height="150dp"
+                android:background="@drawable/ad_banner14"
+                android:clickable="true"
+                android:onClick="openAdBanner1">
+            </RelativeLayout>
+        </LinearLayout>
+        
     </RelativeLayout>
 
 </ScrollView>
