@@ -3,15 +3,21 @@ package com.example.siddhant.pricyfy;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.Html;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -33,11 +39,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -47,29 +56,14 @@ public class homeScreen extends AppCompatActivity
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private CircleIndicator indicator;
-    private ArrayList<String> deals_names;
-    private ArrayList<String> deals_images_links;
-    private ArrayList<String> deals_links;
+    private ArrayList<Deal> deals;
     private ArrayList<String> coupon_images;
     private ArrayList<String> coupon_title;
-    private ArrayList<String> mobile_names;
-    private ArrayList<String> mobile_images;
-    private ArrayList<String> mobile_mrp;
-    private ArrayList<String> camera_names;
-    private ArrayList<String> camera_images;
-    private ArrayList<String> camera_mrp;
-
-    private ArrayList<String> men_names;
-    private ArrayList<String> men_images;
-    private ArrayList<String> men_mrp;
-
-    private ArrayList<String> women_names;
-    private ArrayList<String> women_images;
-    private ArrayList<String> women_mrp;
-
-    private ArrayList<String> footwear_names;
-    private ArrayList<String> footwear_images;
-    private ArrayList<String> footwear_mrp;
+    private ArrayList<Product> mobiles;
+    private ArrayList<Product> cameras;
+    private ArrayList<Product> men;
+    private ArrayList<Product> women;
+    private ArrayList<Product> footwear;
 
 
     @Override
@@ -101,41 +95,47 @@ public class homeScreen extends AppCompatActivity
         // slider end
 
         //to disable tinting of the navigation view icons
-        NavigationView mNavigationView = (NavigationView)findViewById(R.id.nav_view);
-        mNavigationView.setItemIconTintList(null);
+        navigationView.setItemIconTintList(null);
 
         indicator = (CircleIndicator)findViewById(R.id.indicator);
         indicator.setViewPager(viewPager);
-
-        deals_names=this.getIntent().getStringArrayListExtra("deals_names");
-        deals_links=this.getIntent().getStringArrayListExtra("deals_links");
-        deals_images_links=this.getIntent().getStringArrayListExtra("deals_images_links");
+        deals = new ArrayList<>();
+        mobiles = new ArrayList<>();
+        men = new ArrayList<>();
+        women = new ArrayList<>();
+        cameras = new ArrayList<>();
+        footwear = new ArrayList<>();
+        Bundle extras = getIntent().getExtras();
+        deals = extras.getParcelableArrayList("deals");
         coupon_images = this.getIntent().getStringArrayListExtra("coupon_images");
         coupon_title = this.getIntent().getStringArrayListExtra("coupon_title");
-        mobile_images = this.getIntent().getStringArrayListExtra("mobile_images");
-        mobile_mrp = this.getIntent().getStringArrayListExtra("mobile_mrp");
-        mobile_names = this.getIntent().getStringArrayListExtra("mobile_names");
-        men_images = this.getIntent().getStringArrayListExtra("men_images");
-        men_mrp = this.getIntent().getStringArrayListExtra("men_mrp");
-        men_names = this.getIntent().getStringArrayListExtra("men_names");
-        camera_images = this.getIntent().getStringArrayListExtra("camera_images");
-        camera_mrp = this.getIntent().getStringArrayListExtra("camera_mrp");
-        camera_names = this.getIntent().getStringArrayListExtra("camera_names");
-        women_images = this.getIntent().getStringArrayListExtra("women_images");
-        women_mrp = this.getIntent().getStringArrayListExtra("women_mrp");
-        women_names = this.getIntent().getStringArrayListExtra("women_names");
-        footwear_images = this.getIntent().getStringArrayListExtra("footwear_images");
-        footwear_mrp = this.getIntent().getStringArrayListExtra("footwear_mrp");
-        footwear_names = this.getIntent().getStringArrayListExtra("footwear_names");
-        setDealsButtons();
-        setCouponsButtons();
-        setMobileRanges();
-        setCameraRanges();
-        setMenRanges();
-        setWomenRanges();
-        setFootwearRanges();
-    };
+        mobiles = extras.getParcelableArrayList("mobiles");
+        men = extras.getParcelableArrayList("men");
+        women = extras.getParcelableArrayList("women");
+        cameras = extras.getParcelableArrayList("cameras");
+        footwear = extras.getParcelableArrayList("footwear");
+        //mobiles=(ArrayList<Product>)getIntent().getSerializableExtra("mobiles");
+        //men=(ArrayList<Product>)getIntent().getSerializableExtra("men");
+        //cameras=(ArrayList<Product>)getIntent().getSerializableExtra("cameras");
+        //women=(ArrayList<Product>)getIntent().getSerializableExtra("women");
+        //footwear=(ArrayList<Product>)getIntent().getSerializableExtra("footwear");
 
+        if(!(deals==null))
+            setDealsButtons();
+        if(!coupon_images.isEmpty() && !coupon_title.isEmpty())
+            setCouponsButtons();
+        if(!mobiles.isEmpty())
+           setMobileRanges();
+        if(!cameras.isEmpty())
+            setCameraRanges();
+        if(!men.isEmpty())
+            setMenRanges();
+        if(!women.isEmpty())
+           setWomenRanges();
+        if(!footwear.isEmpty())
+           setFootwearRanges();
+        loadAdBanners();
+    };
 
     @Override
     public void onBackPressed() {
@@ -254,6 +254,32 @@ public class homeScreen extends AppCompatActivity
         }
     }
 
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
+
+
     public void openDealsPage(View view)
     {
         Intent i = new Intent(this,dealsScreen.class);
@@ -304,507 +330,63 @@ public class homeScreen extends AppCompatActivity
 
     public void setDealsButtons()
     {
-        ImageView iv = (ImageView)findViewById(R.id.iv1);
-        TextView tv = (TextView)findViewById(R.id.tv1);
-        Glide.with(getApplicationContext()).load(deals_images_links.get(0)).into(iv);
-        tv.setText(deals_names.get(0));
-
-        iv = (ImageView)findViewById(R.id.iv2);
-        tv = (TextView)findViewById(R.id.tv2);
-        Glide.with(getApplicationContext()).load(deals_images_links.get(1)).into(iv);
-        tv.setText(deals_names.get(1));
-
-        iv = (ImageView)findViewById(R.id.iv3);
-        tv = (TextView)findViewById(R.id.tv3);
-        Glide.with(getApplicationContext()).load(deals_images_links.get(2)).into(iv);
-        tv.setText(deals_names.get(2));
-
-        iv = (ImageView)findViewById(R.id.iv4);
-        tv = (TextView)findViewById(R.id.tv4);
-        Glide.with(getApplicationContext()).load(deals_images_links.get(3)).into(iv);
-        tv.setText(deals_names.get(3));
-
-        iv = (ImageView)findViewById(R.id.iv5);
-        tv = (TextView)findViewById(R.id.tv5);
-        Glide.with(getApplicationContext()).load(deals_images_links.get(4)).into(iv);
-        tv.setText(deals_names.get(4));
-
-        iv = (ImageView)findViewById(R.id.iv6);
-        tv = (TextView)findViewById(R.id.tv6);
-        Glide.with(getApplicationContext()).load(deals_images_links.get(5)).into(iv);
-        tv.setText(deals_names.get(5));
-
-        iv = (ImageView)findViewById(R.id.iv7);
-        tv = (TextView)findViewById(R.id.tv7);
-        Glide.with(getApplicationContext()).load(deals_images_links.get(6)).into(iv);
-        tv.setText(deals_names.get(6));
-
-        iv = (ImageView)findViewById(R.id.iv8);
-        tv = (TextView)findViewById(R.id.tv8);
-        Glide.with(getApplicationContext()).load(deals_images_links.get(7)).into(iv);
-        tv.setText(deals_names.get(7));
-
-        iv = (ImageView)findViewById(R.id.iv9);
-        tv = (TextView)findViewById(R.id.tv9);
-        Glide.with(getApplicationContext()).load(deals_images_links.get(8)).into(iv);
-        tv.setText(deals_names.get(8));
-
-        iv = (ImageView)findViewById(R.id.iv10);
-        tv = (TextView)findViewById(R.id.tv10);
-        Glide.with(getApplicationContext()).load(deals_images_links.get(9)).into(iv);
-        tv.setText(deals_names.get(9));
-
-        iv = (ImageView)findViewById(R.id.iv11);
-        tv = (TextView)findViewById(R.id.tv11);
-        Glide.with(getApplicationContext()).load(deals_images_links.get(10)).into(iv);
-        tv.setText(deals_names.get(10));
-
-        iv = (ImageView)findViewById(R.id.iv12);
-        tv = (TextView)findViewById(R.id.tv12);
-        Glide.with(getApplicationContext()).load(deals_images_links.get(11)).into(iv);
-        tv.setText(deals_names.get(11));
+        RecyclerView rv_deals = (RecyclerView) findViewById(R.id.rv_deals);
+        LinearLayoutManager linearLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        rv_deals.setLayoutManager(linearLayout);
+        DealsAdapter dAdapter = new DealsAdapter(this,deals,0);
+        rv_deals.setAdapter(dAdapter);
     }
 
     public void setMobileRanges()
     {
-        ImageView iv = (ImageView)findViewById(R.id.iv1_mobiles);
-        TextView tv = (TextView)findViewById(R.id.tv1_mobiles);
-        Glide.with(getApplicationContext()).load(mobile_images.get(0)).into(iv);
-        tv.setText(mobile_names.get(0));
-        tv = (TextView)findViewById(R.id.mobile_mrp1);
-        tv.setText("Rs. "+mobile_mrp.get(0));
-
-        iv = (ImageView)findViewById(R.id.iv2_mobiles);
-        tv = (TextView)findViewById(R.id.tv2_mobiles);
-        Glide.with(getApplicationContext()).load(mobile_images.get(1)).into(iv);
-        tv.setText(mobile_names.get(1));
-        tv = (TextView)findViewById(R.id.mobile_mrp2);
-        tv.setText("Rs. "+mobile_mrp.get(1));
-
-        iv = (ImageView)findViewById(R.id.iv3_mobiles);
-        tv = (TextView)findViewById(R.id.tv3_mobiles);
-        Glide.with(getApplicationContext()).load(mobile_images.get(2)).into(iv);
-        tv.setText(mobile_names.get(2));
-        tv = (TextView)findViewById(R.id.mobile_mrp3);
-        tv.setText("Rs. "+mobile_mrp.get(2));
-
-        iv = (ImageView)findViewById(R.id.iv4_mobiles);
-        tv = (TextView)findViewById(R.id.tv4_mobiles);
-        Glide.with(getApplicationContext()).load(mobile_images.get(3)).into(iv);
-        tv.setText(mobile_names.get(3));
-        tv = (TextView)findViewById(R.id.mobile_mrp4);
-        tv.setText("Rs. "+mobile_mrp.get(3));
-
-        iv = (ImageView)findViewById(R.id.iv5_mobiles);
-        tv = (TextView)findViewById(R.id.tv5_mobiles);
-        Glide.with(getApplicationContext()).load(mobile_images.get(4)).into(iv);
-        tv.setText(mobile_names.get(4));
-        tv = (TextView)findViewById(R.id.mobile_mrp5);
-        tv.setText("Rs. "+mobile_mrp.get(4));
-
-        iv = (ImageView)findViewById(R.id.iv6_mobiles);
-        tv = (TextView)findViewById(R.id.tv6_mobiles);
-        Glide.with(getApplicationContext()).load(mobile_images.get(5)).into(iv);
-        tv.setText(mobile_names.get(5));
-        tv = (TextView)findViewById(R.id.mobile_mrp6);
-        tv.setText("Rs. "+mobile_mrp.get(5));
-
-        iv = (ImageView)findViewById(R.id.iv7_mobiles);
-        tv = (TextView)findViewById(R.id.tv7_mobiles);
-        Glide.with(getApplicationContext()).load(mobile_images.get(6)).into(iv);
-        tv.setText(mobile_names.get(6));
-        tv = (TextView)findViewById(R.id.mobile_mrp7);
-        tv.setText("Rs. "+mobile_mrp.get(6));
-
-        iv = (ImageView)findViewById(R.id.iv8_mobiles);
-        tv = (TextView)findViewById(R.id.tv8_mobiles);
-        Glide.with(getApplicationContext()).load(mobile_images.get(7)).into(iv);
-        tv.setText(mobile_names.get(7));
-        tv = (TextView)findViewById(R.id.mobile_mrp8);
-        tv.setText("Rs. "+mobile_mrp.get(7));
-
-        iv = (ImageView)findViewById(R.id.iv9_mobiles);
-        tv = (TextView)findViewById(R.id.tv9_mobiles);
-        Glide.with(getApplicationContext()).load(mobile_images.get(8)).into(iv);
-        tv.setText(mobile_names.get(8));
-        tv = (TextView)findViewById(R.id.mobile_mrp9);
-        tv.setText("Rs. "+mobile_mrp.get(8));
-
-        iv = (ImageView)findViewById(R.id.iv10_mobiles);
-        tv = (TextView)findViewById(R.id.tv10_mobiles);
-        Glide.with(getApplicationContext()).load(mobile_images.get(9)).into(iv);
-        tv.setText(mobile_names.get(9));
-        tv = (TextView)findViewById(R.id.mobile_mrp10);
-        tv.setText("Rs. "+mobile_mrp.get(9));
-
-        iv = (ImageView)findViewById(R.id.iv11_mobiles);
-        tv = (TextView)findViewById(R.id.tv11_mobiles);
-        Glide.with(getApplicationContext()).load(mobile_images.get(10)).into(iv);
-        tv.setText(mobile_names.get(10));
-        tv = (TextView)findViewById(R.id.mobile_mrp11);
-        tv.setText("Rs. "+mobile_mrp.get(10));
-
-        iv = (ImageView)findViewById(R.id.iv12_mobiles);
-        tv = (TextView)findViewById(R.id.tv12_mobiles);
-        Glide.with(getApplicationContext()).load(mobile_images.get(11)).into(iv);
-        tv.setText(mobile_names.get(11));
-        tv = (TextView)findViewById(R.id.mobile_mrp12);
-        tv.setText("Rs. "+mobile_mrp.get(11));
+        RecyclerView rv_mobiles = (RecyclerView) findViewById(R.id.rv_mobiles);
+        LinearLayoutManager linearLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        rv_mobiles.setLayoutManager(linearLayout);
+        ProductsAdapter pAdapter = new ProductsAdapter(this,mobiles,0);
+        rv_mobiles.setAdapter(pAdapter);
     }
 
     public void setCameraRanges()
     {
-        ImageView iv = (ImageView)findViewById(R.id.iv1_cameras);
-        TextView tv = (TextView)findViewById(R.id.tv1_cameras);
-        Glide.with(getApplicationContext()).load(camera_images.get(0)).into(iv);
-        tv.setText(camera_names.get(0));
-        tv = (TextView)findViewById(R.id.cameras_mrp1);
-        tv.setText("Rs. "+camera_mrp.get(0));
-
-        iv = (ImageView)findViewById(R.id.iv2_cameras);
-        tv = (TextView)findViewById(R.id.tv2_cameras);
-        Glide.with(getApplicationContext()).load(camera_images.get(1)).into(iv);
-        tv.setText(camera_names.get(1));
-        tv = (TextView)findViewById(R.id.cameras_mrp2);
-        tv.setText("Rs. "+camera_mrp.get(1));
-
-        iv = (ImageView)findViewById(R.id.iv3_cameras);
-        tv = (TextView)findViewById(R.id.tv3_cameras);
-        Glide.with(getApplicationContext()).load(camera_images.get(2)).into(iv);
-        tv.setText(camera_names.get(2));
-        tv = (TextView)findViewById(R.id.cameras_mrp3);
-        tv.setText("Rs. "+camera_mrp.get(2));
-
-        iv = (ImageView)findViewById(R.id.iv4_cameras);
-        tv = (TextView)findViewById(R.id.tv4_cameras);
-        Glide.with(getApplicationContext()).load(camera_images.get(3)).into(iv);
-        tv.setText(camera_names.get(3));
-        tv = (TextView)findViewById(R.id.cameras_mrp4);
-        tv.setText("Rs. "+camera_mrp.get(3));
-
-        iv = (ImageView)findViewById(R.id.iv5_cameras);
-        tv = (TextView)findViewById(R.id.tv5_cameras);
-        Glide.with(getApplicationContext()).load(camera_images.get(4)).into(iv);
-        tv.setText(camera_names.get(4));
-        tv = (TextView)findViewById(R.id.cameras_mrp5);
-        tv.setText("Rs. "+camera_mrp.get(4));
-
-        iv = (ImageView)findViewById(R.id.iv6_cameras);
-        tv = (TextView)findViewById(R.id.tv6_cameras);
-        Glide.with(getApplicationContext()).load(camera_images.get(5)).into(iv);
-        tv.setText(camera_names.get(5));
-        tv = (TextView)findViewById(R.id.cameras_mrp6);
-        tv.setText("Rs. "+camera_mrp.get(5));
-
-        iv = (ImageView)findViewById(R.id.iv7_cameras);
-        tv = (TextView)findViewById(R.id.tv7_cameras);
-        Glide.with(getApplicationContext()).load(camera_images.get(6)).into(iv);
-        tv.setText(camera_names.get(6));
-        tv = (TextView)findViewById(R.id.cameras_mrp7);
-        tv.setText("Rs. "+camera_mrp.get(6));
-
-        iv = (ImageView)findViewById(R.id.iv8_cameras);
-        tv = (TextView)findViewById(R.id.tv8_cameras);
-        Glide.with(getApplicationContext()).load(camera_images.get(7)).into(iv);
-        tv.setText(camera_names.get(7));
-        tv = (TextView)findViewById(R.id.cameras_mrp8);
-        tv.setText("Rs. "+camera_mrp.get(7));
-
-        iv = (ImageView)findViewById(R.id.iv9_cameras);
-        tv = (TextView)findViewById(R.id.tv9_cameras);
-        Glide.with(getApplicationContext()).load(camera_images.get(8)).into(iv);
-        tv.setText(camera_names.get(8));
-        tv = (TextView)findViewById(R.id.cameras_mrp9);
-        tv.setText("Rs. "+camera_mrp.get(8));
-
-        iv = (ImageView)findViewById(R.id.iv10_cameras);
-        tv = (TextView)findViewById(R.id.tv10_cameras);
-        Glide.with(getApplicationContext()).load(camera_images.get(9)).into(iv);
-        tv.setText(camera_names.get(9));
-        tv = (TextView)findViewById(R.id.cameras_mrp10);
-        tv.setText("Rs. "+camera_mrp.get(9));
-
-        iv = (ImageView)findViewById(R.id.iv11_cameras);
-        tv = (TextView)findViewById(R.id.tv11_cameras);
-        Glide.with(getApplicationContext()).load(camera_images.get(10)).into(iv);
-        tv.setText(camera_names.get(10));
-        tv = (TextView)findViewById(R.id.cameras_mrp11);
-        tv.setText("Rs. "+camera_mrp.get(10));
-
-        iv = (ImageView)findViewById(R.id.iv12_cameras);
-        tv = (TextView)findViewById(R.id.tv12_cameras);
-        Glide.with(getApplicationContext()).load(camera_images.get(11)).into(iv);
-        tv.setText(camera_names.get(11));
-        tv = (TextView)findViewById(R.id.cameras_mrp12);
-        tv.setText("Rs. "+camera_mrp.get(11));
+        RecyclerView rv_cameras = (RecyclerView) findViewById(R.id.rv_cameras);
+        LinearLayoutManager linearLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        rv_cameras.setLayoutManager(linearLayout);
+        ProductsAdapter pAdapter = new ProductsAdapter(this,cameras,0);
+        rv_cameras.setAdapter(pAdapter);
     }
 
 
     public void setMenRanges()
     {
-        ImageView iv = (ImageView)findViewById(R.id.iv1_men);
-        TextView tv = (TextView)findViewById(R.id.tv1_men);
-        Glide.with(getApplicationContext()).load(men_images.get(0)).into(iv);
-        tv.setText(men_names.get(0));
-        tv = (TextView)findViewById(R.id.men_mrp1);
-        tv.setText("Rs. "+men_mrp.get(0));
-
-        iv = (ImageView)findViewById(R.id.iv2_men);
-        tv = (TextView)findViewById(R.id.tv2_men);
-        Glide.with(getApplicationContext()).load(men_images.get(1)).into(iv);
-        tv.setText(men_names.get(1));
-        tv = (TextView)findViewById(R.id.men_mrp2);
-        tv.setText("Rs. "+men_mrp.get(1));
-
-        iv = (ImageView)findViewById(R.id.iv3_men);
-        tv = (TextView)findViewById(R.id.tv3_men);
-        Glide.with(getApplicationContext()).load(men_images.get(2)).into(iv);
-        tv.setText(men_names.get(2));
-        tv = (TextView)findViewById(R.id.men_mrp3);
-        tv.setText("Rs. "+men_mrp.get(2));
-
-        iv = (ImageView)findViewById(R.id.iv4_men);
-        tv = (TextView)findViewById(R.id.tv4_men);
-        Glide.with(getApplicationContext()).load(men_images.get(3)).into(iv);
-        tv.setText(men_names.get(3));
-        tv = (TextView)findViewById(R.id.men_mrp4);
-        tv.setText("Rs. "+men_mrp.get(3));
-
-        iv = (ImageView)findViewById(R.id.iv5_men);
-        tv = (TextView)findViewById(R.id.tv5_men);
-        Glide.with(getApplicationContext()).load(men_images.get(4)).into(iv);
-        tv.setText(men_names.get(4));
-        tv = (TextView)findViewById(R.id.men_mrp5);
-        tv.setText("Rs. "+men_mrp.get(4));
-
-        iv = (ImageView)findViewById(R.id.iv6_men);
-        tv = (TextView)findViewById(R.id.tv6_men);
-        Glide.with(getApplicationContext()).load(men_images.get(5)).into(iv);
-        tv.setText(men_names.get(5));
-        tv = (TextView)findViewById(R.id.men_mrp6);
-        tv.setText("Rs. "+men_mrp.get(5));
-
-        iv = (ImageView)findViewById(R.id.iv7_men);
-        tv = (TextView)findViewById(R.id.tv7_men);
-        Glide.with(getApplicationContext()).load(men_images.get(6)).into(iv);
-        tv.setText(men_names.get(6));
-        tv = (TextView)findViewById(R.id.men_mrp7);
-        tv.setText("Rs. "+men_mrp.get(6));
-
-        iv = (ImageView)findViewById(R.id.iv8_men);
-        tv = (TextView)findViewById(R.id.tv8_men);
-        Glide.with(getApplicationContext()).load(men_images.get(7)).into(iv);
-        tv.setText(men_names.get(7));
-        tv = (TextView)findViewById(R.id.men_mrp8);
-        tv.setText("Rs. "+men_mrp.get(7));
-
-        iv = (ImageView)findViewById(R.id.iv9_men);
-        tv = (TextView)findViewById(R.id.tv9_men);
-        Glide.with(getApplicationContext()).load(men_images.get(8)).into(iv);
-        tv.setText(men_names.get(8));
-        tv = (TextView)findViewById(R.id.men_mrp9);
-        tv.setText("Rs. "+men_mrp.get(8));
-
-        iv = (ImageView)findViewById(R.id.iv10_men);
-        tv = (TextView)findViewById(R.id.tv10_men);
-        Glide.with(getApplicationContext()).load(men_images.get(9)).into(iv);
-        tv.setText(men_names.get(9));
-        tv = (TextView)findViewById(R.id.men_mrp10);
-        tv.setText("Rs. "+men_mrp.get(9));
-
-        iv = (ImageView)findViewById(R.id.iv11_men);
-        tv = (TextView)findViewById(R.id.tv11_men);
-        Glide.with(getApplicationContext()).load(men_images.get(10)).into(iv);
-        tv.setText(men_names.get(10));
-        tv = (TextView)findViewById(R.id.men_mrp11);
-        tv.setText("Rs. "+men_mrp.get(10));
-
-        iv = (ImageView)findViewById(R.id.iv12_men);
-        tv = (TextView)findViewById(R.id.tv12_men);
-        Glide.with(getApplicationContext()).load(men_images.get(11)).into(iv);
-        tv.setText(men_names.get(11));
-        tv = (TextView)findViewById(R.id.men_mrp12);
-        tv.setText("Rs. "+mobile_mrp.get(11));
+        RecyclerView rv_men = (RecyclerView) findViewById(R.id.rv_men);
+        LinearLayoutManager linearLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        rv_men.setLayoutManager(linearLayout);
+        ProductsAdapter pAdapter = new ProductsAdapter(this,men,0);
+        rv_men.setAdapter(pAdapter);
     }
 
     public void setWomenRanges()
     {
-        ImageView iv = (ImageView)findViewById(R.id.iv1_women);
-        TextView tv = (TextView)findViewById(R.id.tv1_women);
-        Glide.with(getApplicationContext()).load(women_images.get(0)).into(iv);
-        tv.setText(women_names.get(0));
-        tv = (TextView)findViewById(R.id.women_mrp1);
-        tv.setText("Rs. "+women_mrp.get(0));
-
-        iv = (ImageView)findViewById(R.id.iv2_women);
-        tv = (TextView)findViewById(R.id.tv2_women);
-        Glide.with(getApplicationContext()).load(women_images.get(1)).into(iv);
-        tv.setText(women_names.get(1));
-        tv = (TextView)findViewById(R.id.women_mrp2);
-        tv.setText("Rs. "+women_mrp.get(1));
-
-        iv = (ImageView)findViewById(R.id.iv3_women);
-        tv = (TextView)findViewById(R.id.tv3_women);
-        Glide.with(getApplicationContext()).load(women_images.get(2)).into(iv);
-        tv.setText(women_names.get(2));
-        tv = (TextView)findViewById(R.id.women_mrp3);
-        tv.setText("Rs. "+women_mrp.get(2));
-
-        iv = (ImageView)findViewById(R.id.iv4_women);
-        tv = (TextView)findViewById(R.id.tv4_women);
-        Glide.with(getApplicationContext()).load(women_images.get(3)).into(iv);
-        tv.setText(women_names.get(3));
-        tv = (TextView)findViewById(R.id.women_mrp4);
-        tv.setText("Rs. "+women_mrp.get(3));
-
-        iv = (ImageView)findViewById(R.id.iv5_women);
-        tv = (TextView)findViewById(R.id.tv5_women);
-        Glide.with(getApplicationContext()).load(women_images.get(4)).into(iv);
-        tv.setText(women_names.get(4));
-        tv = (TextView)findViewById(R.id.women_mrp5);
-        tv.setText("Rs. "+women_mrp.get(4));
-
-        iv = (ImageView)findViewById(R.id.iv6_women);
-        tv = (TextView)findViewById(R.id.tv6_women);
-        Glide.with(getApplicationContext()).load(women_images.get(5)).into(iv);
-        tv.setText(women_names.get(5));
-        tv = (TextView)findViewById(R.id.women_mrp6);
-        tv.setText("Rs. "+women_mrp.get(5));
-
-        iv = (ImageView)findViewById(R.id.iv7_women);
-        tv = (TextView)findViewById(R.id.tv7_women);
-        Glide.with(getApplicationContext()).load(women_images.get(6)).into(iv);
-        tv.setText(women_names.get(6));
-        tv = (TextView)findViewById(R.id.women_mrp7);
-        tv.setText("Rs. "+women_mrp.get(6));
-
-        iv = (ImageView)findViewById(R.id.iv8_women);
-        tv = (TextView)findViewById(R.id.tv8_women);
-        Glide.with(getApplicationContext()).load(women_images.get(7)).into(iv);
-        tv.setText(women_names.get(7));
-        tv = (TextView)findViewById(R.id.women_mrp8);
-        tv.setText("Rs. "+women_mrp.get(7));
-
-        iv = (ImageView)findViewById(R.id.iv9_women);
-        tv = (TextView)findViewById(R.id.tv9_women);
-        Glide.with(getApplicationContext()).load(women_images.get(8)).into(iv);
-        tv.setText(women_names.get(8));
-        tv = (TextView)findViewById(R.id.women_mrp9);
-        tv.setText("Rs. "+women_mrp.get(8));
-
-        iv = (ImageView)findViewById(R.id.iv10_women);
-        tv = (TextView)findViewById(R.id.tv10_women);
-        Glide.with(getApplicationContext()).load(women_images.get(9)).into(iv);
-        tv.setText(women_names.get(9));
-        tv = (TextView)findViewById(R.id.women_mrp10);
-        tv.setText("Rs. "+women_mrp.get(9));
-
-        iv = (ImageView)findViewById(R.id.iv11_women);
-        tv = (TextView)findViewById(R.id.tv11_women);
-        Glide.with(getApplicationContext()).load(women_images.get(10)).into(iv);
-        tv.setText(women_names.get(10));
-        tv = (TextView)findViewById(R.id.women_mrp11);
-        tv.setText("Rs. "+women_mrp.get(10));
-
-        iv = (ImageView)findViewById(R.id.iv12_women);
-        tv = (TextView)findViewById(R.id.tv12_women);
-        Glide.with(getApplicationContext()).load(women_images.get(11)).into(iv);
-        tv.setText(women_names.get(11));
-        tv = (TextView)findViewById(R.id.women_mrp12);
-        tv.setText("Rs. "+mobile_mrp.get(11));
+        RecyclerView rv_women = (RecyclerView) findViewById(R.id.rv_women);
+        LinearLayoutManager linearLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        rv_women.setLayoutManager(linearLayout);
+        ProductsAdapter pAdapter = new ProductsAdapter(this,women,0);
+        rv_women.setAdapter(pAdapter);
     }
 
     public void setFootwearRanges()
     {
-        ImageView iv = (ImageView)findViewById(R.id.iv1_footwear);
-        TextView tv = (TextView)findViewById(R.id.tv1_footwear);
-        Glide.with(getApplicationContext()).load(footwear_images.get(0)).into(iv);
-        tv.setText(footwear_names.get(0));
-        tv = (TextView)findViewById(R.id.footwear_mrp1);
-        tv.setText("Rs. "+footwear_mrp.get(0));
-
-        iv = (ImageView)findViewById(R.id.iv2_footwear);
-        tv = (TextView)findViewById(R.id.tv2_footwear);
-        Glide.with(getApplicationContext()).load(footwear_images.get(1)).into(iv);
-        tv.setText(footwear_names.get(1));
-        tv = (TextView)findViewById(R.id.footwear_mrp2);
-        tv.setText("Rs. "+footwear_mrp.get(1));
-
-        iv = (ImageView)findViewById(R.id.iv3_footwear);
-        tv = (TextView)findViewById(R.id.tv3_footwear);
-        Glide.with(getApplicationContext()).load(footwear_images.get(2)).into(iv);
-        tv.setText(footwear_names.get(2));
-        tv = (TextView)findViewById(R.id.footwear_mrp3);
-        tv.setText("Rs. "+footwear_mrp.get(2));
-
-        iv = (ImageView)findViewById(R.id.iv4_footwear);
-        tv = (TextView)findViewById(R.id.tv4_footwear);
-        Glide.with(getApplicationContext()).load(footwear_images.get(3)).into(iv);
-        tv.setText(footwear_names.get(3));
-        tv = (TextView)findViewById(R.id.footwear_mrp4);
-        tv.setText("Rs. "+footwear_mrp.get(3));
-
-        iv = (ImageView)findViewById(R.id.iv5_footwear);
-        tv = (TextView)findViewById(R.id.tv5_footwear);
-        Glide.with(getApplicationContext()).load(footwear_images.get(4)).into(iv);
-        tv.setText(footwear_names.get(4));
-        tv = (TextView)findViewById(R.id.footwear_mrp5);
-        tv.setText("Rs. "+footwear_mrp.get(4));
-
-        iv = (ImageView)findViewById(R.id.iv6_footwear);
-        tv = (TextView)findViewById(R.id.tv6_footwear);
-        Glide.with(getApplicationContext()).load(footwear_images.get(5)).into(iv);
-        tv.setText(footwear_names.get(5));
-        tv = (TextView)findViewById(R.id.footwear_mrp6);
-        tv.setText("Rs. "+footwear_mrp.get(5));
-
-        iv = (ImageView)findViewById(R.id.iv7_footwear);
-        tv = (TextView)findViewById(R.id.tv7_footwear);
-        Glide.with(getApplicationContext()).load(footwear_images.get(6)).into(iv);
-        tv.setText(footwear_names.get(6));
-        tv = (TextView)findViewById(R.id.footwear_mrp7);
-        tv.setText("Rs. "+footwear_mrp.get(6));
-
-        iv = (ImageView)findViewById(R.id.iv8_footwear);
-        tv = (TextView)findViewById(R.id.tv8_footwear);
-        Glide.with(getApplicationContext()).load(footwear_images.get(7)).into(iv);
-        tv.setText(footwear_names.get(7));
-        tv = (TextView)findViewById(R.id.footwear_mrp8);
-        tv.setText("Rs. "+footwear_mrp.get(7));
-
-        iv = (ImageView)findViewById(R.id.iv9_footwear);
-        tv = (TextView)findViewById(R.id.tv9_footwear);
-        Glide.with(getApplicationContext()).load(footwear_images.get(8)).into(iv);
-        tv.setText(footwear_names.get(8));
-        tv = (TextView)findViewById(R.id.footwear_mrp9);
-        tv.setText("Rs. "+footwear_mrp.get(8));
-
-        iv = (ImageView)findViewById(R.id.iv10_footwear);
-        tv = (TextView)findViewById(R.id.tv10_footwear);
-        Glide.with(getApplicationContext()).load(footwear_images.get(9)).into(iv);
-        tv.setText(footwear_names.get(9));
-        tv = (TextView)findViewById(R.id.footwear_mrp10);
-        tv.setText("Rs. "+footwear_mrp.get(9));
-
-        iv = (ImageView)findViewById(R.id.iv11_footwear);
-        tv = (TextView)findViewById(R.id.tv11_footwear);
-        Glide.with(getApplicationContext()).load(footwear_images.get(10)).into(iv);
-        tv.setText(footwear_names.get(10));
-        tv = (TextView)findViewById(R.id.footwear_mrp11);
-        tv.setText("Rs. "+footwear_mrp.get(10));
-
-        iv = (ImageView)findViewById(R.id.iv12_footwear);
-        tv = (TextView)findViewById(R.id.tv12_footwear);
-        Glide.with(getApplicationContext()).load(footwear_images.get(11)).into(iv);
-        tv.setText(footwear_names.get(11));
-        tv = (TextView)findViewById(R.id.footwear_mrp12);
-        tv.setText("Rs. "+mobile_mrp.get(11));
+        RecyclerView rv_footwear = (RecyclerView) findViewById(R.id.rv_footwear);
+        LinearLayoutManager linearLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        rv_footwear.setLayoutManager(linearLayout);
+        ProductsAdapter pAdapter = new ProductsAdapter(this,footwear,0);
+        rv_footwear.setAdapter(pAdapter);
     }
     
     public void openDeal(View view)
     {
-        String url="";
-        switch(view.getId())
+        String url="https://pricyfy.com/";
+       /* switch(view.getId())
         {
             case R.id.ll1 : url=deals_links.get(0);break;
             case R.id.ll2 : url=deals_links.get(1);break;
@@ -818,9 +400,59 @@ public class homeScreen extends AppCompatActivity
             case R.id.ll10 : url=deals_links.get(9);break;
             case R.id.ll11 : url=deals_links.get(10);break;
             case R.id.ll12 : url=deals_links.get(11);break;
-        }
+        }*/
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);
+    }
+
+    public void loadAdBanners()
+    {
+        ImageView iv;
+
+        iv = (ImageView)findViewById(R.id.ad_banner_relative_layout);
+        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner.png").into(iv);
+
+        iv = (ImageView)findViewById(R.id.ad_banner_relative_layout1);
+        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner1.png").into(iv);
+
+        iv = (ImageView)findViewById(R.id.ad_banner_relative_layout2);
+        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner2.png").into(iv);
+
+        iv = (ImageView)findViewById(R.id.ad_banner_relative_layout3);
+        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner3.png").into(iv);
+
+        iv = (ImageView)findViewById(R.id.ad_banner_relative_layout4);
+        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner4.png").into(iv);
+
+        iv = (ImageView)findViewById(R.id.ad_banner_relative_layout5);
+        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner5.png").into(iv);
+
+        iv = (ImageView)findViewById(R.id.ad_banner_relative_layout6);
+        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner6.png").into(iv);
+
+        iv = (ImageView)findViewById(R.id.ad_banner_relative_layout7);
+        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner7.png").into(iv);
+
+        iv = (ImageView)findViewById(R.id.ad_banner_relative_layout8);
+        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner8.jpg").into(iv);
+
+        iv = (ImageView)findViewById(R.id.ad_banner_relative_layout9);
+        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner9.jpg").into(iv);
+
+        iv = (ImageView)findViewById(R.id.ad_banner_relative_layout10);
+        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner10.png").into(iv);
+
+        iv = (ImageView)findViewById(R.id.ad_banner_relative_layout11);
+        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner11.png").into(iv);
+
+        iv = (ImageView)findViewById(R.id.ad_banner_relative_layout12);
+        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner12.png").into(iv);
+
+        iv = (ImageView)findViewById(R.id.ad_banner_relative_layout13);
+        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner13.png").into(iv);
+
+        iv = (ImageView)findViewById(R.id.ad_banner_relative_layout14);
+        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner14.png").into(iv);
     }
 
     public void openCouponsPage(View view)

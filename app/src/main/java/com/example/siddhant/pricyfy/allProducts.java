@@ -79,7 +79,7 @@ public class allProducts extends AppCompatActivity implements NavigationView.OnN
         gridLayout = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(gridLayout);
 
-        adapter = new ProductsAdapter(this, products);
+        adapter = new ProductsAdapter(this, products,1);
 
         recyclerView.setAdapter(adapter);
 

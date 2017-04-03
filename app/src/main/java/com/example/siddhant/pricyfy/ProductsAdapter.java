@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -18,29 +17,36 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
     private Context context;
     private List<Product> products;
+    private int type;   //0 for homeScreen 1 for allProductsScreen
 
-    public ProductsAdapter(Context context, List<Product> products) {
+    public ProductsAdapter(Context context, List<Product> products, int type) {
         this.context = context;
         this.products = products;
+        this.type=type;
+
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.deals_elements,parent,false);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) 
+    {
+        View itemView;
+        if(type==0)
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_elements_home_screen,parent,false);
+        else
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_elements_all_products_screen,parent,false);
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-
+        Glide.with(context).load(products.get(position).getImageLink()).into(holder.imageView);
+        holder.productPrice.setText("Rs. " + String.format("%d",products.get(position).getPrice()));
         holder.productTitle.setText(products.get(position).getTitle());
+        if(type==0) return;
         String desc = products.get(position).getDescription();
         if(desc.length()>50) holder.productDescription.setText(desc.substring(0,50));
         else holder.productDescription.setText(desc);
-        holder.productPrice.setText("Rs. " + String.format("%d",products.get(position).getPrice()));
         holder.ratingBar.setRating(((float) products.get(position).getSeller_rating()));
-        Glide.with(context).load(products.get(position).getImageLink()).into(holder.imageView);
     }
 
 

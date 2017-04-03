@@ -1,12 +1,16 @@
 package com.example.siddhant.pricyfy;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 /**
  * Created by siddhant on 22/3/17.
  */
 
-public class Product {
+public class Product implements Parcelable{
     private int id;
-    private String product_number;
     private String title;
     private String description;
     private int price;
@@ -21,6 +25,13 @@ public class Product {
         this.price=price;
         this.image_link=image_link;
         this.seller_rating=seller_rating;
+    }
+
+    public Product(String title, int price, String image_link)
+    {
+        this.title=title;
+        this.price=price;
+        this.image_link=image_link;
     }
     public int getId()
     {
@@ -37,11 +48,6 @@ public class Product {
         return image_link;
     }
 
-    public String getProduct_number()
-    {
-        return product_number;
-    }
-
     public String getDescription()
     {
         return description;
@@ -53,4 +59,47 @@ public class Product {
     }
 
     public double getSeller_rating() { return seller_rating;}
+
+    public Product(Parcel in)
+    {
+        super();
+        readFromParcel(in);
+    }
+
+    public static final Parcelable.Creator<Product> CREATOR = new Parcelable.Creator<Product>(){
+        public Product createFromParcel(Parcel in)
+        {
+            return new Product(in);
+        }
+
+        public Product[] newArray(int size)
+        {
+            return new Product[size];
+        }
+    };
+
+    public void readFromParcel(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        description = in.readString();
+        price = in.readInt();
+        image_link = in.readString();
+        seller_rating = in.readDouble();
+    }
+
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel dest, int flags)
+    {
+        dest.writeInt(id);
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeInt(price);
+        dest.writeString(image_link);
+        dest.writeDouble(seller_rating);
+    }
+
 }
