@@ -44,22 +44,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_height="100dp"
+            android:layout_height="90dp"
             android:baselineAligned="false"
+            android:background="@color/background_home_screen"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/viewPagerFrameLayout"
-            android:layout_marginTop="0dp"
             android:id="@+id/relativeLayout1">
 
             <LinearLayout
                 android:id="@+id/button_deals"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:padding="2dp"
+                android:padding="1dp"
                 android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:layout_height="fill_parent"
+                android:layout_margin="0.5dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:clickable="true"
                 android:onClick="openDealsPage">
@@ -69,16 +69,16 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:layout_weight="1"
-                    android:src="@drawable/deals"
+                    android:src="@drawable/hot_deals"
                     android:scaleType="fitXY"/>
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:text="@string/deals"
+                    android:text="Hot deals"
                     android:layout_weight="4"
                     android:textAlignment="center"
-                    android:textColor="#000000"
+                    android:textColor="@color/pure_black"
                     android:textSize="8dp" />
             </LinearLayout>
 
@@ -86,10 +86,10 @@
                 android:id="@+id/mobiles"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:padding="2dp"
+                android:padding="1dp"
                 android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:layout_height="fill_parent"
+                android:layout_margin="0.5dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:clickable="true"
                 android:onClick="openAllProducts">
@@ -99,16 +99,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:src="@drawable/mobiles_tablets"
+                    android:src="@drawable/mobiles"
                     android:scaleType="fitXY"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
-                    android:text="@string/mobiles_and_tablets"
+                    android:text="Mobiles"
                     android:layout_weight="4"
                     android:textAlignment="center"
-                    android:textColor="#000000"
+                    android:textColor="@color/pure_black"
                     android:textSize="8dp" />
             </LinearLayout>
 
@@ -116,10 +116,10 @@
                 android:id="@+id/laptops"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:padding="2dp"
+                android:padding="1dp"
                 android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:layout_height="fill_parent"
+                android:layout_margin="0.5dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:clickable="true"
                 android:onClick="openDealsPage">
@@ -129,16 +129,16 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:layout_weight="1"
-                    android:src="@drawable/laptops_peripherals"
+                    android:src="@drawable/smartwatches"
                     android:scaleType="fitXY"/>
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:text="@string/laptops_and_peripherals"
+                    android:text="Smartwatches"
                     android:layout_weight="4"
                     android:textAlignment="center"
-                    android:textColor="#000000"
+                    android:textColor="@color/pure_black"
                     android:textSize="8dp" />
             </LinearLayout>
 
@@ -146,10 +146,10 @@
                 android:id="@+id/cameras"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:padding="2dp"
+                android:padding="1dp"
                 android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:layout_height="fill_parent"
+                android:layout_margin="0.5dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:clickable="true"
                 android:onClick="openAllProducts">
@@ -159,16 +159,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:src="@drawable/camera_accessories"
+                    android:src="@drawable/cameras"
                     android:scaleType="fitXY"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
-                    android:text="@string/mobiles_and_tablets"
+                    android:text="Cameras"
                     android:layout_weight="4"
                     android:textAlignment="center"
-                    android:textColor="#000000"
+                    android:textColor="@color/pure_black"
                     android:textSize="8dp" />
             </LinearLayout>
 
@@ -178,22 +178,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_height="100dp"
+            android:layout_height="90dp"
             android:baselineAligned="false"
+            android:background="@color/background_home_screen"
+            android:layout_margin="0.5dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="0dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/relativeLayout1"
-            android:layout_marginTop="0dp"
             android:id="@+id/relativeLayout2">
 
             <LinearLayout
                 android:id="@+id/tv"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:padding="2dp"
+                android:padding="1dp"
                 android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:layout_height="fill_parent"
+                android:layout_margin="0.5dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:clickable="true"
                 android:onClick="openAllProducts">
@@ -203,16 +206,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:src="@drawable/tv_entertainment"
+                    android:src="@drawable/furnitures"
                     android:scaleType="fitXY"/>
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:text="@string/tv_and_entertainment"
+                    android:text="Furnitures"
                     android:layout_weight="4"
                     android:textAlignment="center"
-                    android:textColor="#000000"
+                    android:textColor="@color/pure_black"
                     android:textSize="8dp" />
             </LinearLayout>
 
@@ -220,10 +223,10 @@
                 android:id="@+id/men"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:padding="2dp"
+                android:padding="1dp"
                 android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:layout_height="fill_parent"
+                android:layout_margin="0.5dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:clickable="true"
                 android:onClick="openAllProducts">
@@ -233,26 +236,26 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:src="@drawable/men"
+                    android:src="@drawable/mens_clothing"
                     android:scaleType="fitXY"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
-                    android:text="@string/men"
+                    android:text="Men's clothing"
                     android:layout_weight="4"
                     android:textAlignment="center"
-                    android:textColor="#000000"
+                    android:textColor="@color/pure_black"
                     android:textSize="8dp" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/women"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:padding="2dp"
+                android:padding="1dp"
                 android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:layout_height="fill_parent"
+                android:layout_margin="0.5dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:clickable="true"
                 android:onClick="openAllProducts">
@@ -262,16 +265,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:src="@drawable/women"
+                    android:src="@drawable/mens_accessories"
                     android:scaleType="fitXY"/>
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:text="@string/women"
+                    android:text="Men's accessories"
                     android:layout_weight="4"
                     android:textAlignment="center"
-                    android:textColor="#000000"
+                    android:textColor="@color/pure_black"
                     android:textSize="8dp" />
             </LinearLayout>
 
@@ -279,10 +282,10 @@
                 android:id="@+id/other"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:padding="2dp"
+                android:padding="1dp"
                 android:layout_weight="1"
-                android:layout_margin="2dp"
-                android:layout_height="fill_parent"
+                android:layout_margin="0.5dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:clickable="true"
                 android:onClick="openAllProducts">
@@ -292,16 +295,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:src="@drawable/other"
+                    android:src="@drawable/womens_clothing"
                     android:scaleType="fitXY"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
-                    android:text="Other Products"
+                    android:text="Women's clothing"
                     android:layout_weight="4"
                     android:textAlignment="center"
-                    android:textColor="#000000"
+                    android:textColor="@color/pure_black"
                     android:textSize="8dp" />
             </LinearLayout>
 
@@ -313,37 +316,43 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_below="@+id/relativeLayout2"
-            android:layout_margin="2dp"
-            android:layout_marginTop="2dp"
             android:layout_centerHorizontal="true">
 
 
-            <Button
-                android:id="@+id/button"
-                android:backgroundTint="@color/pricify_blue"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:textColor="#112233"
-                android:text="Deals of the day"
-                android:layout_margin="2dp"
-                android:textAlignment="viewStart"
-                android:gravity="start"
-                android:background="#ffffff"
-                android:elevation="0dp"
-                android:textSize="15dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+            <LinearLayout
+                android:id="@+id/tvLL1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:text="Deals of the day"
+                    android:textAllCaps="false"
+                    android:textSize="15dp"
+                    android:textColor="@color/deals_of_the_day"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:text="View all"
+                    android:gravity="end"
+                    android:textAllCaps="false"
+                    android:textAlignment="textEnd"
+                    android:textSize="10dp"
+                    android:textColor="@color/view_all"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_deals"
-                android:elevation="5dp"
                 android:layout_width="match_parent"
+                android:background="@color/background_home_screen"
                 android:layout_height="fill_parent"
-                android:layout_below="@id/button"
-                android:layout_alignParentBottom="true"
+                android:layout_below="@id/tvLL1"
                 xmlns:android="http://schemas.android.com/apk/res/android">
             </android.support.v7.widget.RecyclerView>
 
@@ -355,31 +364,46 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/coupons"
-            android:layout_margin="2dp"
+            android:layout_margin="0.5dp"
             android:layout_below="@+id/deals">
 
-            <Button
-                android:id="@+id/dealandOffers"
-                android:layout_width="wrap_content"
-                android:backgroundTint="@color/pricify_blue"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:elevation="0dp"
-                android:gravity="start"
-                android:text="Coupons"
-                android:textAlignment="viewStart"
-                android:textColor="#112233"
-                android:textSize="15dp" />
+            <LinearLayout
+                android:id="@+id/tvLL2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.5dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:text="Coupons"
+                    android:textAllCaps="false"
+                    android:textSize="15dp"
+                    android:textColor="@color/deals_of_the_day"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:text="View all"
+                    android:gravity="end"
+                    android:textAllCaps="false"
+                    android:textAlignment="textEnd"
+                    android:textSize="10dp"
+                    android:textColor="@color/view_all"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="none"
-                android:layout_below="@id/dealandOffers">
+                android:background="@color/background_home_screen"
+                android:layout_below="@id/tvLL2">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -390,7 +414,9 @@
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
-                        android:layout_margin="2dp"
+                        android:layout_margin="0.5dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="0dp"
                         android:orientation="vertical">
 
                         <ImageView
@@ -398,15 +424,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:padding="1dp"
                             android:src="@drawable/deals"
                             android:scaleType="fitXY"/>
                         <TextView
                             android:id="@+id/tv2_coupons"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="3"
+                            android:layout_weight="5"
                             android:textAlignment="center"
+                            android:background="#ffffff"
                             android:textColor="#000000"
                             android:textSize="10dp"/>
 
@@ -416,7 +442,9 @@
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
-                        android:layout_margin="2dp"
+                        android:layout_margin="0.5dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="0dp"
                         android:orientation="vertical">
 
                         <ImageView
@@ -424,15 +452,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:padding="1dp"
                             android:src="@drawable/deals"
                             android:scaleType="fitXY"/>
                         <TextView
                             android:id="@+id/tv1_coupons"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="3"
+                            android:layout_weight="5"
                             android:textAlignment="center"
+                            android:background="#ffffff"
                             android:textColor="#000000"
                             android:textSize="10dp"/>
 
@@ -442,7 +470,9 @@
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
-                        android:layout_margin="2dp"
+                        android:layout_margin="0.5dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="0dp"
                         android:orientation="vertical">
 
                         <ImageView
@@ -450,14 +480,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:padding="1dp"
                             android:src="@drawable/deals"
                             android:scaleType="fitXY"/>
                         <TextView
                             android:id="@+id/tv3_coupons"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="3"
+                            android:layout_weight="5"
+                            android:background="#ffffff"
                             android:textAlignment="center"
                             android:textColor="#000000"
                             android:textSize="10dp"/>
@@ -469,84 +499,120 @@
 
         <ImageView
             android:id="@+id/ad_banner_relative_layout"
-            android:layout_margin="2dp"
+            android:layout_margin="0.5dp"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:background="@color/background_home_screen"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="130dp"
             android:layout_below="@+id/coupons">
         </ImageView>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_margin="2dp"
+            android:layout_margin="0.5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/mobile_ranges_relative_layout"
             android:layout_below="@+id/ad_banner_relative_layout">
 
-            <Button
-                android:id="@+id/mobile_ranges_button"
-                android:layout_width="wrap_content"
-                android:backgroundTint="@color/pricify_blue"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:background="#ffffff"
-                android:elevation="0dp"
-                android:gravity="start"
-                android:text="Desired Range of Mobile Phones"
-                android:textAlignment="viewStart"
-                android:textColor="#112233"
-                android:textSize="15dp"
-                android:onClick="openAllProducts"/>
+
+            <LinearLayout
+                android:id="@+id/tvLL3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.5dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="500dp"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:text="Desired range of mobile phones"
+                    android:textAllCaps="false"
+                    android:singleLine="true"
+                    android:textSize="15dp"
+                    android:textColor="@color/deals_of_the_day"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:text="View all"
+                    android:gravity="end"
+                    android:textAllCaps="false"
+                    android:textAlignment="textEnd"
+                    android:textSize="10dp"
+                    android:textColor="@color/view_all"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:elevation="5dp"
-                android:layout_below="@id/mobile_ranges_button"
+                android:background="@color/background_home_screen"
+                android:layout_below="@id/tvLL3"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:layout_alignParentBottom="true"
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/rv_mobiles"
-                android:layout_margin="2dp"
                 />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_margin="2dp"
+            android:layout_margin="0.5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:layout_height="200dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/camera_ranges_relative_layout"
             android:layout_below="@+id/mobile_ranges_relative_layout">
 
-            <Button
-                android:id="@+id/camera_ranges_button"
-                android:layout_width="wrap_content"
-                android:backgroundTint="@color/pricify_blue"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:background="#ffffff"
-                android:elevation="0dp"
-                android:gravity="start"
-                android:text="Desired Range of Cameras"
-                android:textAlignment="viewStart"
-                android:textColor="#112233"
-                android:textSize="15dp"
-                android:onClick="openAllProducts"/>
+            <LinearLayout
+                android:id="@+id/tvLL4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.5dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="500dp"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:text="Desired range of cameras"
+                    android:textAllCaps="false"
+                    android:singleLine="true"
+                    android:textSize="15dp"
+                    android:textColor="@color/deals_of_the_day"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:text="View all"
+                    android:gravity="end"
+                    android:textAllCaps="false"
+                    android:textAlignment="textEnd"
+                    android:textSize="10dp"
+                    android:textColor="@color/view_all"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_cameras"
                 android:layout_width="match_parent"
-                android:layout_margin="2dp"
+                android:background="@color/background_home_screen"
+                android:layout_below="@id/tvLL4"
                 android:layout_height="200dp"
                 xmlns:android="http://schemas.android.com/apk/res/android"/>
         </RelativeLayout>
@@ -554,8 +620,12 @@
         <ImageView
             android:id="@+id/ad_banner_relative_layout1"
             android:layout_width="match_parent"
-            android:layout_margin="2dp"
+            android:layout_margin="0.5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:layout_height="150dp"
+            android:padding="1dp"
+            android:background="@color/background_home_screen"
             android:layout_below="@+id/camera_ranges_relative_layout"
             android:clickable="true"
             android:scaleType="fitXY"
@@ -565,8 +635,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_margin="2dp"
+            android:layout_margin="0.5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:orientation="horizontal"
+            android:background="@color/background_home_screen"
+            android:padding="1dp"
             android:id="@+id/ad_banner_linear_layout1"
             android:layout_below="@id/ad_banner_relative_layout1">
             <ImageView
@@ -575,7 +649,7 @@
                 android:layout_weight="1"
                 android:scaleType="fitXY"
                 android:layout_height="150dp"
-                android:layout_margin="2dp"
+                android:layout_margin="0.5dp"
                 android:clickable="true"
                 android:onClick="openAdBanner1">
             </ImageView>
@@ -585,7 +659,7 @@
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:scaleType="fitXY"
-                android:layout_margin="2dp"
+                android:layout_margin="0.5dp"
                 android:layout_height="150dp"
                 android:clickable="true"
                 android:onClick="openAdBanner1">
@@ -596,7 +670,11 @@
             android:id="@+id/ad_banner_relative_layout4"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_margin="2dp"
+            android:layout_margin="0.5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:padding="1dp"
+            android:background="@color/background_home_screen"
             android:scaleType="fitXY"
             android:layout_below="@+id/ad_banner_linear_layout1"
             android:clickable="true"
@@ -607,35 +685,47 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_alignParentLeft="true"
-            android:layout_margin="2dp"
+            android:layout_margin="0.5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:layout_alignParentStart="true"
             android:id="@+id/men_ranges_relative_layout"
             android:layout_below="@+id/ad_banner_relative_layout4">
 
-            <Button
-                android:id="@+id/men_ranges_button"
-                android:layout_width="wrap_content"
-                android:backgroundTint="@color/pricify_blue"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:background="#ffffff"
-                android:elevation="0dp"
-                android:gravity="start"
-                android:text="Desired Range of Men's Clothing"
-                android:textAlignment="viewStart"
-                android:textColor="#112233"
-                android:textSize="15dp"
-                android:onClick="openAllProducts"/>
+            <LinearLayout
+                android:id="@+id/tvLL5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="500dp"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:text="Desired range of men's clothing"
+                    android:textAllCaps="false"
+                    android:singleLine="true"
+                    android:textSize="15dp"
+                    android:textColor="@color/deals_of_the_day"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:text="View all"
+                    android:gravity="end"
+                    android:textAllCaps="false"
+                    android:textAlignment="textEnd"
+                    android:textSize="10dp"
+                    android:textColor="@color/view_all"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_men"
                 android:layout_width="match_parent"
-                android:layout_margin="2dp"
-                android:layout_below="@id/men_ranges_button"
+                android:background="@color/background_home_screen"
+                android:layout_below="@id/tvLL5"
                 android:layout_height="200dp"
                 xmlns:android="http://schemas.android.com/apk/res/android"/>
         </RelativeLayout>
@@ -644,7 +734,11 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:orientation="horizontal"
-            android:layout_margin="1dp"
+            android:layout_margin="0.5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:background="@color/background_home_screen"
+            android:padding="1dp"
             android:id="@+id/ad_banner_linear_layout2"
             android:layout_below="@id/men_ranges_relative_layout">
             <ImageView
@@ -652,7 +746,7 @@
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_margin="1dp"
+                android:layout_margin="0.5dp"
                 android:scaleType="fitXY"
                 android:clickable="true"
                 android:onClick="openAdBanner1">
@@ -663,7 +757,7 @@
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:scaleType="fitXY"
-                android:layout_margin="2dp"
+                android:layout_margin="0.5dp"
                 android:layout_height="150dp"
                 android:clickable="true"
                 android:onClick="openAdBanner1">
@@ -675,7 +769,11 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="150dp"
-            android:layout_margin="2dp"
+            android:padding="1dp"
+            android:background="@color/background_home_screen"
+            android:layout_margin="0.5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:clickable="true"
             android:scaleType="fitXY"
             android:layout_below="@id/ad_banner_linear_layout2"
@@ -687,7 +785,11 @@
             android:layout_below="@id/ad_banner_relative_layout7"
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:layout_margin="2dp"
+            android:padding="1dp"
+            android:background="@color/background_home_screen"
+            android:layout_margin="0.5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:scaleType="fitXY"
             android:layout_height="150dp"
             android:clickable="true"
@@ -698,35 +800,46 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_alignParentLeft="true"
-            android:layout_margin="2dp"
+            android:layout_margin="0.5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:layout_alignParentStart="true"
             android:id="@+id/women_ranges_relative_layout"
             android:layout_below="@+id/ad_banner_relative_layout8">
-
-            <Button
-                android:id="@+id/women_ranges_button"
-                android:layout_width="wrap_content"
-                android:backgroundTint="@color/pricify_blue"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:background="#ffffff"
-                android:elevation="0dp"
-                android:gravity="start"
-                android:text="Desired Range of Women's Clothing"
-                android:textAlignment="viewStart"
-                android:textColor="#112233"
-                android:textSize="15dp"
-                android:onClick="openAllProducts"/>
+            <LinearLayout
+                android:id="@+id/tvLL6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="500dp"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:text="Desired range of women's clothing"
+                    android:textAllCaps="false"
+                    android:singleLine="true"
+                    android:textSize="15dp"
+                    android:textColor="@color/deals_of_the_day"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:text="View all"
+                    android:gravity="end"
+                    android:textAllCaps="false"
+                    android:textAlignment="textEnd"
+                    android:textSize="10dp"
+                    android:textColor="@color/view_all"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_women"
                 android:layout_width="match_parent"
-                android:layout_margin="2dp"
-                android:layout_below="@id/women_ranges_button"
+                android:background="@color/background_home_screen"
+                android:layout_below="@id/tvLL6"
                 android:layout_height="200dp"
                 xmlns:android="http://schemas.android.com/apk/res/android"/>
         </RelativeLayout>
@@ -735,7 +848,11 @@
             android:id="@+id/ad_banner_relative_layout9"
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:layout_margin="2dp"
+            android:padding="1dp"
+            android:layout_margin="0.5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:background="@color/background_home_screen"
             android:scaleType="fitXY"
             android:layout_height="150dp"
             android:layout_below="@id/women_ranges_relative_layout"
@@ -746,7 +863,11 @@
             android:id="@+id/ad_banner_relative_layout10"
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:layout_margin="2dp"
+            android:padding="1dp"
+            android:background="@color/background_home_screen"
+            android:layout_margin="0.5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:scaleType="fitXY"
             android:layout_height="150dp"
             android:layout_below="@id/ad_banner_relative_layout9"
@@ -758,14 +879,18 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:orientation="horizontal"
-            android:layout_margin="2dp"
+            android:layout_margin="0.5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:padding="1dp"
+            android:background="@color/background_home_screen"
             android:id="@+id/ad_banner_linear_layout3"
             android:layout_below="@+id/ad_banner_relative_layout10">
             <ImageView
                 android:id="@+id/ad_banner_relative_layout11"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="2dp"
+                android:layout_margin="0.5dp"
                 android:scaleType="fitXY"
                 android:layout_height="150dp"
                 android:clickable="true"
@@ -778,7 +903,7 @@
                 android:layout_weight="1"
                 android:scaleType="fitXY"
                 android:layout_height="150dp"
-                android:layout_margin="2dp"
+                android:layout_margin="0.5dp"
                 android:clickable="true"
                 android:onClick="openAdBanner1">
             </ImageView>
@@ -788,35 +913,47 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_alignParentLeft="true"
-            android:layout_margin="2dp"
+            android:layout_margin="0.5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:layout_alignParentStart="true"
             android:id="@+id/footwear_ranges_relative_layout"
             android:layout_below="@+id/ad_banner_linear_layout3">
 
-            <Button
-                android:id="@+id/footwear_ranges_button"
-                android:layout_width="wrap_content"
-                android:backgroundTint="@color/pricify_blue"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:background="#ffffff"
-                android:elevation="0dp"
-                android:gravity="start"
-                android:text="Desired Range of Women's Footwear"
-                android:textAlignment="viewStart"
-                android:textColor="#112233"
-                android:textSize="15dp"
-                android:onClick="openAllProducts"/>
+            <LinearLayout
+                android:id="@+id/tvLL7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="500dp"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:text="Desired range of women's footwear"
+                    android:textAllCaps="false"
+                    android:singleLine="true"
+                    android:textSize="15dp"
+                    android:textColor="@color/deals_of_the_day"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:text="View all"
+                    android:gravity="end"
+                    android:textAllCaps="false"
+                    android:textAlignment="textEnd"
+                    android:textSize="10dp"
+                    android:textColor="@color/view_all"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_footwear"
                 android:layout_width="match_parent"
-                android:layout_margin="2dp"
-                android:layout_below="@id/footwear_ranges_button"
+                android:background="@color/background_home_screen"
+                android:layout_below="@id/tvLL7"
                 android:layout_height="200dp"
                 xmlns:android="http://schemas.android.com/apk/res/android"/>
         </RelativeLayout>
@@ -825,14 +962,18 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:orientation="horizontal"
-            android:layout_margin="2dp"
+            android:layout_margin="0.5dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:background="@color/background_home_screen"
+            android:padding="1dp"
             android:id="@+id/ad_banner_linear_layout4"
             android:layout_below="@id/footwear_ranges_relative_layout">
             <ImageView
                 android:id="@+id/ad_banner_relative_layout13"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="2dp"
+                android:layout_margin="0.5dp"
                 android:scaleType="fitXY"
                 android:layout_height="150dp"
                 android:clickable="true"
@@ -843,7 +984,7 @@
                 android:id="@+id/ad_banner_relative_layout14"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="2dp"
+                android:layout_margin="0.5dp"
                 android:scaleType="fitXY"
                 android:layout_height="150dp"
                 android:clickable="true"

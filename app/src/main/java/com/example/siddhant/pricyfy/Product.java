@@ -13,7 +13,7 @@ public class Product implements Parcelable{
     private int id;
     private String title;
     private String description;
-    private int price;
+    private int price, discount;
     private String image_link;
     private double seller_rating;
 
@@ -27,15 +27,21 @@ public class Product implements Parcelable{
         this.seller_rating=seller_rating;
     }
 
-    public Product(String title, int price, String image_link)
+    public Product(String title, int price, String image_link, int discount)
     {
         this.title=title;
         this.price=price;
         this.image_link=image_link;
+        this.discount = discount;
     }
     public int getId()
     {
         return id;
+    }
+
+    public int getDiscount()
+    {
+        return discount;
     }
 
     public String getTitle()
@@ -85,6 +91,7 @@ public class Product implements Parcelable{
         price = in.readInt();
         image_link = in.readString();
         seller_rating = in.readDouble();
+        discount = in.readInt();
     }
 
     public int describeContents()
@@ -100,6 +107,7 @@ public class Product implements Parcelable{
         dest.writeInt(price);
         dest.writeString(image_link);
         dest.writeDouble(seller_rating);
+        dest.writeInt(discount);
     }
 
 }

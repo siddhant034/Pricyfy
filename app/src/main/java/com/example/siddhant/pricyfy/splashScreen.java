@@ -30,13 +30,8 @@ import static com.example.siddhant.pricyfy.R.id.toolbar;
 public class splashScreen extends AppCompatActivity {
 
     private ArrayList<Deal> deals;
-    private ArrayList<String> coupon_images;
-    private ArrayList<String> coupon_title;
-    private ArrayList<Product> mobiles;
-    private ArrayList<Product> cameras;
-    private ArrayList<Product> men;
-    private ArrayList<Product> women;
-    private ArrayList<Product> footwear;
+    private ArrayList<String> coupon_images, coupon_title, slider_images, slider_links;
+    private ArrayList<Product> mobiles, cameras, men, women, footwear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +52,8 @@ public class splashScreen extends AppCompatActivity {
         men = new ArrayList<>();
         women = new ArrayList<>();
         footwear = new ArrayList<>();
-
-
-
+        slider_links = new ArrayList<>();
+        slider_images = new ArrayList<>();
     }
 
     public boolean checkConnection()
@@ -109,19 +103,25 @@ public class splashScreen extends AppCompatActivity {
                     coupon_title.add(object.getString("title"));
                     coupon_images.add(object.getString("image_link"));
                 }
+                coupon_images.set(2,coupon_images.get(3));
+                coupon_title.set(2,coupon_title.get(3));
+
+               array = jsonObject.getJSONArray("8");
+                for(int i=0;i<array.length();i++)
+                {
+                    JSONObject object = array.getJSONObject(i);
+                    slider_images.add(object.getString("slider_image_link"));
+                    slider_links.add(object.getString("redirect_link"));
+                }
                 for(int i=0;i<=5;i++)
                 {
-                    Log.i("icici = ",Integer.toString(i));
                     if(!jsonObject.has(Integer.toString(i))) continue;
                     array = jsonObject.getJSONArray(Integer.toString(i));
-                    Log.i("array Length = ",Integer.toString(array.length()));
-                    Log.i("iiii=", Integer.toString(i));
                     for(int j=0;j<array.length();j++)
                     {
-                        Product newProduct=null;
+                        Product newProduct = null;
                         JSONObject object = array.getJSONObject(j);
-                        if(i!=5)
-                          newProduct = new Product(object.getString("product_name"),object.getInt("mrp"),object.getString("image_link"));
+                        if(i!=5) newProduct = new Product(object.getString("product_name"),object.getInt("flipkart_price"),object.getString("image_link"),object.getInt("discount"));
                         switch(i)
                         {
                             case 0 : mobiles.add(newProduct);break;
@@ -132,8 +132,6 @@ public class splashScreen extends AppCompatActivity {
                             case 5 : Deal d = new Deal(1,object.getString("product_name"),object.getString("image_link"),object.getString("product_link"));
                                      deals.add(d);break;
                         }
-                        Log.i("mobile.length = " ,Integer.toString(mobiles.size()));
-                        Log.i("jjjjj = ",Integer.toString(j));
                     }
                 }
 
@@ -155,6 +153,8 @@ public class splashScreen extends AppCompatActivity {
             b.putParcelableArrayList("deals",deals);
             b.putStringArrayList("coupon_title",coupon_title);
             b.putStringArrayList("coupon_images",coupon_images);
+            b.putStringArrayList("slider_links",slider_links);
+            b.putStringArrayList("slider_images",slider_images);
             b.putParcelableArrayList("mobiles",mobiles);
             b.putParcelableArrayList("cameras",cameras);
             b.putParcelableArrayList("men",men);

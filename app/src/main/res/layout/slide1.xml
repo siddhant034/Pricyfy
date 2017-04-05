@@ -16,8 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/slider1"
-            android:onClick="openDealsPage"/>
-
+            android:scaleType="fitXY"
+            android:onClick="openDealsPage" />
     </LinearLayout>
 
 </RelativeLayout>

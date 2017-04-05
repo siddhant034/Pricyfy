@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -47,23 +49,23 @@ import org.json.JSONException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import android.os.Handler;
 
 import me.relex.circleindicator.CircleIndicator;
 
 public class homeScreen extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener
+{
 
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private CircleIndicator indicator;
     private ArrayList<Deal> deals;
-    private ArrayList<String> coupon_images;
-    private ArrayList<String> coupon_title;
-    private ArrayList<Product> mobiles;
-    private ArrayList<Product> cameras;
-    private ArrayList<Product> men;
-    private ArrayList<Product> women;
-    private ArrayList<Product> footwear;
+    private ArrayList<String> coupon_images, coupon_title, slider_images, slider_links;
+    private ArrayList<Product> mobiles, cameras, men, women, footwear;
 
 
     @Override
@@ -82,7 +84,6 @@ public class homeScreen extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
         //slider start
         viewPager = (ViewPager)findViewById(R.id.view_pager);
         myViewPagerAdapter = new MyViewPagerAdapter();
@@ -92,6 +93,27 @@ public class homeScreen extends AppCompatActivity
             public void onClick(View view) {
             }
         });
+
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable()
+        {
+            public void run()
+            {
+                if(viewPager.getCurrentItem()==3)
+                    viewPager.setCurrentItem(0);
+                else
+                    viewPager.setCurrentItem(viewPager.getCurrentItem()+1,true);
+            }
+        };
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run()
+            {
+                handler.post(Update);
+            }
+        },500,3000);
         // slider end
 
         //to disable tinting of the navigation view icons
@@ -105,35 +127,26 @@ public class homeScreen extends AppCompatActivity
         women = new ArrayList<>();
         cameras = new ArrayList<>();
         footwear = new ArrayList<>();
+        slider_links = new ArrayList<>();
+        slider_images = new ArrayList<>();
         Bundle extras = getIntent().getExtras();
         deals = extras.getParcelableArrayList("deals");
-        coupon_images = this.getIntent().getStringArrayListExtra("coupon_images");
-        coupon_title = this.getIntent().getStringArrayListExtra("coupon_title");
         mobiles = extras.getParcelableArrayList("mobiles");
+        cameras = extras.getParcelableArrayList("cameras");
         men = extras.getParcelableArrayList("men");
         women = extras.getParcelableArrayList("women");
-        cameras = extras.getParcelableArrayList("cameras");
         footwear = extras.getParcelableArrayList("footwear");
-        //mobiles=(ArrayList<Product>)getIntent().getSerializableExtra("mobiles");
-        //men=(ArrayList<Product>)getIntent().getSerializableExtra("men");
-        //cameras=(ArrayList<Product>)getIntent().getSerializableExtra("cameras");
-        //women=(ArrayList<Product>)getIntent().getSerializableExtra("women");
-        //footwear=(ArrayList<Product>)getIntent().getSerializableExtra("footwear");
-
-        if(!(deals==null))
-            setDealsButtons();
-        if(!coupon_images.isEmpty() && !coupon_title.isEmpty())
-            setCouponsButtons();
-        if(!mobiles.isEmpty())
-           setMobileRanges();
-        if(!cameras.isEmpty())
-            setCameraRanges();
-        if(!men.isEmpty())
-            setMenRanges();
-        if(!women.isEmpty())
-           setWomenRanges();
-        if(!footwear.isEmpty())
-           setFootwearRanges();
+        coupon_images = this.getIntent().getStringArrayListExtra("coupon_images");
+        coupon_title = this.getIntent().getStringArrayListExtra("coupon_title");
+        slider_images = this.getIntent().getStringArrayListExtra("slider_images");
+        slider_links = this.getIntent().getStringArrayListExtra("slider_links");
+        if(!(deals==null)) setDealsButtons();
+        if(!coupon_images.isEmpty() && !coupon_title.isEmpty()) setCouponsButtons();
+        if(!mobiles.isEmpty()) setMobileRanges();
+        if(!cameras.isEmpty()) setCameraRanges();
+        if(!men.isEmpty()) setMenRanges();
+        if(!women.isEmpty()) setWomenRanges();
+        if(!footwear.isEmpty()) setFootwearRanges();
         loadAdBanners();
     };
 
@@ -157,8 +170,9 @@ public class homeScreen extends AppCompatActivity
         SearchView searchView = (SearchView) menu.findItem(R.id.search_view).getActionView();
         // Assumes current activity is the searchable activity
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
 
+        ImageView searchClose = (ImageView)searchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        searchClose.setColorFilter(R.color.black_overlay);
         return super.onCreateOptionsMenu(menu);
 
     }
@@ -179,35 +193,35 @@ public class homeScreen extends AppCompatActivity
             Intent i = new Intent(this,homeScreen.class);
             startActivity(i);
         }
-        else if (id == R.id.mobilesandTablets)
+        else if (id == R.id.mobiles_and_tablets)
         {
             Intent i = new Intent(this,allProducts.class);
             i.putExtra("URL","mobiles");
-            startActivity(i);
+         //   startActivity(i);
         }
-        else if (id == R.id.homeDecor)
+        else if (id == R.id.home_decors)
         {
             Intent i = new Intent(this,allProducts.class);
             i.putExtra("URL","others");
-            startActivity(i);
+       //     startActivity(i);
         }
         else if (id == R.id.men)
         {
             Intent i = new Intent(this,allProducts.class);
             i.putExtra("URL","men");
-            startActivity(i);
+       //     startActivity(i);
         }
         else if (id == R.id.women)
         {
             Intent i = new Intent(this,allProducts.class);
             i.putExtra("URL","women");
-            startActivity(i);
+        //    startActivity(i);
         }
         else if (id == R.id.laptops)
         {
             Intent i = new Intent(this,allProducts.class);
             i.putExtra("URL","laptops");
-            startActivity(i);
+         //   startActivity(i);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -220,14 +234,13 @@ public class homeScreen extends AppCompatActivity
         public Object instantiateItem(ViewGroup container, final int position) {
             layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(R.layout.slide1, container, false);
-//           // Glide.with(getApplicationContext()).load("https://pricyfy.com/slider-img/slide-1.jpg").into(iv);
-            //Glide.with(getApplicationContext()).load(imageLinks[position]).into(iv);
+            ImageView iv = (ImageView)view.findViewById(R.id.slider1);
+            Picasso.with(getApplicationContext()).load(slider_images.get(position)).into(iv);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view)
                 {
-                    String url="";
-                    //url = urlLinks[position];
+                    String url=slider_links.get(position);
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     startActivity(browserIntent);
                 }
@@ -253,32 +266,6 @@ public class homeScreen extends AppCompatActivity
             container.removeView(view);
         }
     }
-
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }
-
 
     public void openDealsPage(View view)
     {

@@ -6,4 +6,7 @@
     <color name="black_overlay">#66000000</color>
     <color name="pricify_blue">#029ACF</color>
     <color name="pure_black">#000000</color>
+    <color name="background_home_screen">#efefef</color>
+    <color name="deals_of_the_day">#000000</color>
+    <color name="view_all">#660000</color>
 </resources>

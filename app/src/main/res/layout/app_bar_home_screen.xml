@@ -9,9 +9,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:background="@color/pricify_blue"
         android:theme="@style/AppTheme.AppBarOverlay"
         android:id="@+id/relativeLayout"
@@ -27,19 +24,32 @@
             app:contentInsetStart="0dp"
             app:titleTextAppearance="@style/AppTheme"
             app:contentInsetStartWithNavigation="0dp"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="0dp">
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <android.support.v7.widget.SearchView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/company_logo"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <!--android.support.v7.widget.SearchView
                 android:id="@+id/search_view"
                 android:layout_width="match_parent"
+                android:background="#00ffff"
                 app:contentInsetLeft="0dp"
                 app:contentInsetStart="0dp"
                 app:contentInsetStartWithNavigation="0dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true">
-            </android.support.v7.widget.SearchView>
+                android:layout_height="match_parent">
+            </android.support.v7.widget.SearchView-->
 
         </android.support.v7.widget.Toolbar>
 
@@ -61,38 +71,117 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/pricify_blue"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#ffffff"
         android:theme="@style/AppTheme.AppBarOverlay"
         android:id="@+id/footer"
         android:clickable="true"
+        android:orientation="horizontal"
+        android:elevation="5dp"
         android:layout_alignParentBottom="true">
 
-        <Button
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:id="@+id/button_home_footer"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/icon"/>
-
-        <Button
+            android:baselineAligned="true"
             android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/icon"/>
+            android:orientation="vertical">
+            <ImageView
+                android:background="#ffffff"
+                android:scaleType="center"
+                android:tint="@color/pricify_blue"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:layout_height="match_parent"
+                android:src="@mipmap/home_footer"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Home"
+                android:gravity="bottom"
+                android:textStyle="bold"
+                android:textColor="@color/pure_black"
+                android:textAlignment="center"
+                android:textAllCaps="false"/>
+        </FrameLayout>
 
-        <Button
+        <FrameLayout
+            android:id="@+id/button_deals_footer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="true"
             android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/icon"/>
+            android:orientation="vertical">
+            <ImageView
+                android:background="#ffffff"
+                android:scaleType="center"
+                android:tint="@color/pricify_blue"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:layout_height="match_parent"
+                android:src="@mipmap/deals_footer"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Deals"
+                android:gravity="bottom"
+                android:textStyle="bold"
+                android:textColor="@color/pure_black"
+                android:textAlignment="center"
+                android:textAllCaps="false"/>
+        </FrameLayout>
 
-        <Button
+        <FrameLayout
+            android:id="@+id/button_coupons_footer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="true"
             android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/icon"/>
+            android:orientation="vertical">
+            <ImageView
+                android:background="#ffffff"
+                android:scaleType="center"
+                android:tint="@color/pricify_blue"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:layout_height="match_parent"
+                android:src="@mipmap/coupons_footer"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Coupons"
+                android:gravity="bottom"
+                android:textColor="@color/pure_black"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textAllCaps="false"/>
+        </FrameLayout>
 
+        <FrameLayout
+            android:id="@+id/button_profile_footer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="true"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <ImageView
+                android:background="#ffffff"
+                android:scaleType="center"
+                android:tint="@color/pricify_blue"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:layout_height="match_parent"
+                android:src="@mipmap/profile_footer"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Profile"
+                android:textColor="@color/pure_black"
+                android:gravity="bottom"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textAllCaps="false"/>
+        </FrameLayout>
     </LinearLayout>
-
-
 </RelativeLayout>
