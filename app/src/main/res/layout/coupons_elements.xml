@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_home_screen"
+    android:id="@+id/ll_all_products2">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview_allProducts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="1dp"
+        android:clickable="true"
+        card_view:cardElevation="1dp"
+        card_view:cardCornerRadius="1dp"
+        android:background="@color/background_home_screen">
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_coupons"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/deals"
+                android:scaleType="fitCenter"/>
+            <TextView
+                android:id="@+id/tv_coupons"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:textAlignment="center"
+                android:background="#ffffff"
+                android:textColor="#000000"
+                android:textSize="10dp"/>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

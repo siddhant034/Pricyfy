@@ -3,40 +3,63 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    android:background="@drawable/side_nav_bar"
+    android:background="#bbbbbb"
     android:gravity="bottom"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:theme="@style/ThemeOverlay.AppCompat">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:layout_marginLeft="0dp"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/company_logo"/>
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Welcome"
-        android:textColor="@color/pure_black"
-        android:layout_weight="3"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="57dp"
+            app:srcCompat="@drawable/profile_nav_header"/>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:textAlignment="center"
-        android:textColor="@color/pure_black"
-        android:text="Your Profile" />
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello"
+            android:paddingTop="60dp"
+            android:layout_toRightOf="@+id/imageView"
+            android:textStyle="bold"
+            android:textColor="@color/pure_black"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign In / "
+            android:id="@+id/tv2"
+            android:layout_toRightOf="@id/imageView"
+            android:layout_below="@id/tv1"
+            android:textStyle="bold"
+            android:textColor="@color/pure_black"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:clickable="true"
+            android:onClick="goToLoginPage"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:layout_toRightOf="@id/tv2"
+            android:layout_below="@id/tv1"
+            android:textStyle="bold"
+            android:textColor="@color/pure_black"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:clickable="true"
+            android:onClick="goToLoginPage"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

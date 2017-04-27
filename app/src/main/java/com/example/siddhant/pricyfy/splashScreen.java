@@ -10,7 +10,9 @@ import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,11 +22,14 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.OkHttpClient.Builder;
 
+import static com.example.siddhant.pricyfy.R.id.split_action_bar;
 import static com.example.siddhant.pricyfy.R.id.toolbar;
 
 public class splashScreen extends AppCompatActivity {
@@ -32,11 +37,20 @@ public class splashScreen extends AppCompatActivity {
     private ArrayList<Deal> deals;
     private ArrayList<String> coupon_images, coupon_title, slider_images, slider_links;
     private ArrayList<Product> mobiles, cameras, men, women, footwear;
+    private int temp = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
+        Intent i = getIntent();
+       // Toast.makeText(getApplicationContext(),Boolean.toString(i.getExtras()==null),Toast.LENGTH_LONG).show();
+        if(i.getExtras()==null) {
+            setContentView(R.layout.activity_splash_screen);
+        }
+        else {
+            setContentView(R.layout.activity_splash_screen2);
+            temp = 2;
+        }
         TextView tv = (TextView)findViewById(R.id.tv);
         if(!checkConnection())
         {
@@ -70,6 +84,7 @@ public class splashScreen extends AppCompatActivity {
 
     private class PrefetchData extends AsyncTask<Void, Void, Void> {
 
+        String jsonStr;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -79,23 +94,11 @@ public class splashScreen extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            /*
-             * Will make http call here This call will download required data
-             * before launching the app
-             * example:
-             * 1. Downloading and storing in SQLite
-             * 2. Downloading images
-             * 3. Fetching and parsing the xml / json
-             * 4. Sending device information to server
-             * 5. etc.,
-             */
-            Request request = new Request.Builder()
-                    .url("https://pricyfy.com/app_splash_screen.php")
-                    .build();
-            OkHttpClient client = new OkHttpClient();
+            HttpHandler sh = new HttpHandler();
+            String url = "https://pricyfy.com/app_splash_screen.php";
+            jsonStr = sh.makeServiceCall(url);
             try {
-                Response response = client.newCall(request).execute();
-                JSONObject jsonObject = new JSONObject(response.body().string());
+                JSONObject jsonObject = new JSONObject(jsonStr);
                 JSONArray array = jsonObject.getJSONArray("6");
                 for(int i=0;i<array.length();i++)
                 {
@@ -121,7 +124,7 @@ public class splashScreen extends AppCompatActivity {
                     {
                         Product newProduct = null;
                         JSONObject object = array.getJSONObject(j);
-                        if(i!=5) newProduct = new Product(object.getString("product_name"),object.getInt("flipkart_price"),object.getString("image_link"),object.getInt("discount"));
+                        if(i!=5) newProduct = new Product(object.getInt("id"),object.getString("product_name"),object.getInt("flipkart_price"),object.getString("image_link"),object.getInt("discount"),object.getInt("mrp"),object.getDouble("seller_rating"));
                         switch(i)
                         {
                             case 0 : mobiles.add(newProduct);break;
@@ -135,8 +138,6 @@ public class splashScreen extends AppCompatActivity {
                     }
                 }
 
-            } catch (IOException e) {
-                e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e){
@@ -148,6 +149,11 @@ public class splashScreen extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
+            if(jsonStr.isEmpty())
+            {
+                Intent i = new Intent(getApplicationContext(),splashScreen.class);
+                startActivity(i);
+            }
             Bundle b = new Bundle();
             Intent i = new Intent(getApplicationContext(),homeScreen.class);
             b.putParcelableArrayList("deals",deals);
@@ -162,6 +168,11 @@ public class splashScreen extends AppCompatActivity {
             b.putParcelableArrayList("footwear",footwear);
             i.putExtras(b);
             startActivity(i);
+            if(temp==2) {
+                ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar1);
+                pb.setVisibility(View.INVISIBLE);
+            }
+
             finish();
         }
     }

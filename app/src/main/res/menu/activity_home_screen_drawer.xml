@@ -6,6 +6,14 @@
             android:icon="@mipmap/home"
             android:title="Home" />
         <item
+            android:id="@+id/coupons_and_cashbacks"
+            android:icon="@mipmap/coupons_and_cashbacks"
+            android:title="Coupons and Cashbacks" />
+        <item
+            android:id="@+id/deals"
+            android:icon="@mipmap/deals"
+            android:title="Deals" />
+        <item
             android:id="@+id/mobiles_and_tablets"
             android:icon="@mipmap/mobiles_and_tablets"
             android:title="Mobiles and Tablets" />
@@ -32,19 +40,11 @@
         <item
             android:id="@+id/men"
             android:icon="@mipmap/mens"
-            android:title="Men" />
+            android:title="Men's" />
         <item
             android:id="@+id/women"
             android:icon="@mipmap/womens"
-            android:title="Women" />
-        <item
-            android:id="@+id/coupons_and_cashbacks"
-            android:icon="@mipmap/coupons_and_cashbacks"
-            android:title="Coupons and Cashbacks" />
-        <item
-            android:id="@+id/deals"
-            android:icon="@mipmap/deals"
-            android:title="Deals" />
+            android:title="Women's" />
 
         <item
             android:id="@+id/mens_footwear"

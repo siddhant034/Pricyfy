@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +21,7 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
 
         private Context context;
         private List<Deal> deals;
-        int type;           //0 for homescreen 1 for dealsPage
+        private int type;
 
         public DealsAdapter(Context context, List<Deal> deals, int type) {
             this.context = context;
@@ -29,17 +30,17 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
         }
 
         @Override
-        public DealsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
         {
             View itemView;
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.deal_elements_home_screen, parent, false);
+            WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+            int width = windowManager.getDefaultDisplay().getWidth();
+            int height = windowManager.getDefaultDisplay().getHeight();
             if(type==0)
-            {
-                itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.deal_elements_home_screen, parent, false);
-            }
+                itemView.setLayoutParams(new RecyclerView.LayoutParams(width/2,height/5));
             else
-            {
-                itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.deal_elements_home_screen, parent, false);
-            }
+                itemView.setLayoutParams(new RecyclerView.LayoutParams(width/2,height/3+10));
             return new DealsAdapter.ViewHolder(itemView);
         }
 
@@ -49,7 +50,6 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
             holder.dealTitle.setText(deals.get(position).getDeal_name());
             Glide.with(context).load(deals.get(position).getDeal_image()).into(holder.imageView);
         }
-
 
 
         @Override

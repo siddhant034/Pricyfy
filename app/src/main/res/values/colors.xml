@@ -8,5 +8,8 @@
     <color name="pure_black">#000000</color>
     <color name="background_home_screen">#efefef</color>
     <color name="deals_of_the_day">#000000</color>
-    <color name="view_all">#660000</color>
+    <color name="view_all">@color/pricify_blue</color>
+    <color name="golden">#ffdf00</color>
+    <color name="footer_icons">#000000</color>
+    <color name="footer_names">#000000</color>
 </resources>

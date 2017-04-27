@@ -3,6 +3,7 @@ package com.example.siddhant.pricyfy;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
@@ -18,6 +19,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.Html;
+import android.text.method.SingleLineTransformationMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +36,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -85,35 +88,7 @@ public class homeScreen extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //slider start
-        viewPager = (ViewPager)findViewById(R.id.view_pager);
-        myViewPagerAdapter = new MyViewPagerAdapter();
-        viewPager.setAdapter(myViewPagerAdapter);
-        viewPager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
 
-        final Handler handler = new Handler();
-        final Runnable Update = new Runnable()
-        {
-            public void run()
-            {
-                if(viewPager.getCurrentItem()==3)
-                    viewPager.setCurrentItem(0);
-                else
-                    viewPager.setCurrentItem(viewPager.getCurrentItem()+1,true);
-            }
-        };
-
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run()
-            {
-                handler.post(Update);
-            }
-        },500,3000);
         // slider end
 
         //to disable tinting of the navigation view icons
@@ -130,24 +105,60 @@ public class homeScreen extends AppCompatActivity
         slider_links = new ArrayList<>();
         slider_images = new ArrayList<>();
         Bundle extras = getIntent().getExtras();
-        deals = extras.getParcelableArrayList("deals");
-        mobiles = extras.getParcelableArrayList("mobiles");
-        cameras = extras.getParcelableArrayList("cameras");
-        men = extras.getParcelableArrayList("men");
-        women = extras.getParcelableArrayList("women");
-        footwear = extras.getParcelableArrayList("footwear");
-        coupon_images = this.getIntent().getStringArrayListExtra("coupon_images");
-        coupon_title = this.getIntent().getStringArrayListExtra("coupon_title");
-        slider_images = this.getIntent().getStringArrayListExtra("slider_images");
-        slider_links = this.getIntent().getStringArrayListExtra("slider_links");
-        if(!(deals==null)) setDealsButtons();
-        if(!coupon_images.isEmpty() && !coupon_title.isEmpty()) setCouponsButtons();
-        if(!mobiles.isEmpty()) setMobileRanges();
-        if(!cameras.isEmpty()) setCameraRanges();
-        if(!men.isEmpty()) setMenRanges();
-        if(!women.isEmpty()) setWomenRanges();
-        if(!footwear.isEmpty()) setFootwearRanges();
-        loadAdBanners();
+        if(extras!=null) {
+            deals = extras.getParcelableArrayList("deals");
+            mobiles = extras.getParcelableArrayList("mobiles");
+            cameras = extras.getParcelableArrayList("cameras");
+            men = extras.getParcelableArrayList("men");
+            women = extras.getParcelableArrayList("women");
+            footwear = extras.getParcelableArrayList("footwear");
+            coupon_images = this.getIntent().getStringArrayListExtra("coupon_images");
+            coupon_title = this.getIntent().getStringArrayListExtra("coupon_title");
+            slider_images = this.getIntent().getStringArrayListExtra("slider_images");
+            slider_links = this.getIntent().getStringArrayListExtra("slider_links");
+            if (!(deals == null)) setDealsButtons();
+            if (!coupon_images.isEmpty() && !coupon_title.isEmpty()) setCouponsButtons();
+            if (!mobiles.isEmpty()) setMobileRanges();
+            if (!cameras.isEmpty()) setCameraRanges();
+            if (!men.isEmpty()) setMenRanges();
+            if (!women.isEmpty()) setWomenRanges();
+            if (!footwear.isEmpty()) setFootwearRanges();
+            loadAdBanners();
+            viewPager = (ViewPager)findViewById(R.id.view_pager);
+            myViewPagerAdapter = new MyViewPagerAdapter();
+            viewPager.setAdapter(myViewPagerAdapter);
+            viewPager.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                }
+            });
+
+            final Handler handler = new Handler();
+            final Runnable Update = new Runnable()
+            {
+                public void run()
+                {
+                    if(viewPager.getCurrentItem()==3)
+                        viewPager.setCurrentItem(0);
+                    else
+                        viewPager.setCurrentItem(viewPager.getCurrentItem()+1,true);
+                }
+            };
+
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run()
+                {
+                    handler.post(Update);
+                }
+            },500,3000);
+        }
+
+        ImageView iv = (ImageView)findViewById(R.id.iv_footer_home);
+        iv.setColorFilter(getResources().getColor(R.color.pricify_blue));
+        TextView tv = (TextView)findViewById(R.id.tv_footer_home);
+        tv.setTextColor(getResources().getColor(R.color.pricify_blue));
     };
 
     @Override
@@ -185,44 +196,80 @@ public class homeScreen extends AppCompatActivity
 
         if (id == R.id.home)
         {
-            Intent i = new Intent(this,homeScreen.class);
-            startActivity(i);
+            DrawerLayout mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+            mDrawerLayout.closeDrawers();
         }
-        else if (id == R.id.dealandOffers)
+        else if(id == R.id.mobiles_and_tablets)
         {
-            Intent i = new Intent(this,homeScreen.class);
-            startActivity(i);
-        }
-        else if (id == R.id.mobiles_and_tablets)
-        {
-            Intent i = new Intent(this,allProducts.class);
+            Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","mobiles");
-         //   startActivity(i);
-        }
-        else if (id == R.id.home_decors)
-        {
-            Intent i = new Intent(this,allProducts.class);
-            i.putExtra("URL","others");
-       //     startActivity(i);
-        }
-        else if (id == R.id.men)
-        {
-            Intent i = new Intent(this,allProducts.class);
-            i.putExtra("URL","men");
-       //     startActivity(i);
-        }
-        else if (id == R.id.women)
-        {
-            Intent i = new Intent(this,allProducts.class);
-            i.putExtra("URL","women");
-        //    startActivity(i);
+            startActivity(i);
         }
         else if (id == R.id.laptops)
         {
-            Intent i = new Intent(this,allProducts.class);
+            Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","laptops");
-         //   startActivity(i);
+            startActivity(i);
         }
+        else if (id == R.id.cameras)
+        {
+            Intent i = new Intent(this,Sliders.class);
+            i.putExtra("URL","cameras");
+            startActivity(i);
+        }
+        else if (id == R.id.tv_and_entertainment)
+        {
+            Intent i = new Intent(this,Sliders.class);
+            i.putExtra("URL","tv");
+            startActivity(i);
+        }
+        else if (id == R.id.home_and_kitchen_appliances)
+        {
+            Intent i = new Intent(this,Sliders.class);
+            i.putExtra("URL","home");
+            startActivity(i);
+        }
+        else if (id == R.id.home_decors)
+        {
+            Intent i = new Intent(this,Sliders.class);
+            i.putExtra("URL","home_decors");
+            startActivity(i);
+        }
+        else if (id == R.id.men)
+        {
+            Intent i = new Intent(this,Sliders.class);
+            i.putExtra("URL","men");
+            startActivity(i);
+        }
+        else if (id == R.id.women)
+        {
+            Intent i = new Intent(this,Sliders.class);
+            i.putExtra("URL","women");
+            startActivity(i);
+        }
+        else if (id == R.id.mens_footwear)
+        {
+            Intent i = new Intent(this,Sliders.class);
+            i.putExtra("URL","mens_footwear");
+            startActivity(i);
+        }
+        else if (id == R.id.womens_footwear)
+        {
+            Intent i = new Intent(this,Sliders.class);
+            i.putExtra("URL","womens_footwear");
+            startActivity(i);
+        }
+        else if (id == R.id.coupons_and_cashbacks)
+        {
+            Intent i = new Intent(this,CouponsPage.class);
+            startActivity(i);
+        }
+        else if(id == R.id.deals)
+        {
+            Intent i = new Intent(this,DealsPage.class);
+            startActivity(i);
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -231,11 +278,13 @@ public class homeScreen extends AppCompatActivity
     public class MyViewPagerAdapter extends PagerAdapter {
         private LayoutInflater layoutInflater;
         @Override
-        public Object instantiateItem(ViewGroup container, final int position) {
+        public Object instantiateItem(ViewGroup container, final int position)
+        {
             layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(R.layout.slide1, container, false);
             ImageView iv = (ImageView)view.findViewById(R.id.slider1);
-            Picasso.with(getApplicationContext()).load(slider_images.get(position)).into(iv);
+            if(slider_images!=null && slider_images.size()!=0)
+                Picasso.with(getApplicationContext()).load(slider_images.get(position)).into(iv);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view)
@@ -247,10 +296,12 @@ public class homeScreen extends AppCompatActivity
             });
             container.addView(view);
             return view;
+        //    return null;
         }
 
         @Override
-        public int getCount() {
+        public int getCount()
+        {
             return 4;
         }
 
@@ -269,32 +320,31 @@ public class homeScreen extends AppCompatActivity
 
     public void openDealsPage(View view)
     {
-        Intent i = new Intent(this,dealsScreen.class);
-        startActivity(i);
+      //  Intent i = new Intent(this,SingleProduct.class);
+       // startActivity(i);
     }
 
     public void openAllProducts(View view)
     {
-      /*  Intent i = new Intent(this,allProducts.class);
+        Intent i = new Intent(this,allProducts.class);
         switch(view.getId())
         {
             case R.id.mobiles :
-                case R.id.mobile_ranges_button :
                 i.putExtra("URL","mobiles"); break;
-            case R.id.laptops :
-                i.putExtra("URL","laptops"); break;
+            case R.id.smartwatches :
+                i.putExtra("URL","smartwatches"); break;
             case R.id.cameras :
                 i.putExtra("URL","cameras"); break;
-            case R.id.tv :
-                i.putExtra("URL","tv"); break;
+            case R.id.furnitures :
+                i.putExtra("URL","furnitures"); break;
             case R.id.men :
                 i.putExtra("URL","men"); break;
+            case R.id.mens_accessories :
+                i.putExtra("URL","mens_accessories"); break;
             case R.id.women :
                 i.putExtra("URL","women"); break;
-            case R.id.others :
-                i.putExtra("URL","others"); break;
         }
-        startActivity(i);*/
+        startActivity(i);
     }
 
     public void setCouponsButtons()
@@ -320,7 +370,7 @@ public class homeScreen extends AppCompatActivity
         RecyclerView rv_deals = (RecyclerView) findViewById(R.id.rv_deals);
         LinearLayoutManager linearLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
         rv_deals.setLayoutManager(linearLayout);
-        DealsAdapter dAdapter = new DealsAdapter(this,deals,0);
+        DealsAdapter dAdapter = new DealsAdapter(this,deals,1);
         rv_deals.setAdapter(dAdapter);
     }
 
@@ -329,7 +379,7 @@ public class homeScreen extends AppCompatActivity
         RecyclerView rv_mobiles = (RecyclerView) findViewById(R.id.rv_mobiles);
         LinearLayoutManager linearLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
         rv_mobiles.setLayoutManager(linearLayout);
-        ProductsAdapter pAdapter = new ProductsAdapter(this,mobiles,0);
+        ProductsAdapterHomePage pAdapter = new ProductsAdapterHomePage(this,mobiles);
         rv_mobiles.setAdapter(pAdapter);
     }
 
@@ -338,7 +388,7 @@ public class homeScreen extends AppCompatActivity
         RecyclerView rv_cameras = (RecyclerView) findViewById(R.id.rv_cameras);
         LinearLayoutManager linearLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
         rv_cameras.setLayoutManager(linearLayout);
-        ProductsAdapter pAdapter = new ProductsAdapter(this,cameras,0);
+        ProductsAdapterHomePage pAdapter = new ProductsAdapterHomePage(this,cameras);
         rv_cameras.setAdapter(pAdapter);
     }
 
@@ -348,7 +398,7 @@ public class homeScreen extends AppCompatActivity
         RecyclerView rv_men = (RecyclerView) findViewById(R.id.rv_men);
         LinearLayoutManager linearLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
         rv_men.setLayoutManager(linearLayout);
-        ProductsAdapter pAdapter = new ProductsAdapter(this,men,0);
+        ProductsAdapterHomePage pAdapter = new ProductsAdapterHomePage(this,men);
         rv_men.setAdapter(pAdapter);
     }
 
@@ -357,8 +407,24 @@ public class homeScreen extends AppCompatActivity
         RecyclerView rv_women = (RecyclerView) findViewById(R.id.rv_women);
         LinearLayoutManager linearLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
         rv_women.setLayoutManager(linearLayout);
-        ProductsAdapter pAdapter = new ProductsAdapter(this,women,0);
+        ProductsAdapterHomePage pAdapter = new ProductsAdapterHomePage(this,women);
         rv_women.setAdapter(pAdapter);
+    }
+
+    public void setViewAllButtons(View view)
+    {
+        Intent i = new Intent(this,allProducts.class);
+        switch(view.getId())
+        {
+            case R.id.tvLL1 : i.putExtra("URL","deals");break;
+            case R.id.tvLL2 : i.putExtra("URL","coupons");break;
+            case R.id.tvLL3 : i.putExtra("URL","mobiles");break;
+            case R.id.tvLL4 : i.putExtra("URL","cameras");break;
+            case R.id.tvLL5 : i.putExtra("URL","men");break;
+            case R.id.tvLL6 : i.putExtra("URL","women");break;
+            case R.id.tvLL7 : i.putExtra("URL","women");break;
+        }
+        startActivity(i);
     }
 
     public void setFootwearRanges()
@@ -366,7 +432,7 @@ public class homeScreen extends AppCompatActivity
         RecyclerView rv_footwear = (RecyclerView) findViewById(R.id.rv_footwear);
         LinearLayoutManager linearLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
         rv_footwear.setLayoutManager(linearLayout);
-        ProductsAdapter pAdapter = new ProductsAdapter(this,footwear,0);
+        ProductsAdapterHomePage pAdapter = new ProductsAdapterHomePage(this,footwear);
         rv_footwear.setAdapter(pAdapter);
     }
     
@@ -442,18 +508,28 @@ public class homeScreen extends AppCompatActivity
         Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner14.png").into(iv);
     }
 
-    public void openCouponsPage(View view)
-    {
-
+    public void goToHomePage(View view) {
     }
 
-    public void openMobilePage(View view)
+    public void goToDealsPage(View view)
     {
-
+        Intent i = new Intent(this,DealsPage.class);
+        startActivity(i);
     }
 
-    public void openAdBanner1(View view)
+    public void goToCouponsPage(View view)
     {
+        Intent i = new Intent(this,CouponsPage.class);
+        startActivity(i);
+    }
 
+    public void goToProfilePage(View view)
+    {
+        Intent i = new Intent(this,ProfilePage.class);
+        startActivity(i);
+    }
+
+    public void goToLoginPage(View view)
+    {
     }
 }

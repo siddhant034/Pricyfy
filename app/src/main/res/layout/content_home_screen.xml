@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".homeScreen"
     tools:ignore="contentDescription"
+    android:background="@color/background_home_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -18,7 +19,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="125dp"
+            android:layout_height="150dp"
             android:id="@+id/viewPagerFrameLayout">
             <android.support.v4.view.ViewPager
                 android:id="@+id/view_pager"
@@ -44,7 +45,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_height="90dp"
+            android:layout_height="wrap_content"
             android:baselineAligned="false"
             android:background="@color/background_home_screen"
             android:layout_alignParentLeft="true"
@@ -56,26 +57,30 @@
                 android:id="@+id/button_deals"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:padding="1dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:clickable="true"
-                android:onClick="openDealsPage">
+                android:onClick="goToDealsPage">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="10dp"
                     android:layout_weight="1"
-                    android:src="@drawable/hot_deals"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/hot_deals"
                     android:scaleType="fitXY"/>
 
                 <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Hot deals"
+                    android:paddingBottom="2dp"
                     android:layout_weight="4"
                     android:textAlignment="center"
                     android:textColor="@color/pure_black"
@@ -86,90 +91,102 @@
                 android:id="@+id/mobiles"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:padding="1dp"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:clickable="true"
                 android:onClick="openAllProducts">
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="10dp"
-                    android:src="@drawable/mobiles"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="10dp"
+                    android:src="@mipmap/mobiles"
                     android:scaleType="fitXY"/>
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_height="wrap_content"
                     android:text="Mobiles"
                     android:layout_weight="4"
                     android:textAlignment="center"
                     android:textColor="@color/pure_black"
-                    android:textSize="8dp" />
+                    android:textSize="8dp"
+                    android:paddingBottom="2dp"/>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/laptops"
+                android:id="@+id/smartwatches"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:padding="1dp"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:clickable="true"
-                android:onClick="openDealsPage">
+                android:onClick="openAllProducts">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
                     android:layout_weight="1"
-                    android:src="@drawable/smartwatches"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/smartwatches"
                     android:scaleType="fitXY"/>
 
                 <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Smartwatches"
                     android:layout_weight="4"
                     android:textAlignment="center"
                     android:textColor="@color/pure_black"
-                    android:textSize="8dp" />
+                    android:textSize="8dp"
+                    android:paddingBottom="2dp"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/cameras"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:padding="1dp"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:clickable="true"
                 android:onClick="openAllProducts">
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="10dp"
-                    android:src="@drawable/cameras"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="10dp"
+                    android:src="@mipmap/cameras_homepage"
                     android:scaleType="fitXY"/>
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_height="wrap_content"
                     android:text="Cameras"
                     android:layout_weight="4"
                     android:textAlignment="center"
                     android:textColor="@color/pure_black"
-                    android:textSize="8dp" />
+                    android:textSize="8dp"
+                    android:paddingBottom="2dp"/>
             </LinearLayout>
 
 
@@ -178,22 +195,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_height="90dp"
+            android:layout_height="wrap_content"
             android:baselineAligned="false"
             android:background="@color/background_home_screen"
             android:layout_margin="0.5dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_below="@+id/relativeLayout1"
             android:id="@+id/relativeLayout2">
 
             <LinearLayout
-                android:id="@+id/tv"
+                android:id="@+id/furnitures"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:padding="1dp"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
                 android:layout_height="match_parent"
@@ -205,57 +217,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="10dp"
-                    android:src="@drawable/furnitures"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/furnitures"
                     android:scaleType="fitXY"/>
 
                 <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Furnitures"
                     android:layout_weight="4"
                     android:textAlignment="center"
                     android:textColor="@color/pure_black"
-                    android:textSize="8dp" />
+                    android:textSize="8dp"
+                    android:paddingBottom="2dp"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/men"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:padding="1dp"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:clickable="true"
-                android:onClick="openAllProducts">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="10dp"
-                    android:src="@drawable/mens_clothing"
-                    android:scaleType="fitXY"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:text="Men's clothing"
-                    android:layout_weight="4"
-                    android:textAlignment="center"
-                    android:textColor="@color/pure_black"
-                    android:textSize="8dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/women"
-                android:background="#ffffff"
-                android:layout_width="match_parent"
-                android:padding="1dp"
-                android:layout_weight="1"
-                android:layout_margin="0.5dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:clickable="true"
                 android:onClick="openAllProducts">
@@ -264,48 +251,90 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="10dp"
-                    android:src="@drawable/mens_accessories"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="10dp"
+                    android:src="@mipmap/mens_clothing"
                     android:scaleType="fitXY"/>
 
                 <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:text="Men's accessories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Men"
                     android:layout_weight="4"
                     android:textAlignment="center"
                     android:textColor="@color/pure_black"
-                    android:textSize="8dp" />
+                    android:textSize="8dp"
+                    android:paddingBottom="2dp"/>
             </LinearLayout>
-
             <LinearLayout
-                android:id="@+id/other"
+                android:id="@+id/mens_accessories"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:padding="1dp"
                 android:layout_weight="1"
                 android:layout_margin="0.5dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:clickable="true"
                 android:onClick="openAllProducts">
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="10dp"
-                    android:src="@drawable/womens_clothing"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="10dp"
+                    android:src="@mipmap/mens_accessories"
                     android:scaleType="fitXY"/>
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:text="Women's clothing"
+                    android:layout_height="wrap_content"
+                    android:text="Men's accessories"
                     android:layout_weight="4"
                     android:textAlignment="center"
                     android:textColor="@color/pure_black"
-                    android:textSize="8dp" />
+                    android:textSize="8dp"
+                    android:paddingBottom="2dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/women"
+                android:background="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="0.5dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:onClick="openAllProducts">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/womens_clothing"
+                    android:scaleType="fitXY"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Women"
+                    android:layout_weight="4"
+                    android:textAlignment="center"
+                    android:textColor="@color/pure_black"
+                    android:textSize="8dp"
+                    android:paddingBottom="2dp"/>
             </LinearLayout>
 
 
@@ -321,6 +350,8 @@
 
             <LinearLayout
                 android:id="@+id/tvLL1"
+                android:clickable="true"
+                android:onClick="setViewAllButtons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -337,6 +368,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
+                    android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:text="View all"
                     android:gravity="end"
@@ -369,6 +401,8 @@
 
             <LinearLayout
                 android:id="@+id/tvLL2"
+                android:clickable="true"
+                android:onClick="setViewAllButtons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="0.5dp"
@@ -389,6 +423,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:layout_weight="1"
+                    android:layout_marginRight="5dp"
                     android:text="View all"
                     android:gravity="end"
                     android:textAllCaps="false"
@@ -412,7 +447,7 @@
 
                     <LinearLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="200dp"
+                        android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_margin="0.5dp"
                         android:layout_marginLeft="0dp"
@@ -440,7 +475,7 @@
 
                     <LinearLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="200dp"
+                        android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_margin="0.5dp"
                         android:layout_marginLeft="0dp"
@@ -468,7 +503,7 @@
 
                     <LinearLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="200dp"
+                        android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_margin="0.5dp"
                         android:layout_marginLeft="0dp"
@@ -511,7 +546,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_margin="0.5dp"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
@@ -523,7 +558,9 @@
 
             <LinearLayout
                 android:id="@+id/tvLL3"
-                android:layout_width="match_parent"
+                android:clickable="true"
+                android:onClick="setViewAllButtons"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="0.5dp"
                 android:layout_marginLeft="0dp"
@@ -544,6 +581,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:layout_weight="1"
+                    android:layout_marginRight="5dp"
                     android:text="View all"
                     android:gravity="end"
                     android:textAllCaps="false"
@@ -558,7 +596,7 @@
                 android:background="@color/background_home_screen"
                 android:layout_below="@id/tvLL3"
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/rv_mobiles"
@@ -570,7 +608,7 @@
             android:layout_margin="0.5dp"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/camera_ranges_relative_layout"
@@ -581,6 +619,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="0.5dp"
+                android:clickable="true"
+                android:onClick="setViewAllButtons"
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="0dp"
                 android:orientation="horizontal">
@@ -599,6 +639,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:layout_weight="1"
+                    android:layout_marginRight="5dp"
                     android:text="View all"
                     android:gravity="end"
                     android:textAllCaps="false"
@@ -613,7 +654,7 @@
                 android:layout_width="match_parent"
                 android:background="@color/background_home_screen"
                 android:layout_below="@id/tvLL4"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 xmlns:android="http://schemas.android.com/apk/res/android"/>
         </RelativeLayout>
 
@@ -683,7 +724,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_margin="0.5dp"
             android:layout_marginLeft="0dp"
@@ -694,6 +735,8 @@
 
             <LinearLayout
                 android:id="@+id/tvLL5"
+                android:clickable="true"
+                android:onClick="setViewAllButtons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -712,6 +755,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:layout_weight="1"
+                    android:layout_marginRight="5dp"
                     android:text="View all"
                     android:gravity="end"
                     android:textAllCaps="false"
@@ -726,7 +770,7 @@
                 android:layout_width="match_parent"
                 android:background="@color/background_home_screen"
                 android:layout_below="@id/tvLL5"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 xmlns:android="http://schemas.android.com/apk/res/android"/>
         </RelativeLayout>
 
@@ -798,7 +842,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_margin="0.5dp"
             android:layout_marginLeft="0dp"
@@ -808,6 +852,8 @@
             android:layout_below="@+id/ad_banner_relative_layout8">
             <LinearLayout
                 android:id="@+id/tvLL6"
+                android:clickable="true"
+                android:onClick="setViewAllButtons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -826,6 +872,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:layout_weight="1"
+                    android:layout_marginRight="5dp"
                     android:text="View all"
                     android:gravity="end"
                     android:textAllCaps="false"
@@ -840,7 +887,7 @@
                 android:layout_width="match_parent"
                 android:background="@color/background_home_screen"
                 android:layout_below="@id/tvLL6"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 xmlns:android="http://schemas.android.com/apk/res/android"/>
         </RelativeLayout>
 
@@ -911,7 +958,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_margin="0.5dp"
             android:layout_marginLeft="0dp"
@@ -922,6 +969,8 @@
 
             <LinearLayout
                 android:id="@+id/tvLL7"
+                android:clickable="true"
+                android:onClick="setViewAllButtons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -940,6 +989,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:layout_weight="1"
+                    android:layout_marginRight="5dp"
                     android:text="View all"
                     android:gravity="end"
                     android:textAllCaps="false"
@@ -954,7 +1004,7 @@
                 android:layout_width="match_parent"
                 android:background="@color/background_home_screen"
                 android:layout_below="@id/tvLL7"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 xmlns:android="http://schemas.android.com/apk/res/android"/>
         </RelativeLayout>
 
