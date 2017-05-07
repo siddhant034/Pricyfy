@@ -61,7 +61,7 @@
                     android:isIndicator="true"
                     android:visibility="invisible"
                     android:progressTint="#ffffff"
-                    android:secondaryProgressTint="#b2b2b2"
+                    android:secondaryProgressTint="#ffffff"
                     style="?android:attr/ratingBarStyleSmall"
                     android:numStars="1" />
 
@@ -163,7 +163,7 @@
             <Button
                 android:id="@+id/button_goToStorebestPrice"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:textColor="#ffffff"
@@ -324,7 +324,7 @@
 
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_weight="1"
                 android:textColor="#ffffff"
                 android:text="Go To Store"
@@ -374,7 +374,7 @@
 
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/pricify_blue"
                 android:textColor="#ffffff"
@@ -425,7 +425,7 @@
 
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/pricify_blue"
                 android:textColor="#ffffff"
@@ -475,7 +475,7 @@
 
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/pricify_blue"
                 android:textColor="#ffffff"
@@ -526,7 +526,7 @@
 
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/pricify_blue"
                 android:textColor="#ffffff"

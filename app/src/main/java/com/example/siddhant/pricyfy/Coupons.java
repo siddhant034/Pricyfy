@@ -29,6 +29,13 @@ public class Coupons{
         this.image_link = image_link;
     }
 
+    public Coupons(int id, String title, String image_link)
+    {
+        this.id = id;
+        this.title = title;
+        this.image_link = image_link;
+    }
+
     public int getId()
     {
         return id;

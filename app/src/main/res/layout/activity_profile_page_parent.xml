@@ -9,7 +9,7 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/activity_sliders"
+        layout="@layout/activity_profile_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

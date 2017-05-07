@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -45,6 +46,8 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -104,6 +107,54 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
         slugs = new ArrayList<>();
         new PrefetchData().execute();
         navigationView.setItemIconTintList(null);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MYPREFERENCES", MODE_PRIVATE);
+        Boolean isSignedInGoogle = sharedPreferences.getBoolean("signedInGoogle",false);
+        Boolean isSignedInFb = sharedPreferences.getBoolean("signedInFb",false);
+        if(isSignedInGoogle)
+        {
+            View navHeaderView = navigationView.getHeaderView(0);
+            String name = sharedPreferences.getString("name","No name defined");
+            String profilePicture = sharedPreferences.getString("profilePicture",null);
+            TextView tv = (TextView)navHeaderView.findViewById(R.id.tv2);
+            tv.setText(name);
+            tv.setClickable(false);
+            tv = (TextView)navHeaderView.findViewById(R.id.tv3);
+            tv.setVisibility(View.GONE);
+            ImageView iv = (ImageView)navHeaderView.findViewById(R.id.profile_image);
+            Picasso.with(getApplicationContext()).load(profilePicture).into(iv);
+        }
+        else if(isSignedInFb)
+        {
+            View navHeaderView = navigationView.getHeaderView(0);
+            String name = sharedPreferences.getString("name","No name defined");
+            String userId = sharedPreferences.getString("profilePicture",null);
+            URL imageURL = null;
+            try {
+                imageURL = new URL("https://graph.facebook.com/" + userId + "/picture?type=large");
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            //getProfilePic(userId);
+            TextView tv = (TextView)navHeaderView.findViewById(R.id.tv2);
+            tv.setText(name);
+            tv.setClickable(false);
+            tv = (TextView)navHeaderView.findViewById(R.id.tv3);
+            tv.setVisibility(View.GONE);
+            //  iv = (ImageView)navHeaderView.findViewById(R.id.imageView);
+            //  iv.setImageBitmap(profilePic);
+        }
+        else
+        {
+            View navHeaderView = navigationView.getHeaderView(0);
+            TextView tv = (TextView)navHeaderView.findViewById(R.id.tv3);
+            tv.setVisibility(View.VISIBLE);
+            tv = (TextView)navHeaderView.findViewById(R.id.tv2);
+            tv.setText("Sign in");
+            tv.setClickable(true);
+        }
+        ImageView iv = (ImageView)findViewById(R.id.iv_company_logo);
+        Picasso.with(getApplicationContext()).load(R.drawable.company_logo).into(iv);
     }
 
 
@@ -121,7 +172,8 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.search_view).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(false);
+        ImageView searchClose = (ImageView)searchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        searchClose.setColorFilter(R.color.black_overlay);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -139,71 +191,71 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","mobiles");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.laptops)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","laptops");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.cameras)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","cameras");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.tv_and_entertainment)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","tv");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.home_and_kitchen_appliances)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","home");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.home_decors)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","home_decors");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.men)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","men");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.women)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","women");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.mens_footwear)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","mens_footwear");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.womens_footwear)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","womens_footwear");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.coupons_and_cashbacks)
         {
-            Intent i = new Intent(this,CouponsPage.class);
-            startActivity(i);
+            Intent i = new Intent(this,CouponsPage2.class);
+            startActivity(i);finish();
         }
         else if(id == R.id.deals)
         {
             Intent i = new Intent(this,DealsPage.class);
-            startActivity(i);
+            startActivity(i);finish();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout1);
         drawer.closeDrawers();
@@ -222,6 +274,7 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
         viewPager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"hello world",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -230,7 +283,7 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
         {
             public void run()
             {
-                if(viewPager.getCurrentItem()==3)
+                if(viewPager.getCurrentItem()==slider_links.size()-1)
                     viewPager.setCurrentItem(0);
                 else
                     viewPager.setCurrentItem(viewPager.getCurrentItem()+1,true);
@@ -263,7 +316,7 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
                 {
                     Intent i = new Intent(getApplicationContext(),allProducts.class);
                     i.putExtra("URL",n);
-                    startActivity(i);
+                    startActivity(i);finish();
                 }
             });
 
@@ -355,7 +408,7 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
                 @Override
                 public void onClick(View view)
                 {
-                    String url=slider_links.get(position);
+                    String url="https://pricyfy.com/";
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     startActivity(browserIntent);
                 }
@@ -368,7 +421,7 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
         @Override
         public int getCount()
         {
-            return 4;
+            return slider_images.size();
         }
 
         @Override
@@ -387,24 +440,29 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
     public void goToHomePage(View view) {
         Intent i = new Intent(this,splashScreen.class);
         i.putExtra("abc","abc");
-        startActivity(i);
+        startActivity(i);finish();
     }
 
     public void goToDealsPage(View view)
     {
         Intent i = new Intent(this,DealsPage.class);
-        startActivity(i);
+        startActivity(i);finish();
     }
 
     public void goToCouponsPage(View view)
     {
-        Intent i = new Intent(this,CouponsPage.class);
-        startActivity(i);
+        Intent i = new Intent(this,CouponsPage2.class);
+        startActivity(i);finish();
     }
 
     public void goToProfilePage(View view)
     {
         Intent i = new Intent(this,ProfilePage.class);
+        startActivity(i);finish();
+    }
+    public void goToLoginPage(View view)
+    {
+        Intent i = new Intent(this,LoginPage.class);
         startActivity(i);
     }
 

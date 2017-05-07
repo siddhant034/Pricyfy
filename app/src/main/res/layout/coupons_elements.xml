@@ -31,13 +31,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/deals"
                 android:scaleType="fitCenter"/>
             <TextView
                 android:id="@+id/tv_coupons"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
+                android:layout_weight="4"
                 android:textAlignment="center"
                 android:background="#ffffff"
                 android:textColor="#000000"

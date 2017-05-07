@@ -100,9 +100,7 @@ public class ProductsAdapterHomePage extends RecyclerView.Adapter<ProductsAdapte
         {
             Intent i = new Intent(context,SingleProduct.class);
             int pos = getAdapterPosition();
-            Log.i("pos=",Integer.toString(pos));
             id=products.get(pos).getId();
-            Log.i("id=",Integer.toString(id));
             i.putExtra("id",id);
             context.startActivity(i);
         }

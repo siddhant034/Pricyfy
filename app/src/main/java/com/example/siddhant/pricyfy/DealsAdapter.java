@@ -1,6 +1,9 @@
 package com.example.siddhant.pricyfy;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,15 +64,25 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.ViewHolder> 
 
             public TextView dealTitle;
             public ImageView imageView;
+            public CardView cv;
+
 
             public ViewHolder(View itemView) {
                 super(itemView);
                 dealTitle = (TextView) itemView.findViewById(R.id.text_view_deals);
                 imageView = (ImageView) itemView.findViewById(R.id.image_view_deals);
+                cv = (CardView)itemView.findViewById(R.id.cardview_allProducts);
+                cv.setOnClickListener(this);
             }
 
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+                int pos = getAdapterPosition();
+                String url = deals.get(pos).getDeal_link();
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                context.startActivity(i);
             }
         }
     }

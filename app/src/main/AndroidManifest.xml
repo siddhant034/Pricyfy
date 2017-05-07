@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.siddhant.pricyfy">
+    package="com.example.siddhant.pricyfy"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:versionCode="1"
+    android:versionName="1.0">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" tools:node="remove" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -14,6 +18,15 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".SearchableActivity" />
+
         <activity
             android:name=".splashScreen"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -23,7 +36,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchableActivity">
+        <activity android:name=".SearchableActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -36,7 +50,6 @@
             android:name=".homeScreen"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".productScreen" />
         <activity
             android:name=".allProducts"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -46,7 +59,7 @@
         <activity
             android:name=".SingleProduct"
             android:label="@string/title_activity_single_product"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DealsPage"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -54,8 +67,13 @@
             android:name=".CouponsPage"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".CouponsPage2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ProfilePage"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LoginPage"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -35,9 +35,10 @@ import static com.example.siddhant.pricyfy.R.id.toolbar;
 public class splashScreen extends AppCompatActivity {
 
     private ArrayList<Deal> deals;
-    private ArrayList<String> coupon_images, coupon_title, slider_images, slider_links;
+    private ArrayList<String> coupon_images, coupon_title, slider_images, slider_links, coupon_links, ad_banners, ad_banner_links;
     private ArrayList<Product> mobiles, cameras, men, women, footwear;
     private int temp = 1;
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,8 @@ public class splashScreen extends AppCompatActivity {
         }
         else {
             setContentView(R.layout.activity_splash_screen2);
+            spinner = (ProgressBar)findViewById(R.id.progressBar1);
+            spinner.getIndeterminateDrawable().setColorFilter(spinner.getResources().getColor(R.color.pricify_blue), android.graphics.PorterDuff.Mode.MULTIPLY);
             temp = 2;
         }
         TextView tv = (TextView)findViewById(R.id.tv);
@@ -68,6 +71,9 @@ public class splashScreen extends AppCompatActivity {
         footwear = new ArrayList<>();
         slider_links = new ArrayList<>();
         slider_images = new ArrayList<>();
+        ad_banner_links = new ArrayList<>();
+        ad_banners = new ArrayList<>();
+        coupon_links = new ArrayList<>();
     }
 
     public boolean checkConnection()
@@ -105,9 +111,11 @@ public class splashScreen extends AppCompatActivity {
                     JSONObject object = array.getJSONObject(i);
                     coupon_title.add(object.getString("title"));
                     coupon_images.add(object.getString("image_link"));
+                    coupon_links.add(object.getString("landing_page"));
                 }
                 coupon_images.set(2,coupon_images.get(3));
                 coupon_title.set(2,coupon_title.get(3));
+                coupon_links.set(2,coupon_title.get(3));
 
                array = jsonObject.getJSONArray("8");
                 for(int i=0;i<array.length();i++)
@@ -116,6 +124,15 @@ public class splashScreen extends AppCompatActivity {
                     slider_images.add(object.getString("slider_image_link"));
                     slider_links.add(object.getString("redirect_link"));
                 }
+
+                array = jsonObject.getJSONArray("ad_banner");
+                for(int i=0;i<array.length();i++)
+                {
+                    JSONObject object = array.getJSONObject(i);
+                    ad_banners.add(object.getString("ad_banner_link"));
+                    ad_banner_links.add(object.getString("redirect_link"));
+                }
+
                 for(int i=0;i<=5;i++)
                 {
                     if(!jsonObject.has(Integer.toString(i))) continue;
@@ -152,27 +169,28 @@ public class splashScreen extends AppCompatActivity {
             if(jsonStr.isEmpty())
             {
                 Intent i = new Intent(getApplicationContext(),splashScreen.class);
-                startActivity(i);
+                startActivity(i);finish();
             }
             Bundle b = new Bundle();
             Intent i = new Intent(getApplicationContext(),homeScreen.class);
             b.putParcelableArrayList("deals",deals);
             b.putStringArrayList("coupon_title",coupon_title);
             b.putStringArrayList("coupon_images",coupon_images);
+            b.putStringArrayList("coupon_links",coupon_links);
             b.putStringArrayList("slider_links",slider_links);
             b.putStringArrayList("slider_images",slider_images);
+            b.putStringArrayList("ad_banners",ad_banners);
+            b.putStringArrayList("ad_banner_links",ad_banner_links);
             b.putParcelableArrayList("mobiles",mobiles);
             b.putParcelableArrayList("cameras",cameras);
             b.putParcelableArrayList("men",men);
             b.putParcelableArrayList("women",women);
             b.putParcelableArrayList("footwear",footwear);
             i.putExtras(b);
-            startActivity(i);
+            startActivity(i);finish();
             if(temp==2) {
-                ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar1);
-                pb.setVisibility(View.INVISIBLE);
+                spinner.setVisibility(View.INVISIBLE);
             }
-
             finish();
         }
     }

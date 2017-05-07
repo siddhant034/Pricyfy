@@ -100,6 +100,7 @@ public class ProductsAdapterAllProductsPage extends RecyclerView.Adapter<Product
         public void onClick(View v)
         {
             Intent i = new Intent(context,SingleProduct.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             int pos = getAdapterPosition();
             id=products.get(pos).getId();
             i.putExtra("id",id);

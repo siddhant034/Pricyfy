@@ -8,7 +8,7 @@
         <item
             android:id="@+id/coupons_and_cashbacks"
             android:icon="@mipmap/coupons_and_cashbacks"
-            android:title="Coupons and Cashbacks" />
+            android:title="Coupons &amp; Cashbacks" />
         <item
             android:id="@+id/deals"
             android:icon="@mipmap/deals"
@@ -16,23 +16,23 @@
         <item
             android:id="@+id/mobiles_and_tablets"
             android:icon="@mipmap/mobiles_and_tablets"
-            android:title="Mobiles and Tablets" />
+            android:title="Mobiles &amp; Tablets" />
         <item
             android:id="@+id/laptops"
             android:icon="@mipmap/laptops"
-            android:title="Laptops, PC and Gaming" />
+            android:title="Laptops, PC &amp; Gaming" />
         <item
             android:id="@+id/cameras"
             android:icon="@mipmap/cameras"
-            android:title="Cameras and Accessories" />
+            android:title="Cameras &amp; Accessories" />
         <item
             android:id="@+id/tv_and_entertainment"
             android:icon="@mipmap/tv_and_entertainment"
-            android:title="TV and Entertainment" />
+            android:title="TV &amp; Entertainment" />
         <item
             android:id="@+id/home_and_kitchen_appliances"
             android:icon="@mipmap/home_and_kitchen_applianes"
-            android:title="Home and Kitchen Appliances" />
+            android:title="Home &amp; Kitchen Appliances" />
         <item
             android:id="@+id/home_decors"
             android:icon="@mipmap/home_decors"

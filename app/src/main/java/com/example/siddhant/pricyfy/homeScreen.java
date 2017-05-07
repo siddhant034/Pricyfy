@@ -3,13 +3,16 @@ package com.example.siddhant.pricyfy;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -40,16 +43,23 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -67,9 +77,9 @@ public class homeScreen extends AppCompatActivity
     private MyViewPagerAdapter myViewPagerAdapter;
     private CircleIndicator indicator;
     private ArrayList<Deal> deals;
-    private ArrayList<String> coupon_images, coupon_title, slider_images, slider_links;
+    private ArrayList<String> coupon_images, coupon_title, coupon_links, slider_images, slider_links, ad_banners, ad_banner_links;
     private ArrayList<Product> mobiles, cameras, men, women, footwear;
-
+    private Bitmap profilePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,8 +104,6 @@ public class homeScreen extends AppCompatActivity
         //to disable tinting of the navigation view icons
         navigationView.setItemIconTintList(null);
 
-        indicator = (CircleIndicator)findViewById(R.id.indicator);
-        indicator.setViewPager(viewPager);
         deals = new ArrayList<>();
         mobiles = new ArrayList<>();
         men = new ArrayList<>();
@@ -104,6 +112,9 @@ public class homeScreen extends AppCompatActivity
         footwear = new ArrayList<>();
         slider_links = new ArrayList<>();
         slider_images = new ArrayList<>();
+        ad_banner_links = new ArrayList<>();
+        ad_banners = new ArrayList<>();
+        coupon_links = new ArrayList<>();
         Bundle extras = getIntent().getExtras();
         if(extras!=null) {
             deals = extras.getParcelableArrayList("deals");
@@ -114,8 +125,11 @@ public class homeScreen extends AppCompatActivity
             footwear = extras.getParcelableArrayList("footwear");
             coupon_images = this.getIntent().getStringArrayListExtra("coupon_images");
             coupon_title = this.getIntent().getStringArrayListExtra("coupon_title");
+            coupon_links = this.getIntent().getStringArrayListExtra("coupon_links");
             slider_images = this.getIntent().getStringArrayListExtra("slider_images");
             slider_links = this.getIntent().getStringArrayListExtra("slider_links");
+            ad_banners = this.getIntent().getStringArrayListExtra("ad_banners");
+            ad_banner_links = this.getIntent().getStringArrayListExtra("ad_banner_links");
             if (!(deals == null)) setDealsButtons();
             if (!coupon_images.isEmpty() && !coupon_title.isEmpty()) setCouponsButtons();
             if (!mobiles.isEmpty()) setMobileRanges();
@@ -130,6 +144,7 @@ public class homeScreen extends AppCompatActivity
             viewPager.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                 }
             });
 
@@ -138,7 +153,7 @@ public class homeScreen extends AppCompatActivity
             {
                 public void run()
                 {
-                    if(viewPager.getCurrentItem()==3)
+                    if(viewPager.getCurrentItem()==slider_images.size())
                         viewPager.setCurrentItem(0);
                     else
                         viewPager.setCurrentItem(viewPager.getCurrentItem()+1,true);
@@ -153,13 +168,81 @@ public class homeScreen extends AppCompatActivity
                     handler.post(Update);
                 }
             },500,3000);
+            indicator = (CircleIndicator)findViewById(R.id.indicator);
+            indicator.setViewPager(viewPager);
         }
 
         ImageView iv = (ImageView)findViewById(R.id.iv_footer_home);
         iv.setColorFilter(getResources().getColor(R.color.pricify_blue));
         TextView tv = (TextView)findViewById(R.id.tv_footer_home);
         tv.setTextColor(getResources().getColor(R.color.pricify_blue));
-    };
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MYPREFERENCES", MODE_PRIVATE);
+        Boolean isSignedInGoogle = sharedPreferences.getBoolean("signedInGoogle",false);
+        Boolean isSignedInFb = sharedPreferences.getBoolean("signedInFb",false);
+        if(isSignedInGoogle)
+        {
+            View navHeaderView = navigationView.getHeaderView(0);
+            String name = sharedPreferences.getString("name","No name defined");
+            String profilePicture = sharedPreferences.getString("profilePicture",null);
+            tv = (TextView)navHeaderView.findViewById(R.id.tv3);
+            tv.setVisibility(View.GONE);
+            tv = (TextView)navHeaderView.findViewById(R.id.tv2);
+            tv.setText(name);
+            tv.setClickable(false);
+            iv = (ImageView)navHeaderView.findViewById(R.id.profile_image);
+            Picasso.with(getApplicationContext()).load(profilePicture).into(iv);
+        }
+        else if(isSignedInFb)
+        {
+            View navHeaderView = navigationView.getHeaderView(0);
+            String name = sharedPreferences.getString("name","No name defined");
+            String userId = sharedPreferences.getString("profilePicture",null);
+            URL imageURL = null;
+            try {
+                imageURL = new URL("https://graph.facebook.com/" + userId + "/picture?type=large");
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            getProfilePic(userId);
+            tv = (TextView)navHeaderView.findViewById(R.id.tv3);
+            tv.setVisibility(View.GONE);
+            tv = (TextView)navHeaderView.findViewById(R.id.tv2);
+            tv.setText(name);
+            tv.setClickable(false);
+          //  iv = (ImageView)navHeaderView.findViewById(R.id.imageView);
+          //  iv.setImageBitmap(profilePic);
+        }
+        else
+        {
+            View navHeaderView = navigationView.getHeaderView(0);
+            tv = (TextView)navHeaderView.findViewById(R.id.tv3);
+            tv.setVisibility(View.VISIBLE);
+            tv = (TextView)navHeaderView.findViewById(R.id.tv2);
+            tv.setText("Sign in");
+            tv.setClickable(true);
+        }
+        iv = (ImageView)findViewById(R.id.iv_company_logo);
+        Picasso.with(getApplicationContext()).load(R.drawable.company_logo).into(iv);
+    }
+
+    public void getProfilePic(final String userId)
+    {
+        AsyncTask<String, Void, Void> asyncTask = new AsyncTask<String, Void, Void>() {
+
+            @Override
+            protected Void doInBackground(String... params) {
+                try {
+                    URL imageURL = new URL("https://graph.facebook.com/" + userId + "/picture?type=large");
+                    profilePic = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+        asyncTask.execute();
+    }
 
     @Override
     public void onBackPressed() {
@@ -261,7 +344,7 @@ public class homeScreen extends AppCompatActivity
         }
         else if (id == R.id.coupons_and_cashbacks)
         {
-            Intent i = new Intent(this,CouponsPage.class);
+            Intent i = new Intent(this,CouponsPage2.class);
             startActivity(i);
         }
         else if(id == R.id.deals)
@@ -302,7 +385,7 @@ public class homeScreen extends AppCompatActivity
         @Override
         public int getCount()
         {
-            return 4;
+            return slider_images.size();
         }
 
         @Override
@@ -320,8 +403,14 @@ public class homeScreen extends AppCompatActivity
 
     public void openDealsPage(View view)
     {
-      //  Intent i = new Intent(this,SingleProduct.class);
-       // startActivity(i);
+        Intent i = new Intent(this,DealsPage.class);
+        startActivity(i);
+    }
+
+    public void openCouponsPage(View view)
+    {
+        Intent i = new Intent(this,CouponsPage2.class);
+        startActivity(i);
     }
 
     public void openAllProducts(View view)
@@ -349,20 +438,50 @@ public class homeScreen extends AppCompatActivity
 
     public void setCouponsButtons()
     {
+        LinearLayout ll = (LinearLayout)findViewById(R.id.coupon_ll1);
         ImageView iv = (ImageView)findViewById(R.id.iv1_coupons);
         TextView tv = (TextView)findViewById(R.id.tv1_coupons);
         Glide.with(getApplicationContext()).load(coupon_images.get(0)).into(iv);
         tv.setText(coupon_title.get(0));
+        ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = coupon_links.get(0);
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
 
         iv = (ImageView)findViewById(R.id.iv3_coupons);
         tv = (TextView)findViewById(R.id.tv3_coupons);
         Glide.with(getApplicationContext()).load(coupon_images.get(2)).into(iv);
         tv.setText(coupon_title.get(2));
+        ll = (LinearLayout)findViewById(R.id.coupon_ll2);
+        ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = coupon_links.get(2);
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
 
         iv = (ImageView)findViewById(R.id.iv2_coupons);
         tv = (TextView)findViewById(R.id.tv2_coupons);
         Glide.with(getApplicationContext()).load(coupon_images.get(1)).into(iv);
         tv.setText(coupon_title.get(1));
+        ll = (LinearLayout)findViewById(R.id.coupon_ll2);
+        ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = coupon_links.get(0);
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
     }
 
     public void setDealsButtons()
@@ -422,7 +541,7 @@ public class homeScreen extends AppCompatActivity
             case R.id.tvLL4 : i.putExtra("URL","cameras");break;
             case R.id.tvLL5 : i.putExtra("URL","men");break;
             case R.id.tvLL6 : i.putExtra("URL","women");break;
-            case R.id.tvLL7 : i.putExtra("URL","women");break;
+            case R.id.tvLL7 : i.putExtra("URL","womens_footwear");break;
         }
         startActivity(i);
     }
@@ -435,77 +554,178 @@ public class homeScreen extends AppCompatActivity
         ProductsAdapterHomePage pAdapter = new ProductsAdapterHomePage(this,footwear);
         rv_footwear.setAdapter(pAdapter);
     }
-    
-    public void openDeal(View view)
-    {
-        String url="https://pricyfy.com/";
-       /* switch(view.getId())
-        {
-            case R.id.ll1 : url=deals_links.get(0);break;
-            case R.id.ll2 : url=deals_links.get(1);break;
-            case R.id.ll3 : url=deals_links.get(2);break;
-            case R.id.ll4 : url=deals_links.get(3);break;
-            case R.id.ll5 : url=deals_links.get(4);break;
-            case R.id.ll6 : url=deals_links.get(5);break;
-            case R.id.ll7 : url=deals_links.get(6);break;
-            case R.id.ll8 : url=deals_links.get(7);break;
-            case R.id.ll9 : url=deals_links.get(8);break;
-            case R.id.ll10 : url=deals_links.get(9);break;
-            case R.id.ll11 : url=deals_links.get(10);break;
-            case R.id.ll12 : url=deals_links.get(11);break;
-        }*/
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(browserIntent);
-    }
 
     public void loadAdBanners()
     {
         ImageView iv;
 
         iv = (ImageView)findViewById(R.id.ad_banner_relative_layout);
-        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner.png").into(iv);
+        Picasso.with(getApplicationContext()).load(ad_banners.get(0)).into(iv);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url=ad_banner_links.get(0);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+        });
 
         iv = (ImageView)findViewById(R.id.ad_banner_relative_layout1);
-        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner1.png").into(iv);
+        Picasso.with(getApplicationContext()).load(ad_banners.get(1)).into(iv);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url=ad_banner_links.get(1);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+        });
 
         iv = (ImageView)findViewById(R.id.ad_banner_relative_layout2);
-        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner2.png").into(iv);
+        Picasso.with(getApplicationContext()).load(ad_banners.get(2)).into(iv);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url=ad_banner_links.get(2);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+        });
 
         iv = (ImageView)findViewById(R.id.ad_banner_relative_layout3);
-        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner3.png").into(iv);
+        Picasso.with(getApplicationContext()).load(ad_banners.get(3)).into(iv);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url=ad_banner_links.get(3);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+        });
+
 
         iv = (ImageView)findViewById(R.id.ad_banner_relative_layout4);
-        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner4.png").into(iv);
+        Picasso.with(getApplicationContext()).load(ad_banners.get(4)).into(iv);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url=ad_banner_links.get(4);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+        });
 
         iv = (ImageView)findViewById(R.id.ad_banner_relative_layout5);
-        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner5.png").into(iv);
+        Picasso.with(getApplicationContext()).load(ad_banners.get(5)).into(iv);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),allProducts.class);
+                i.putExtra("URL","mens_shirts");
+                startActivity(i);
+            }
+        });
 
         iv = (ImageView)findViewById(R.id.ad_banner_relative_layout6);
-        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner6.png").into(iv);
+        Picasso.with(getApplicationContext()).load(ad_banners.get(6)).into(iv);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),allProducts.class);
+                i.putExtra("URL","mens_footwear");
+                startActivity(i);
+            }
+        });
 
         iv = (ImageView)findViewById(R.id.ad_banner_relative_layout7);
-        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner7.png").into(iv);
+        Picasso.with(getApplicationContext()).load(ad_banners.get(7)).into(iv);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url=ad_banner_links.get(7);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+        });
+
 
         iv = (ImageView)findViewById(R.id.ad_banner_relative_layout8);
-        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner8.jpg").into(iv);
+        Picasso.with(getApplicationContext()).load(ad_banners.get(8)).into(iv);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url=ad_banner_links.get(8);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+        });
 
         iv = (ImageView)findViewById(R.id.ad_banner_relative_layout9);
-        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner9.jpg").into(iv);
+        Picasso.with(getApplicationContext()).load(ad_banners.get(9)).into(iv);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url=ad_banner_links.get(9);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+        });
 
         iv = (ImageView)findViewById(R.id.ad_banner_relative_layout10);
-        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner10.png").into(iv);
+        Picasso.with(getApplicationContext()).load(ad_banners.get(10)).into(iv);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url=ad_banner_links.get(10);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+        });
 
         iv = (ImageView)findViewById(R.id.ad_banner_relative_layout11);
-        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner11.png").into(iv);
+        Picasso.with(getApplicationContext()).load(ad_banners.get(11)).into(iv);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),allProducts.class);
+                i.putExtra("URL","mens_shirts");
+                startActivity(i);
+            }
+        });
+
 
         iv = (ImageView)findViewById(R.id.ad_banner_relative_layout12);
-        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner12.png").into(iv);
+        Picasso.with(getApplicationContext()).load(ad_banners.get(12)).into(iv);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url=ad_banner_links.get(12);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+        });
 
         iv = (ImageView)findViewById(R.id.ad_banner_relative_layout13);
-        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner13.png").into(iv);
+        Picasso.with(getApplicationContext()).load(ad_banners.get(13)).into(iv);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url=ad_banner_links.get(13);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+        });
 
         iv = (ImageView)findViewById(R.id.ad_banner_relative_layout14);
-        Picasso.with(getApplicationContext()).load("https://pricyfy.com/app_ad_banners/ad_banner14.png").into(iv);
+        Picasso.with(getApplicationContext()).load(ad_banners.get(14)).into(iv);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url=ad_banner_links.get(14);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }
+        });
     }
 
     public void goToHomePage(View view) {
@@ -519,7 +739,7 @@ public class homeScreen extends AppCompatActivity
 
     public void goToCouponsPage(View view)
     {
-        Intent i = new Intent(this,CouponsPage.class);
+        Intent i = new Intent(this,CouponsPage2.class);
         startActivity(i);
     }
 
@@ -531,5 +751,7 @@ public class homeScreen extends AppCompatActivity
 
     public void goToLoginPage(View view)
     {
+        Intent i = new Intent(this,LoginPage.class);
+        startActivity(i);
     }
 }

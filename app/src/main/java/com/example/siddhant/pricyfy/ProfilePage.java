@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -29,6 +30,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,6 +39,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -45,6 +54,8 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -59,25 +70,26 @@ import static com.example.siddhant.pricyfy.R.id.indicator;
 
 public class ProfilePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
+
+    private GoogleApiClient mGoogleApiClient;
+    SharedPreferences.Editor editor;
+    private ArrayList<Deal> deals;
+    private ArrayList<Product> products;
+    private ArrayList<String> coupon_images, coupon_title, coupon_links;
     private ProgressBar spinner;
-    private ViewPager viewPager;
-    private CouponsPage.MyViewPagerAdapter myViewPagerAdapter;
-    private ProgressDialog progressDialog;
-    private CircleIndicator indicator;
-    private ArrayList<ArrayList<Product> > products  = new ArrayList<>(10);
-    private String typeOfProducts;
-    private int category_name[] = {R.id.tv1a,R.id.tv2a,R.id.tv3a,R.id.tv4a,R.id.tv5a, R.id.tv6a, R.id.tv6a, R.id.tv7a, R.id.tv8a, R.id.tv9a, R.id.tv10a};
-    private int view_all[] = {R.id.tv1b,R.id.tv2b,R.id.tv3b,R.id.tv4b,R.id.tv5b, R.id.tv6b, R.id.tv7b, R.id.tv8b, R.id.tv9b, R.id.tv10b};
-    private int recycler_view[] = {R.id.rv_content_sliders1,R.id.rv_content_sliders2,R.id.rv_content_sliders3,R.id.rv_content_sliders4,R.id.rv_content_sliders5,R.id.rv_content_sliders6,R.id.rv_content_sliders7,R.id.rv_content_sliders8,R.id.rv_content_sliders9,R.id.rv_content_sliders10};
-    private ArrayList<String> names, slugs;
-    private ArrayList<String> slider_images, slider_links;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_page_parent);
+        SharedPreferences sharedPreferences = getSharedPreferences("MYPREFERENCES", MODE_PRIVATE);
+        Boolean isSignedInGoogle = sharedPreferences.getBoolean("signedInGoogle",false);
+        Boolean isSignedInFb = sharedPreferences.getBoolean("signedInFb",false);
+        if(isSignedInFb || isSignedInGoogle)
+            setContentView(R.layout.activity_profile_page_parent2);
+        else
+            setContentView(R.layout.activity_profile_page_parent);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -86,15 +98,101 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view1);
         navigationView.setNavigationItemSelectedListener(this);
-
-        new PrefetchData().execute();
         navigationView.setItemIconTintList(null);
+
+        ImageView iv = (ImageView)findViewById(R.id.iv_footer_profile);
+        iv.setColorFilter(getResources().getColor(R.color.pricify_blue));
+        TextView tv = (TextView)findViewById(R.id.tv_footer_profile);
+        tv.setTextColor(getResources().getColor(R.color.pricify_blue));
+
+        iv = (ImageView)findViewById(R.id.iv_company_logo);
+        Picasso.with(getApplicationContext()).load(R.drawable.company_logo).into(iv);
+
+        editor = sharedPreferences.edit();
+        if(isSignedInGoogle)
+        {
+            String name = sharedPreferences.getString("name","No name defined");
+            String profilePicture = sharedPreferences.getString("profilePicture",null);
+            tv = (TextView)findViewById(R.id.tv2);
+            tv.setText(name);
+            tv.setClickable(false);
+            iv = (ImageView)findViewById(R.id.profile_image);
+            Picasso.with(getApplicationContext()).load(profilePicture).into(iv);
+        }
+        else if(isSignedInFb)
+        {
+            String name = sharedPreferences.getString("name","No name defined");
+            tv = (TextView)findViewById(R.id.tv2);
+            tv.setText(name);
+            tv.setClickable(false);
+        }
+
+        if(isSignedInGoogle)
+        {
+            View navHeaderView = navigationView.getHeaderView(0);
+            String name = sharedPreferences.getString("name","No name defined");
+            String profilePicture = sharedPreferences.getString("profilePicture",null);
+            tv = (TextView)navHeaderView.findViewById(R.id.tv3);
+            tv.setVisibility(View.GONE);
+            tv = (TextView)navHeaderView.findViewById(R.id.tv2);
+            tv.setText(name);
+            tv.setClickable(false);
+            iv = (ImageView)navHeaderView.findViewById(R.id.profile_image);
+            Picasso.with(getApplicationContext()).load(profilePicture).into(iv);
+        }
+        else if(isSignedInFb)
+        {
+            View navHeaderView = navigationView.getHeaderView(0);
+            String name = sharedPreferences.getString("name","No name defined");
+            String userId = sharedPreferences.getString("profilePicture",null);
+            URL imageURL = null;
+            try {
+                imageURL = new URL("https://graph.facebook.com/" + userId + "/picture?type=large");
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            tv = (TextView)navHeaderView.findViewById(R.id.tv3);
+            tv.setVisibility(View.GONE);
+            tv = (TextView)navHeaderView.findViewById(R.id.tv2);
+            tv.setText(name);
+            tv.setClickable(false);
+            //  iv = (ImageView)navHeaderView.findViewById(R.id.imageView);
+            //  iv.setImageBitmap(profilePic);
+        }
+        else
+        {
+            View navHeaderView = navigationView.getHeaderView(0);
+            tv = (TextView)navHeaderView.findViewById(R.id.tv3);
+            tv.setVisibility(View.VISIBLE);
+            tv = (TextView)navHeaderView.findViewById(R.id.tv2);
+            tv.setText("Sign in");
+            tv.setClickable(true);
+        }
+        deals = new ArrayList<>();
+        coupon_links = new ArrayList<>();
+        coupon_images = new ArrayList<>();
+        coupon_title = new ArrayList<>();
+        products = new ArrayList<>();
+        if(isSignedInGoogle || isSignedInFb)
+            new ProfilePage.PrefetchData().execute();
+
     }
 
 
+
+    public void signOut(View view)
+    {
+        editor.putBoolean("signedInFb", false);
+        editor.putBoolean("signedInGoogle",false);
+        editor.commit();
+        Toast.makeText(getApplicationContext(), "Signed out", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this,splashScreen.class);
+        i.putExtra("abc","abc");
+        startActivity(i);
+        finish();
+    }
 
     @Override
     public void onBackPressed()
@@ -127,141 +225,173 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","mobiles");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.laptops)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","laptops");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.cameras)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","cameras");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.tv_and_entertainment)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","tv");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.home_and_kitchen_appliances)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","home");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.home_decors)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","home_decors");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.men)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","men");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.women)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","women");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.mens_footwear)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","mens_footwear");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.womens_footwear)
         {
             Intent i = new Intent(this,Sliders.class);
             i.putExtra("URL","womens_footwear");
-            startActivity(i);
+            startActivity(i);finish();
         }
         else if (id == R.id.coupons_and_cashbacks)
         {
-            Intent i = new Intent(this,CouponsPage.class);
-            startActivity(i);
+            Intent i = new Intent(this,CouponsPage2.class);
+            startActivity(i);finish();
         }
         else if(id == R.id.deals)
         {
             Intent i = new Intent(this,DealsPage.class);
-            startActivity(i);
+            startActivity(i);finish();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout1);
         drawer.closeDrawers();
         return true;
     }
 
-    public void setLayouts()
+
+    public void goToHomePage(View view) {
+        Intent i = new Intent(this,splashScreen.class);
+        i.putExtra("abc","abc");
+        startActivity(i);finish();
+    }
+
+    public void goToDealsPage(View view)
     {
-       /* FrameLayout fm = (FrameLayout)findViewById(R.id.viewPagerFrameLayout);
-        fm.setVisibility(View.VISIBLE);
-        //Toast.makeText(getApplicationContext(),Integer.toString(products.siz
-        // e()),Toast.LENGTH_LONG).show();
-        viewPager = (ViewPager)findViewById(R.id.view_pager);
-        myViewPagerAdapter = new CouponsPage.MyViewPagerAdapter();
-        viewPager.setAdapter(myViewPagerAdapter);
-        viewPager.setOnClickListener(new View.OnClickListener() {
+        Intent i = new Intent(this,DealsPage.class);
+        startActivity(i);finish();
+    }
+
+    public void goToCouponsPage(View view)
+    {
+        Intent i = new Intent(this,CouponsPage2.class);
+        startActivity(i);finish();
+    }
+
+    public void goToProfilePage(View view)
+    {
+    }
+
+    public void goToLoginPage(View view)
+    {
+        Intent i = new Intent(this,LoginPage.class);
+        startActivity(i);finish();
+    }
+
+    public void openDealsPage(View view)
+    {
+        Intent i = new Intent(this,DealsPage.class);
+        startActivity(i);finish();
+    }
+
+    public void openCouponsPage(View view)
+    {
+        Intent i = new Intent(this,CouponsPage2.class);
+        startActivity(i);finish();
+    }
+
+    public void setCouponsButtons()
+    {
+        LinearLayout ll = (LinearLayout)findViewById(R.id.coupon_ll1);
+        ImageView iv = (ImageView)findViewById(R.id.iv1_coupons);
+        TextView tv = (TextView)findViewById(R.id.tv1_coupons);
+        Glide.with(getApplicationContext()).load(coupon_images.get(0)).into(iv);
+        tv.setText(coupon_title.get(0));
+        ll.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                String url = coupon_links.get(0);
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
             }
         });
 
-        final Handler handler = new Handler();
-        final Runnable Update = new Runnable()
-        {
-            public void run()
-            {
-                if(viewPager.getCurrentItem()==3)
-                    viewPager.setCurrentItem(0);
-                else
-                    viewPager.setCurrentItem(viewPager.getCurrentItem()+1,true);
-            }
-        };
-
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
+        iv = (ImageView)findViewById(R.id.iv3_coupons);
+        tv = (TextView)findViewById(R.id.tv3_coupons);
+        Glide.with(getApplicationContext()).load(coupon_images.get(2)).into(iv);
+        tv.setText(coupon_title.get(2));
+        ll = (LinearLayout)findViewById(R.id.coupon_ll2);
+        ll.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run()
-            {
-                handler.post(Update);
+            public void onClick(View v) {
+                String url = coupon_links.get(2);
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
             }
-        },500,3000);
-        indicator = (CircleIndicator)findViewById(R.id.indicator);
-        indicator.setViewPager(viewPager);
-        //Toast.makeText(getApplicationContext(),Integer.toString(products.size()),Toast.LENGTH_LONG).show();
-        for(int i=0;i<products.size();i++)
-        {
-            if(products.get(i).size()==0)
-                continue;
-            TextView tv = (TextView) findViewById(category_name[i]);
-            final String n = slugs.get(i);
-            tv.setText(names.get(i));
-            tv = (TextView) findViewById(view_all[i]);
-            tv.setText("View all");
-            tv.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    Intent i = new Intent(getApplicationContext(),allProducts.class);
-                    i.putExtra("URL",n);
-                    startActivity(i);
-                }
-            });
+        });
 
-            RecyclerView rv1 = (RecyclerView) findViewById(recycler_view[i]);
-            LinearLayoutManager linearLayout = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-            rv1.setLayoutManager(linearLayout);
-            ProductsAdapterHomePage pAdapter = new ProductsAdapterHomePage(this, products.get(i));
-            rv1.setAdapter(pAdapter);
-        }*/
+        iv = (ImageView)findViewById(R.id.iv2_coupons);
+        tv = (TextView)findViewById(R.id.tv2_coupons);
+        Glide.with(getApplicationContext()).load(coupon_images.get(1)).into(iv);
+        tv.setText(coupon_title.get(1));
+        ll = (LinearLayout)findViewById(R.id.coupon_ll2);
+        ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = coupon_links.get(0);
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+    }
+
+    public void setDealsButtons()
+    {
+        RecyclerView rv_deals = (RecyclerView) findViewById(R.id.rv_deals);
+        LinearLayoutManager linearLayout = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        rv_deals.setLayoutManager(linearLayout);
+        DealsAdapter dAdapter = new DealsAdapter(this,deals,1);
+        rv_deals.setAdapter(dAdapter);
     }
 
     private class PrefetchData extends AsyncTask<Void, Void, Void> {
@@ -269,89 +399,60 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-           // progressDialog = new ProgressDialog(CouponsPage.this);
-           // progressDialog.setMessage("Loading categories...");
-           // progressDialog.show();
-           /* spinner = (ProgressBar)findViewById(R.id.progressBar1);
+            spinner = (ProgressBar)findViewById(R.id.progressBar1);
             spinner.getIndeterminateDrawable().setColorFilter(spinner.getResources().getColor(R.color.pricify_blue), android.graphics.PorterDuff.Mode.MULTIPLY);
-            spinner.setVisibility(View.VISIBLE);    */
+            spinner.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            /*HttpHandler sh = new HttpHandler();
-            String url = "https://pricyfy.com/app_sliders_products.php?type="+typeOfProducts;
+            HttpHandler sh = new HttpHandler();
+            String url = "https://pricyfy.com/app_profile_page.php";
             String jsonStr = sh.makeServiceCall(url);
             try {
                 JSONObject jsonObject = new JSONObject(jsonStr);
-                JSONArray namesJsonArray = jsonObject.getJSONArray("index");
-                JSONArray ja = namesJsonArray.getJSONArray(0);
-                JSONArray sliders = jsonObject.getJSONArray("sliders");
-                Log.i("jsonObjectlength",Integer.toString(sliders.length()));
-                for(int i=0;i<sliders.length();i++)
+                JSONArray dealsArray = jsonObject.getJSONArray("deals");
+                for(int i=0;i<dealsArray.length();i++)
                 {
-                    JSONObject object = sliders.getJSONObject(i);
-                    slider_images.add(object.getString("slider_image_link"));
-                    slider_links.add(object.getString("redirect_link"));
+                    JSONObject object = dealsArray.getJSONObject(i);
+                    Deal d = new Deal(1,object.getString("product_name"),object.getString("image_link"),object.getString("product_link"));
+                    deals.add(d);
                 }
-                JSONArray array;
-                for(int i=0;i<10;i++)
+
+                JSONArray productsJa = jsonObject.getJSONArray("products");
+                for(int i=0;i<productsJa.length();i++)
                 {
-                    if(!jsonObject.has(Integer.toString(i))) continue;
-                    JSONObject jo = ja.getJSONObject(i);
-                    names.add(jo.getString("name"));
-                    slugs.add(jo.getString("slug"));
-                    ArrayList<Product> p = new ArrayList<>();
-                    products.add(p);
-                    array = jsonObject.getJSONArray(Integer.toString(i));
-                    for(int j=0;j<array.length();j++)
-                    {
-                        Product newProduct = null;
-                        JSONObject object = array.getJSONObject(j);
-                        newProduct = new Product(object.getInt("id"),object.getString("product_name"),object.getInt("flipkart_price"),object.getString("image_link"),object.getInt("discount"),object.getInt("mrp"),object.getDouble("seller_rating"));
-                        products.get(i).add(newProduct);
-                    }
+                    JSONObject object = productsJa.getJSONObject(i);
+                    Product newProduct = new Product(object.getInt("id"),object.getString("product_name"),object.getInt("flipkart_price"),object.getString("image_link"),object.getInt("discount"),object.getInt("mrp"),object.getDouble("seller_rating"));
+                    products.add(newProduct);
                 }
+
+                JSONArray couponsJA = jsonObject.getJSONArray("coupons");
+                for(int i=0;i<couponsJA.length();i++)
+                {
+                    JSONObject object = couponsJA.getJSONObject(i);
+                    coupon_title.add(object.getString("title"));
+                    coupon_images.add(object.getString("image_link"));
+                    coupon_links.add(object.getString("landing_page"));
+                }
+                coupon_images.set(2,coupon_images.get(3));
+                coupon_title.set(2,coupon_title.get(3));
+                coupon_links.set(2,coupon_title.get(3));
 
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (Exception e){
                 e.printStackTrace();
-            }*/
+            }
             return null;
         }
 
-        /*@Override
+        @Override
         protected void onPostExecute(Void result) {
-            //  Toast.makeText(getApplicationContext(), "len" + Integer.toString(products.size()), Toast.LENGTH_SHORT).show();
-            progressDialog.dismiss();
-            setLayouts();
-            //spinner.setVisibility(View.GONE);
-            //  finish();
-        }*/
+            spinner.setVisibility(View.INVISIBLE);
+            setDealsButtons();
+            setCouponsButtons();
+        }
     }
 
-    public void goToHomePage(View view) {
-        Intent i = new Intent(this,splashScreen.class);
-        i.putExtra("abc","abc");
-        startActivity(i);
-    }
-
-    public void goToDealsPage(View view)
-    {
-        Intent i = new Intent(this,DealsPage.class);
-        startActivity(i);
-    }
-
-    public void goToCouponsPage(View view)
-    {
-        Intent i = new Intent(this,CouponsPage.class);
-        startActivity(i);
-    }
-
-    public void goToProfilePage(View view)
-    {
-        Intent i = new Intent(this,ProfilePage.class);
-        startActivity(i);
-    }
 }
