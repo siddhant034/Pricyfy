@@ -36,16 +36,16 @@
                 android:id="@+id/ll_rating"
                 android:layout_marginLeft="10dp"
                 android:orientation="horizontal"
-                android:padding="2dp"
-                android:background="@drawable/single_product_buttons"
-                app:backgroundTint="@color/pricify_blue"
+                android:padding="1dp"
+                android:background="@drawable/single_product_buttons2"
+                app:backgroundTint="@color/golden"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="invisible">
 
                 <TextView
                     android:paddingLeft="5dp"
-                    android:textSize="10dp"
+                    android:textSize="12dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/seller_ratings"
@@ -59,9 +59,9 @@
                     android:stepSize="0.1"
                     android:clickable="false"
                     android:isIndicator="true"
-                    android:visibility="invisible"
                     android:progressTint="#ffffff"
                     android:secondaryProgressTint="#ffffff"
+                    android:visibility="invisible"
                     style="?android:attr/ratingBarStyleSmall"
                     android:numStars="1" />
 
@@ -95,9 +95,7 @@
             android:id="@+id/hor_break1"
             android:layout_width="fill_parent"
             android:visibility="invisible"
-            android:layout_height="1dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_height="10dp"
             android:background="@color/background_home_screen"/>
 
         <TextView
@@ -163,6 +161,8 @@
             <Button
                 android:id="@+id/button_goToStorebestPrice"
                 android:layout_width="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:layout_height="25dp"
                 android:textAllCaps="false"
                 android:layout_weight="1"
@@ -327,6 +327,8 @@
                 android:layout_height="25dp"
                 android:layout_weight="1"
                 android:textColor="#ffffff"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:text="Go To Store"
                 android:textAllCaps="false"
                 android:background="@drawable/single_product_buttons"
@@ -375,6 +377,8 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/pricify_blue"
                 android:textColor="#ffffff"
@@ -427,6 +431,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:layout_weight="1"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:backgroundTint="@color/pricify_blue"
                 android:textColor="#ffffff"
                 android:text="Go To Store"
@@ -477,6 +483,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:layout_weight="1"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:backgroundTint="@color/pricify_blue"
                 android:textColor="#ffffff"
                 android:text="Go To Store"
@@ -528,6 +536,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:layout_weight="1"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:backgroundTint="@color/pricify_blue"
                 android:textColor="#ffffff"
                 android:text="Go To Store"

@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +37,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,7 +48,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 9001;
-    private static final String TAG = "holalulu";
     private TextView mStatusTextView;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -53,7 +56,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     LoginButton loginButton;
     private static String userId;
     private String name;
-
+    private String email;
 
 
     @Override
@@ -71,7 +74,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         SignInButton sb = (SignInButton)findViewById(R.id.sign_in_button);
-        setGooglePlusButtonText(sb,"Sign in with Google              ");
+        setGooglePlusButtonText(sb,"Sign in with Google            ");
 
         findViewById(R.id.sign_in_button).setOnClickListener((View.OnClickListener) this);
 
@@ -123,6 +126,43 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
         sharedPreferences = getSharedPreferences("MYPREFERENCES",MODE_PRIVATE);
         editor = sharedPreferences.edit();
+    }
+
+    public void subscribe(View view)
+    {
+        AutoCompleteTextView tv = (AutoCompleteTextView)findViewById(R.id.email);
+        email = tv.getText().toString();
+        new LoginPage.PrefetchData().execute();
+    }
+
+    private class PrefetchData extends AsyncTask<Void, Void, Void> {
+
+        String jsonStr;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            HttpHandler sh = new HttpHandler();
+            String url = "https://pricyfy.com/app_subscribe.php?email="+email;
+            jsonStr = sh.makeServiceCall(url);
+            try {
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            Toast.makeText(getApplicationContext(),"Subscribed",Toast.LENGTH_LONG).show();
+            AutoCompleteTextView tv = (AutoCompleteTextView)findViewById(R.id.email);
+            tv.setText("");
+            tv.clearFocus();
+        }
     }
 
     protected void setGooglePlusButtonText(SignInButton signInButton, String buttonText) {

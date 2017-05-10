@@ -17,6 +17,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -118,11 +121,13 @@ public class SingleProduct extends AppCompatActivity implements NavigationView.O
             TextView tv = (TextView)navHeaderView.findViewById(R.id.tv3);
             tv.setVisibility(View.VISIBLE);
             tv = (TextView)navHeaderView.findViewById(R.id.tv2);
-            tv.setText("Sign in");
+            tv.setText("Sign In / ");
             tv.setClickable(true);
         }
         ImageView iv = (ImageView)findViewById(R.id.iv_company_logo);
         Picasso.with(getApplicationContext()).load(R.drawable.company_logo).into(iv);
+        if(!isSignedInFb && !isSignedInGoogle)
+            LogoutButton();
     }
 
     @Override
@@ -138,7 +143,8 @@ public class SingleProduct extends AppCompatActivity implements NavigationView.O
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item)
+    {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -217,7 +223,7 @@ public class SingleProduct extends AppCompatActivity implements NavigationView.O
             Intent i = new Intent(this,DealsPage.class);
             startActivity(i);finish();
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout1);
         drawer.closeDrawers();
         return true;
     }
@@ -256,7 +262,7 @@ public class SingleProduct extends AppCompatActivity implements NavigationView.O
         RatingBar ratingBar = (RatingBar)findViewById(R.id.ratingBar);
         ratingBar.setVisibility(View.VISIBLE);
         ratingBar.setRating(5);
-        ratingBar.getProgressDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+       // ratingBar.getProgressDrawable().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
 
        // tv = (TextView)findViewById(R.id.textView_ratingsCount);
         //tv.setText("156");
@@ -338,8 +344,16 @@ public class SingleProduct extends AppCompatActivity implements NavigationView.O
         else iv.setImageResource(R.drawable.cross);
 
         tv = (TextView)findViewById(R.id.shipping_charge);
-        tv.setText("Shipping charge : " + Integer.toString(product.getShippingCharge()));
-
+        int sc = product.getShippingCharge();
+        if(sc!=0)
+            tv.setText("Shipping charge : " + Integer.toString(sc));
+        else
+        {
+            final SpannableStringBuilder sb = new SpannableStringBuilder("Shipping Charge : FREE");
+            final ForegroundColorSpan fcs = new ForegroundColorSpan(Color.rgb(0,128,0));
+            sb.setSpan(fcs,18,22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tv.setText(sb);
+        }
         tv = (TextView)findViewById(R.id.delivery);
         tv.setText("Delivery : " + product.getDelivery());
 
@@ -416,6 +430,28 @@ public class SingleProduct extends AppCompatActivity implements NavigationView.O
     {
         Intent i = new Intent(this,LoginPage.class);
         startActivity(i);
+    }
+
+    public void signOut(MenuItem view)
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("MYPREFERENCES", MODE_PRIVATE);
+        SharedPreferences.Editor editor;
+        editor = sharedPreferences.edit();
+        editor.putBoolean("signedInFb", false);
+        editor.putBoolean("signedInGoogle",false);
+        editor.commit();
+        Toast.makeText(getApplicationContext(), "Signed out", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this,splashScreen.class);
+        i.putExtra("abc","abc");
+        startActivity(i);
+        finish();
+    }
+
+    public void LogoutButton()
+    {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view1);
+        Menu nav_Menu = navigationView.getMenu();
+        nav_Menu.findItem(R.id.logout).setVisible(false);
     }
 }
 

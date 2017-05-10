@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -128,12 +129,13 @@ public class DealsPage extends AppCompatActivity implements NavigationView.OnNav
             tv = (TextView)navHeaderView.findViewById(R.id.tv3);
             tv.setVisibility(View.VISIBLE);
             tv = (TextView)navHeaderView.findViewById(R.id.tv2);
-            tv.setText("Sign in");
+            tv.setText("Sign In / ");
             tv.setClickable(true);
         }
         iv = (ImageView)findViewById(R.id.iv_company_logo);
         Picasso.with(getApplicationContext()).load(R.drawable.company_logo).into(iv);
-    }
+        if(!isSignedInFb && !isSignedInGoogle)
+            LogoutButton();    }
 
     @Override
     public void onBackPressed()
@@ -366,4 +368,25 @@ public class DealsPage extends AppCompatActivity implements NavigationView.OnNav
         startActivity(i);
     }
 
+    public void signOut(MenuItem view)
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("MYPREFERENCES", MODE_PRIVATE);
+        SharedPreferences.Editor editor;
+        editor = sharedPreferences.edit();
+        editor.putBoolean("signedInFb", false);
+        editor.putBoolean("signedInGoogle",false);
+        editor.commit();
+        Toast.makeText(getApplicationContext(), "Signed out", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this,splashScreen.class);
+        i.putExtra("abc","abc");
+        startActivity(i);
+        finish();
+    }
+
+    public void LogoutButton()
+    {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view1);
+        Menu nav_Menu = navigationView.getMenu();
+        nav_Menu.findItem(R.id.logout).setVisible(false);
+    }
 }

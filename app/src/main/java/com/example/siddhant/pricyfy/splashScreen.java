@@ -48,11 +48,18 @@ public class splashScreen extends AppCompatActivity {
         if(i.getExtras()==null) {
             setContentView(R.layout.activity_splash_screen);
         }
-        else {
-            setContentView(R.layout.activity_splash_screen2);
-            spinner = (ProgressBar)findViewById(R.id.progressBar1);
-            spinner.getIndeterminateDrawable().setColorFilter(spinner.getResources().getColor(R.color.pricify_blue), android.graphics.PorterDuff.Mode.MULTIPLY);
-            temp = 2;
+        else
+        {
+            Bundle b = getIntent().getExtras();
+            if(!b.containsKey("abc"))
+                setContentView(R.layout.activity_splash_screen);
+            else
+            {
+                setContentView(R.layout.activity_splash_screen2);
+                spinner = (ProgressBar) findViewById(R.id.progressBar1);
+                spinner.getIndeterminateDrawable().setColorFilter(spinner.getResources().getColor(R.color.pricify_blue), android.graphics.PorterDuff.Mode.MULTIPLY);
+                temp = 2;
+            }
         }
         TextView tv = (TextView)findViewById(R.id.tv);
         if(!checkConnection())

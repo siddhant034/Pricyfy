@@ -153,7 +153,7 @@ public class homeScreen extends AppCompatActivity
             {
                 public void run()
                 {
-                    if(viewPager.getCurrentItem()==slider_images.size())
+                    if(viewPager.getCurrentItem()==slider_images.size()-1)
                         viewPager.setCurrentItem(0);
                     else
                         viewPager.setCurrentItem(viewPager.getCurrentItem()+1,true);
@@ -219,11 +219,14 @@ public class homeScreen extends AppCompatActivity
             tv = (TextView)navHeaderView.findViewById(R.id.tv3);
             tv.setVisibility(View.VISIBLE);
             tv = (TextView)navHeaderView.findViewById(R.id.tv2);
-            tv.setText("Sign in");
+            tv.setText("Sign In / ");
             tv.setClickable(true);
         }
         iv = (ImageView)findViewById(R.id.iv_company_logo);
         Picasso.with(getApplicationContext()).load(R.drawable.company_logo).into(iv);
+        if(!isSignedInFb && !isSignedInGoogle)
+            LogoutButton();
+
     }
 
     public void getProfilePic(final String userId)
@@ -753,5 +756,27 @@ public class homeScreen extends AppCompatActivity
     {
         Intent i = new Intent(this,LoginPage.class);
         startActivity(i);
+    }
+
+    public void signOut(MenuItem view)
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("MYPREFERENCES", MODE_PRIVATE);
+        SharedPreferences.Editor editor;
+        editor = sharedPreferences.edit();
+        editor.putBoolean("signedInFb", false);
+        editor.putBoolean("signedInGoogle",false);
+        editor.commit();
+        Toast.makeText(getApplicationContext(), "Signed out", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this,splashScreen.class);
+        i.putExtra("abc","abc");
+        startActivity(i);
+        finish();
+    }
+
+    public void LogoutButton()
+    {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu nav_Menu = navigationView.getMenu();
+        nav_Menu.findItem(R.id.logout).setVisible(false);
     }
 }

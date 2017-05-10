@@ -36,7 +36,7 @@
         <item
             android:id="@+id/home_decors"
             android:icon="@mipmap/home_decors"
-            android:title="Home Decors" />
+            android:title="Furnitures" />
         <item
             android:id="@+id/men"
             android:icon="@mipmap/mens"
@@ -56,5 +56,10 @@
             android:icon="@mipmap/womens_footwear"
             android:title="Women's Footwear"/>
 
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/app_icon"
+            android:title="Logout"
+            android:onClick="signOut" />
     </group>
 </menu>

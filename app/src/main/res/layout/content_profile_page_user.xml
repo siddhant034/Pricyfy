@@ -18,7 +18,7 @@
         tools:context="com.example.siddhant.pricyfy.homeScreen">
 
         <RelativeLayout
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/linear_layout1">
@@ -89,7 +89,7 @@
                 android:id="@+id/deals"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_below="@id/tv_signout"
                 android:layout_centerHorizontal="true">
 
@@ -140,7 +140,7 @@
                 android:id="@+id/coupons"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_below="@id/deals"
                 android:layout_centerHorizontal="true">
 
@@ -281,7 +281,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/background_home_screen"
                 android:id="@+id/recently_viewed_products"
                 android:layout_below="@id/coupons">
@@ -291,20 +291,19 @@
                     android:id="@+id/tvLL3"
                     android:clickable="true"
                     android:onClick="setViewAllButtons"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
                     android:orientation="horizontal"
                     android:background="#ffffff">
                     <TextView
                         android:layout_gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
+                        android:layout_width="500dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_marginLeft="5dp"
                         android:text="Recently Viewed Products"
                         android:textAllCaps="false"
-                        android:singleLine="true"
                         android:textSize="15dp"
                         android:textColor="@color/deals_of_the_day"
                         android:textStyle="bold"/>

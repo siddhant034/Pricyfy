@@ -33,7 +33,7 @@
         <item name = "android:editTextColor">@color/pure_black</item>
         <item name = "android:gravity">left</item>
         <item name = "android:layout_alignParentLeft">true</item>
-        <item name="android:homeAsUpIndicator">@drawable/text_view_background</item>
+        <item name="android:homeAsUpIndicator">@drawable/back</item>
 
     </style>
 

@@ -86,18 +86,21 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
         SharedPreferences sharedPreferences = getSharedPreferences("MYPREFERENCES", MODE_PRIVATE);
         Boolean isSignedInGoogle = sharedPreferences.getBoolean("signedInGoogle",false);
         Boolean isSignedInFb = sharedPreferences.getBoolean("signedInFb",false);
-        if(isSignedInFb || isSignedInGoogle)
-            setContentView(R.layout.activity_profile_page_parent2);
-        else
-            setContentView(R.layout.activity_profile_page_parent);
+        if(!isSignedInFb && !isSignedInGoogle) {
+            Intent i = new Intent(this,LoginPage.class);
+            startActivity(i);
+            finish();
+
+        }
+        setContentView(R.layout.activity_profile_page_parent2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout1);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view1);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
@@ -167,7 +170,7 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
             tv = (TextView)navHeaderView.findViewById(R.id.tv3);
             tv.setVisibility(View.VISIBLE);
             tv = (TextView)navHeaderView.findViewById(R.id.tv2);
-            tv.setText("Sign in");
+            tv.setText("Sign In / ");
             tv.setClickable(true);
         }
         deals = new ArrayList<>();
@@ -177,10 +180,20 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
         products = new ArrayList<>();
         if(isSignedInGoogle || isSignedInFb)
             new ProfilePage.PrefetchData().execute();
+        if(!isSignedInFb && !isSignedInGoogle)
+            LogoutButton();    }
 
+    public void signOut(MenuItem view)
+    {
+        editor.putBoolean("signedInFb", false);
+        editor.putBoolean("signedInGoogle",false);
+        editor.commit();
+        Toast.makeText(getApplicationContext(), "Signed out", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this,splashScreen.class);
+        i.putExtra("abc","abc");
+        startActivity(i);
+        finish();
     }
-
-
 
     public void signOut(View view)
     {
@@ -452,6 +465,18 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
             spinner.setVisibility(View.INVISIBLE);
             setDealsButtons();
             setCouponsButtons();
+        }
+    }
+
+    public void LogoutButton()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("MYPREFERENCES", MODE_PRIVATE);
+        Boolean isSignedInGoogle = sharedPreferences.getBoolean("signedInGoogle",false);
+        Boolean isSignedInFb = sharedPreferences.getBoolean("signedInFb",false);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view1);
+        if(isSignedInFb || isSignedInGoogle)
+        {
+            navigationView.getMenu().getItem(R.id.logout).setVisible(true);
         }
     }
 

@@ -115,6 +115,6 @@
         android:layout_marginTop="25dp"
         android:textColor="#ffffff"
         android:background="@drawable/single_product_buttons"
-        android:onClick="subsribe"
+        android:onClick="subscribe"
         android:clickable="true"/>
 </RelativeLayout>

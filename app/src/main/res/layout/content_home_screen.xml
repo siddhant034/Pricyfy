@@ -16,7 +16,6 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="com.example.siddhant.pricyfy.homeScreen">
 
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
@@ -25,9 +24,7 @@
                 android:id="@+id/view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="0dp"
                 android:clickable="true"
-                android:paddingBottom="0dp"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -43,7 +40,7 @@
         </FrameLayout>
 
         <LinearLayout
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="wrap_content"
@@ -345,7 +342,7 @@
             android:id="@+id/deals"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/relativeLayout2"
             android:layout_centerHorizontal="true">
 
@@ -397,7 +394,7 @@
             android:id="@+id/coupons"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/deals"
             android:layout_centerHorizontal="true">
 
@@ -409,8 +406,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="match_parent"
@@ -454,8 +451,8 @@
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_margin="1dp"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginRight="0dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:orientation="vertical">
 
                         <ImageView
@@ -482,8 +479,8 @@
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_margin="1dp"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginRight="0dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:orientation="vertical">
 
                         <ImageView
@@ -510,8 +507,8 @@
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_margin="1dp"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginRight="0dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:orientation="vertical">
 
                         <ImageView
@@ -538,7 +535,7 @@
         <ImageView
             android:id="@+id/ad_banner_relative_layout"
             android:scaleType="fitXY"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:background="@color/background_home_screen"
             android:layout_width="match_parent"
             android:layout_height="130dp"
@@ -548,7 +545,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:background="@color/background_home_screen"
             android:id="@+id/mobile_ranges_relative_layout"
             android:layout_below="@+id/ad_banner_relative_layout">
@@ -561,8 +558,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:orientation="horizontal"
                 android:background="#ffffff">
                 <TextView
@@ -604,8 +601,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/camera_ranges_relative_layout"
@@ -619,8 +615,8 @@
                 android:layout_margin="1dp"
                 android:clickable="true"
                 android:onClick="setViewAllButtons"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:orientation="horizontal">
                 <TextView
                     android:gravity="center_vertical"
@@ -660,9 +656,8 @@
         <ImageView
             android:id="@+id/ad_banner_relative_layout1"
             android:layout_width="match_parent"
-            android:layout_margin="1dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
+            android:layout_marginTop="10dp"
+
             android:layout_height="150dp"
             android:padding="1dp"
             android:background="@color/background_home_screen"
@@ -675,11 +670,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:background="@color/background_home_screen"
-            android:padding="1dp"
             android:id="@+id/ad_banner_linear_layout1"
             android:layout_below="@id/ad_banner_relative_layout1">
             <ImageView
@@ -709,9 +702,7 @@
             android:id="@+id/ad_banner_relative_layout4"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_margin="1dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
+            android:layout_marginTop="10dp"
             android:padding="1dp"
             android:background="@color/background_home_screen"
             android:scaleType="fitXY"
@@ -723,7 +714,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/men_ranges_relative_layout"
             android:layout_below="@+id/ad_banner_relative_layout4">
 
@@ -771,13 +762,11 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:orientation="horizontal"
             android:background="@color/background_home_screen"
-            android:padding="1dp"
             android:id="@+id/ad_banner_linear_layout2"
             android:layout_below="@id/men_ranges_relative_layout">
             <ImageView
@@ -797,7 +786,7 @@
                 android:layout_weight="1"
                 android:scaleType="fitXY"
                 android:layout_margin="1dp"
-                android:layout_height="150dp"
+                android:layout_height="match_parent"
                 android:clickable="true">
             </ImageView>
         </LinearLayout>
@@ -807,28 +796,23 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="150dp"
-            android:layout_marginBottom="15dp"
-            android:padding="1dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@id/ad_banner_linear_layout2"
             android:background="@color/background_home_screen"
-            android:layout_margin="1dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
             android:clickable="true"
             android:scaleType="fitXY">
         </ImageView>
+
+
+
         <ImageView
-            android:layout_marginTop="15dp"
-            android:paddingTop="15dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/ad_banner_relative_layout8"
             android:layout_below="@id/ad_banner_relative_layout7"
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:padding="1dp"
             android:background="@color/background_home_screen"
-            android:layout_margin="1dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
             android:scaleType="fitXY"
             android:layout_height="150dp"
             android:clickable="true">
@@ -837,8 +821,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/women_ranges_relative_layout"
             android:layout_below="@+id/ad_banner_relative_layout8">
             <LinearLayout
@@ -889,27 +872,18 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_below="@id/women_ranges_relative_layout"
-            android:layout_marginBottom="15dp"
-            android:paddingBottom="15dp"
-            android:padding="1dp"
-            android:layout_margin="1dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
+            android:layout_marginTop="10dp"
             android:background="@color/background_home_screen"
             android:scaleType="fitXY"
             android:layout_height="150dp"
             android:clickable="true" />
 
         <ImageView
-            android:layout_marginTop="15dp"
             android:id="@+id/ad_banner_relative_layout10"
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:padding="1dp"
             android:background="@color/background_home_screen"
-            android:layout_margin="1dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
+            android:layout_marginTop="10dp"
             android:scaleType="fitXY"
             android:layout_height="150dp"
             android:layout_below="@id/ad_banner_relative_layout9"
@@ -917,11 +891,10 @@
         </ImageView>
 
         <LinearLayout
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:orientation="horizontal"
-            android:padding="1dp"
             android:background="@color/background_home_screen"
             android:id="@+id/ad_banner_linear_layout3"
             android:layout_below="@+id/ad_banner_relative_layout10">
@@ -950,8 +923,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/footwear_ranges_relative_layout"
             android:layout_below="@+id/ad_banner_linear_layout3">
 
@@ -999,22 +971,17 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:orientation="horizontal"
-            android:layout_margin="1dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
             android:background="@color/background_home_screen"
-            android:padding="1dp"
             android:id="@+id/ad_banner_linear_layout4"
             android:layout_below="@id/footwear_ranges_relative_layout">
             <ImageView
                 android:id="@+id/ad_banner_relative_layout13"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="1dp"
                 android:scaleType="fitXY"
                 android:layout_height="150dp"
                 android:clickable="true">
@@ -1024,7 +991,6 @@
                 android:id="@+id/ad_banner_relative_layout14"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="1dp"
                 android:scaleType="fitXY"
                 android:layout_height="150dp"
                 android:clickable="true">

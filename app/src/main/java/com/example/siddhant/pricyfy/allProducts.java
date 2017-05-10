@@ -17,12 +17,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -61,6 +63,7 @@ public class allProducts extends AppCompatActivity implements NavigationView.OnN
     private ProgressBar spinner;
     private String typeOfProducts;
     private String url  = "https://pricyfy.com/app_all_products.php";
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,11 +167,14 @@ public class allProducts extends AppCompatActivity implements NavigationView.OnN
             TextView tv = (TextView)navHeaderView.findViewById(R.id.tv3);
             tv.setVisibility(View.VISIBLE);
             tv = (TextView)navHeaderView.findViewById(R.id.tv2);
-            tv.setText("Sign in");
+            tv.setText("Sign In / ");
             tv.setClickable(true);
         }
         ImageView iv = (ImageView)findViewById(R.id.iv_company_logo);
         Picasso.with(getApplicationContext()).load(R.drawable.company_logo).into(iv);
+        editor = sharedPreferences.edit();
+        if(!isSignedInFb && !isSignedInGoogle)
+            LogoutButton();
     }
 
     @Override
@@ -387,5 +393,26 @@ public class allProducts extends AppCompatActivity implements NavigationView.OnN
     {
         Intent i = new Intent(this,LoginPage.class);
         startActivity(i);
+    }
+
+    public void signOut(MenuItem view)
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("MYPREFERENCES", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.putBoolean("signedInFb", false);
+        editor.putBoolean("signedInGoogle",false);
+        editor.commit();
+        Toast.makeText(getApplicationContext(), "Signed out", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this,splashScreen.class);
+        i.putExtra("abc","abc");
+        startActivity(i);
+        finish();
+    }
+
+    public void LogoutButton()
+    {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view1);
+        Menu nav_Menu = navigationView.getMenu();
+        nav_Menu.findItem(R.id.logout).setVisible(false);
     }
 }
