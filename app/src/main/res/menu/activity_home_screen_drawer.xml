@@ -20,7 +20,7 @@
         <item
             android:id="@+id/laptops"
             android:icon="@mipmap/laptops"
-            android:title="Laptops, PC &amp; Gaming" />
+            android:title="PCs &amp; Laptops" />
         <item
             android:id="@+id/cameras"
             android:icon="@mipmap/cameras"

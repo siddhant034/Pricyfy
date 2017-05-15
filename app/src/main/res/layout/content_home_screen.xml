@@ -260,7 +260,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Men"
+                    android:text="Men's"
                     android:layout_weight="4"
                     android:textAlignment="center"
                     android:textColor="@color/pure_black"
@@ -327,7 +327,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Women"
+                    android:text="Women's"
                     android:layout_weight="4"
                     android:textAlignment="center"
                     android:textColor="@color/pure_black"

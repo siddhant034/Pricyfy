@@ -5,6 +5,8 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -31,6 +33,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -71,7 +78,7 @@ public class CouponsPage2 extends AppCompatActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view1);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view1);
         navigationView.setNavigationItemSelectedListener(this);
 
         slider_links = new ArrayList<>();
@@ -119,8 +126,30 @@ public class CouponsPage2 extends AppCompatActivity implements NavigationView.On
             tv.setClickable(false);
             tv = (TextView)navHeaderView.findViewById(R.id.tv3);
             tv.setVisibility(View.GONE);
-            //  iv = (ImageView)navHeaderView.findViewById(R.id.imageView);
-            //  iv.setImageBitmap(profilePic);
+            Bundle params = new Bundle();
+            params.putString("fields", "id,email,gender,cover,picture.type(large)");
+            new GraphRequest(AccessToken.getCurrentAccessToken(), "me", params, HttpMethod.GET,
+                    new GraphRequest.Callback()
+                    {
+                        @Override
+                        public void onCompleted(GraphResponse response) {
+                            if (response != null) {
+                                try {
+                                    JSONObject data = response.getJSONObject();
+                                    if (data.has("picture")) {
+                                        String profilePicUrl = data.getJSONObject("picture").getJSONObject("data").getString("url");
+                                        URL ss = new URL(profilePicUrl);
+                                        Bitmap profilePic= BitmapFactory.decodeStream(ss.openConnection().getInputStream());
+                                        View navHeaderView = navigationView.getHeaderView(0);
+                                        ImageView iv = (ImageView)navHeaderView.findViewById(R.id.profile_image);
+                                        iv.setImageBitmap(profilePic);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }).executeAsync();
         }
         else
         {
@@ -134,7 +163,15 @@ public class CouponsPage2 extends AppCompatActivity implements NavigationView.On
         iv = (ImageView)findViewById(R.id.iv_company_logo);
         Picasso.with(getApplicationContext()).load(R.drawable.company_logo).into(iv);
         if(!isSignedInFb && !isSignedInGoogle)
-            LogoutButton();    }
+            LogoutButton();
+        navigationView.post(new Runnable() {
+            @Override
+            public void run() {
+                navigationView.setCheckedItem(R.id.coupons_and_cashbacks);
+            }
+        });
+
+    }
 
     @Override
     public void onBackPressed()
@@ -290,6 +327,7 @@ public class CouponsPage2 extends AppCompatActivity implements NavigationView.On
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog = new ProgressDialog(CouponsPage2.this);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.setMessage("Loading coupons...");
             progressDialog.show();
         }
@@ -409,6 +447,7 @@ public class CouponsPage2 extends AppCompatActivity implements NavigationView.On
         editor.putBoolean("signedInFb", false);
         editor.putBoolean("signedInGoogle",false);
         editor.commit();
+        LoginManager.getInstance().logOut();
         Toast.makeText(getApplicationContext(), "Signed out", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this,splashScreen.class);
         i.putExtra("abc","abc");

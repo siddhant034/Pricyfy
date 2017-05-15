@@ -49,12 +49,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,6 +67,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.os.Handler;
+
+import org.json.JSONObject;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -182,6 +185,7 @@ public class homeScreen extends AppCompatActivity
         Boolean isSignedInFb = sharedPreferences.getBoolean("signedInFb",false);
         if(isSignedInGoogle)
         {
+            navigationView = (NavigationView) findViewById(R.id.nav_view);
             View navHeaderView = navigationView.getHeaderView(0);
             String name = sharedPreferences.getString("name","No name defined");
             String profilePicture = sharedPreferences.getString("profilePicture",null);
@@ -197,21 +201,37 @@ public class homeScreen extends AppCompatActivity
         {
             View navHeaderView = navigationView.getHeaderView(0);
             String name = sharedPreferences.getString("name","No name defined");
-            String userId = sharedPreferences.getString("profilePicture",null);
-            URL imageURL = null;
-            try {
-                imageURL = new URL("https://graph.facebook.com/" + userId + "/picture?type=large");
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-            getProfilePic(userId);
             tv = (TextView)navHeaderView.findViewById(R.id.tv3);
             tv.setVisibility(View.GONE);
             tv = (TextView)navHeaderView.findViewById(R.id.tv2);
             tv.setText(name);
             tv.setClickable(false);
-          //  iv = (ImageView)navHeaderView.findViewById(R.id.imageView);
-          //  iv.setImageBitmap(profilePic);
+            Bundle params = new Bundle();
+            params.putString("fields", "id,email,gender,cover,picture.type(large)");
+            new GraphRequest(AccessToken.getCurrentAccessToken(), "me", params, HttpMethod.GET,
+                    new GraphRequest.Callback()
+                    {
+                        @Override
+                        public void onCompleted(GraphResponse response) {
+                            if (response != null) {
+                                try {
+                                    JSONObject data = response.getJSONObject();
+                                    if (data.has("picture")) {
+                                        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                                        View navHeaderView = navigationView.getHeaderView(0);
+                                        String profilePicUrl = data.getJSONObject("picture").getJSONObject("data").getString("url");
+                                        URL ss = new URL(profilePicUrl);
+                                        Log.i("profilePicUrl",ss.toString());
+                                        Bitmap profilePic= BitmapFactory.decodeStream(ss.openConnection().getInputStream());
+                                        ImageView iv = (ImageView)navHeaderView.findViewById(R.id.profile_image);
+                                        iv.setImageBitmap(profilePic);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }).executeAsync();
         }
         else
         {
@@ -227,8 +247,14 @@ public class homeScreen extends AppCompatActivity
         if(!isSignedInFb && !isSignedInGoogle)
             LogoutButton();
 
+        navigationView.post(new Runnable() {
+            @Override
+            public void run() {
+                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                navigationView.setCheckedItem(R.id.home);
+            }
+        });
     }
-
     public void getProfilePic(final String userId)
     {
         AsyncTask<String, Void, Void> asyncTask = new AsyncTask<String, Void, Void>() {
@@ -766,6 +792,7 @@ public class homeScreen extends AppCompatActivity
         editor.putBoolean("signedInFb", false);
         editor.putBoolean("signedInGoogle",false);
         editor.commit();
+        LoginManager.getInstance().logOut();
         Toast.makeText(getApplicationContext(), "Signed out", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this,splashScreen.class);
         i.putExtra("abc","abc");

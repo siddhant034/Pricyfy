@@ -5,6 +5,8 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -32,6 +34,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -75,7 +82,7 @@ public class SingleProduct extends AppCompatActivity implements NavigationView.O
 
 //        id=1041930;
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view1);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view1);
         navigationView.setNavigationItemSelectedListener(this);
         new SingleProduct.PrefetchData().execute();
         navigationView.setItemIconTintList(null);
@@ -112,8 +119,30 @@ public class SingleProduct extends AppCompatActivity implements NavigationView.O
             tv.setClickable(false);
             tv = (TextView)navHeaderView.findViewById(R.id.tv3);
             tv.setVisibility(View.GONE);
-            //  iv = (ImageView)navHeaderView.findViewById(R.id.imageView);
-            //  iv.setImageBitmap(profilePic);
+            Bundle params = new Bundle();
+            params.putString("fields", "id,email,gender,cover,picture.type(large)");
+            new GraphRequest(AccessToken.getCurrentAccessToken(), "me", params, HttpMethod.GET,
+                    new GraphRequest.Callback()
+                    {
+                        @Override
+                        public void onCompleted(GraphResponse response) {
+                            if (response != null) {
+                                try {
+                                    JSONObject data = response.getJSONObject();
+                                    if (data.has("picture")) {
+                                        String profilePicUrl = data.getJSONObject("picture").getJSONObject("data").getString("url");
+                                        URL ss = new URL(profilePicUrl);
+                                        Bitmap profilePic= BitmapFactory.decodeStream(ss.openConnection().getInputStream());
+                                        View navHeaderView = navigationView.getHeaderView(0);
+                                        ImageView iv = (ImageView)navHeaderView.findViewById(R.id.profile_image);
+                                        iv.setImageBitmap(profilePic);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }).executeAsync();
         }
         else
         {
@@ -346,7 +375,7 @@ public class SingleProduct extends AppCompatActivity implements NavigationView.O
         tv = (TextView)findViewById(R.id.shipping_charge);
         int sc = product.getShippingCharge();
         if(sc!=0)
-            tv.setText("Shipping charge : " + Integer.toString(sc));
+            tv.setText("Shipping charge : Rs. " + Integer.toString(sc));
         else
         {
             final SpannableStringBuilder sb = new SpannableStringBuilder("Shipping Charge : FREE");
@@ -371,6 +400,7 @@ public class SingleProduct extends AppCompatActivity implements NavigationView.O
         protected void onPreExecute()
         {
             progressDialog = new ProgressDialog(SingleProduct.this);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.setMessage("Loading product...");
             progressDialog.show();
         }
@@ -440,6 +470,7 @@ public class SingleProduct extends AppCompatActivity implements NavigationView.O
         editor.putBoolean("signedInFb", false);
         editor.putBoolean("signedInGoogle",false);
         editor.commit();
+        LoginManager.getInstance().logOut();
         Toast.makeText(getApplicationContext(), "Signed out", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this,splashScreen.class);
         i.putExtra("abc","abc");

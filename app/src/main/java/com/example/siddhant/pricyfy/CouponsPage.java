@@ -5,6 +5,8 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -31,6 +33,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -72,13 +79,16 @@ public class CouponsPage extends AppCompatActivity implements NavigationView.OnN
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view1);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view1);
         navigationView.setNavigationItemSelectedListener(this);
 
         slider_links = new ArrayList<>();
         slider_images = new ArrayList<>();
         coupons = new ArrayList<>();
         recyclerView = (RecyclerView)findViewById(R.id.recyclerview1);
+        Bundle extras = getIntent().getExtras();
+        if(extras!=null)
+            company_name=extras.getString("company_name");
         new PrefetchData().execute();
         navigationView.setItemIconTintList(null);
 
@@ -120,8 +130,30 @@ public class CouponsPage extends AppCompatActivity implements NavigationView.OnN
             tv.setClickable(false);
             tv = (TextView)navHeaderView.findViewById(R.id.tv3);
             tv.setVisibility(View.GONE);
-            //  iv = (ImageView)navHeaderView.findViewById(R.id.imageView);
-            //  iv.setImageBitmap(profilePic);
+            Bundle params = new Bundle();
+            params.putString("fields", "id,email,gender,cover,picture.type(large)");
+            new GraphRequest(AccessToken.getCurrentAccessToken(), "me", params, HttpMethod.GET,
+                    new GraphRequest.Callback()
+                    {
+                        @Override
+                        public void onCompleted(GraphResponse response) {
+                            if (response != null) {
+                                try {
+                                    JSONObject data = response.getJSONObject();
+                                    if (data.has("picture")) {
+                                        String profilePicUrl = data.getJSONObject("picture").getJSONObject("data").getString("url");
+                                        URL ss = new URL(profilePicUrl);
+                                        Bitmap profilePic= BitmapFactory.decodeStream(ss.openConnection().getInputStream());
+                                        View navHeaderView = navigationView.getHeaderView(0);
+                                        ImageView iv = (ImageView)navHeaderView.findViewById(R.id.profile_image);
+                                        iv.setImageBitmap(profilePic);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }).executeAsync();
         }
         else
         {
@@ -134,12 +166,14 @@ public class CouponsPage extends AppCompatActivity implements NavigationView.OnN
         }
         iv = (ImageView)findViewById(R.id.iv_company_logo);
         Picasso.with(getApplicationContext()).load(R.drawable.company_logo).into(iv);
-
-        Bundle extras = getIntent().getExtras();
-        if(extras!=null)
-            company_name=extras.getString("company_name");
         if(!isSignedInFb && !isSignedInGoogle)
             LogoutButton();
+        navigationView.post(new Runnable() {
+            @Override
+            public void run() {
+                navigationView.setCheckedItem(R.id.coupons_and_cashbacks);
+            }
+        });
     }
 
     @Override
@@ -296,6 +330,7 @@ public class CouponsPage extends AppCompatActivity implements NavigationView.OnN
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog = new ProgressDialog(CouponsPage.this);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.setMessage("Loading coupons...");
             progressDialog.show();
         }
@@ -417,7 +452,7 @@ public class CouponsPage extends AppCompatActivity implements NavigationView.OnN
         editor.putBoolean("signedInFb", false);
         editor.putBoolean("signedInGoogle",false);
         editor.commit();
-        Toast.makeText(getApplicationContext(), "Signed out", Toast.LENGTH_SHORT).show();
+        LoginManager.getInstance().logOut();
         Intent i = new Intent(this,splashScreen.class);
         i.putExtra("abc","abc");
         startActivity(i);

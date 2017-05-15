@@ -38,6 +38,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -69,10 +70,10 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
     private CircleIndicator indicator;
     private ArrayList<ArrayList<Product> > products  = new ArrayList<>(10);
     private String typeOfProducts;
-    private int category_name[] = {R.id.tv1a,R.id.tv2a,R.id.tv3a,R.id.tv4a,R.id.tv5a, R.id.tv6a, R.id.tv7a, R.id.tv8a, R.id.tv9a, R.id.tv10a};
-    private int view_all[] = {R.id.tv1b,R.id.tv2b,R.id.tv3b,R.id.tv4b,R.id.tv5b, R.id.tv6b, R.id.tv7b, R.id.tv8b, R.id.tv9b, R.id.tv10b};
-    private int recycler_view[] = {R.id.rv_content_sliders1,R.id.rv_content_sliders2,R.id.rv_content_sliders3,R.id.rv_content_sliders4,R.id.rv_content_sliders5,R.id.rv_content_sliders6,R.id.rv_content_sliders7,R.id.rv_content_sliders8,R.id.rv_content_sliders9,R.id.rv_content_sliders10};
-    private int ll[] = {R.id.ll1, R.id.ll2, R.id.ll3, R.id.ll4, R.id.ll5, R.id.ll6, R.id.ll7, R.id.ll8, R.id.ll9, R.id.ll10};
+    private int category_name[] = {R.id.tv1a,R.id.tv2a,R.id.tv3a,R.id.tv4a,R.id.tv5a, R.id.tv6a, R.id.tv7a, R.id.tv8a, R.id.tv9a, R.id.tv10a, R.id.tv11a, R.id.tv12a, R.id.tv13a, R.id.tv14a, R.id.tv15a, R.id.tv16a, R.id.tv17a, R.id.tv18a, R.id.tv19a, R.id.tv20a};
+    private int view_all[] = {R.id.tv1b,R.id.tv2b,R.id.tv3b,R.id.tv4b,R.id.tv5b, R.id.tv6b, R.id.tv7b, R.id.tv8b, R.id.tv9b, R.id.tv10b, R.id.tv11b, R.id.tv12b, R.id.tv13b, R.id.tv14b, R.id.tv15b, R.id.tv16b, R.id.tv17b, R.id.tv18b, R.id.tv19b, R.id.tv20b};
+    private int recycler_view[] = {R.id.rv_content_sliders1,R.id.rv_content_sliders2,R.id.rv_content_sliders3,R.id.rv_content_sliders4,R.id.rv_content_sliders5,R.id.rv_content_sliders6,R.id.rv_content_sliders7,R.id.rv_content_sliders8,R.id.rv_content_sliders9,R.id.rv_content_sliders10,R.id.rv_content_sliders11,R.id.rv_content_sliders12,R.id.rv_content_sliders13,R.id.rv_content_sliders14,R.id.rv_content_sliders15,R.id.rv_content_sliders16,R.id.rv_content_sliders17,R.id.rv_content_sliders18,R.id.rv_content_sliders19,R.id.rv_content_sliders20};
+    private int ll[] = {R.id.ll1, R.id.ll2, R.id.ll3, R.id.ll4, R.id.ll5, R.id.ll6, R.id.ll7, R.id.ll8, R.id.ll9, R.id.ll10, R.id.ll11, R.id.ll12, R.id.ll13, R.id.ll14, R.id.ll15, R.id.ll16, R.id.ll17, R.id.ll18, R.id.ll19, R.id.ll20};
     private ArrayList<String> names, slugs;
     private ArrayList<String> slider_images, slider_links;
 
@@ -91,7 +92,7 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view1);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view1);
         navigationView.setNavigationItemSelectedListener(this);
 
         Bundle extras = getIntent().getExtras();
@@ -158,6 +159,29 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
         Picasso.with(getApplicationContext()).load(R.drawable.company_logo).into(iv);
         if(!isSignedInFb && !isSignedInGoogle)
             LogoutButton();
+
+        int id = 0;
+        switch(typeOfProducts)
+        {
+            case "mobiles" : id = R.id.mobiles_and_tablets;break;
+            case "laptops" : id = R.id.laptops;break;
+            case "cameras" : id = R.id.cameras;break;
+            case "tv" : id = R.id.tv_and_entertainment;break;
+            case "home" : id = R.id.home;break;
+            case "home_decors" : id = R.id.home_decors;break;
+            case "men" : id = R.id.men;break;
+            case "women" : id = R.id.women;break;
+            case "mens_footwear" : id = R.id.mens_footwear;break;
+            case "womens_footwear" : id = R.id.womens_footwear;break;
+        }
+
+        final int finalId = id;
+        navigationView.post(new Runnable() {
+            @Override
+            public void run() {
+                navigationView.setCheckedItem(finalId);
+            }
+        });
     }
 
 
@@ -342,6 +366,7 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog = new ProgressDialog(Sliders.this);
+            progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.setMessage("Loading categories...");
             progressDialog.show();
            /* spinner = (ProgressBar)findViewById(R.id.progressBar1);
@@ -358,7 +383,6 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
                 JSONObject jsonObject = new JSONObject(jsonStr);
                 JSONArray namesJsonArray = jsonObject.getJSONArray("index");
                 JSONArray ja = namesJsonArray.getJSONArray(0);
-               // Log.i("abra",Integer.toString(ja.length()));
                 JSONArray sliders = jsonObject.getJSONArray("sliders");
                 for(int i=0;i<sliders.length();i++)
                 {
@@ -369,14 +393,11 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
                 JSONArray array;
                 for(int i=0;i<10;i++)
                 {
-                   // Log.i("i=",Integer.toString(i));
                     ArrayList<Product> p = new ArrayList<>();
                     products.add(p);
                     if(!jsonObject.has(Integer.toString(i))) continue;
-                   // Log.i("ii=",Integer.toString(i));
                     JSONObject jo = ja.getJSONObject(i);
                     names.add(jo.getString("name"));
-                    //Log.i("abra",Integer.toString(names.size()));
                     slugs.add(jo.getString("slug"));
                     array = jsonObject.getJSONArray(Integer.toString(i));
                     for(int j=0;j<array.length();j++)
@@ -384,10 +405,8 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
                         Product newProduct = null;
                         JSONObject object = array.getJSONObject(j);
                         newProduct = new Product(object.getInt("id"),object.getString("product_name"),object.getInt("flipkart_price"),object.getString("image_link"),object.getInt("discount"),object.getInt("mrp"),object.getDouble("seller_rating"));
-                        Log.i("arrarr",Integer.toString(j));
                         products.get(i).add(newProduct);
                     }
-                    Log.i("iii=",Integer.toString(i));
 
                 }
 
@@ -489,6 +508,7 @@ public class Sliders extends AppCompatActivity implements NavigationView.OnNavig
         editor.putBoolean("signedInFb", false);
         editor.putBoolean("signedInGoogle",false);
         editor.commit();
+        LoginManager.getInstance().logOut();
         Toast.makeText(getApplicationContext(), "Signed out", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this,splashScreen.class);
         i.putExtra("abc","abc");

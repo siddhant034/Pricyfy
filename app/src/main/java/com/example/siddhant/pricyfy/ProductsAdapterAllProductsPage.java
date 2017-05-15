@@ -56,7 +56,7 @@ public class ProductsAdapterAllProductsPage extends RecyclerView.Adapter<Product
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position)
     {
-        Picasso.with(context).load(products.get(position).getImageLink()).into(holder.imageView);
+        Picasso.with(context).load(products.get(position).getImageLink()).fit().centerInside().into(holder.imageView);
         holder.lowest_price.setText("Rs. " + String.format("%d",products.get(position).getLowestPrice()) + "(" + Integer.toString(products.get(position).getDiscount()) + "% off)" );
         String title = products.get(position).getTitle();
         if(title.length()<=25) holder.productTitle.setText(products.get(position).getTitle());

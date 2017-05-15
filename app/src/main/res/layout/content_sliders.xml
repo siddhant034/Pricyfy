@@ -487,6 +487,455 @@
             xmlns:android="http://schemas.android.com/apk/res/android">
         </android.support.v7.widget.RecyclerView>
 
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll11"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv11a"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:layout_marginLeft="5dp"
+                android:textAllCaps="false"
+                android:textSize="15dp"
+                android:textColor="@color/deals_of_the_day"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv11b"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textAllCaps="false"
+                android:textAlignment="textEnd"
+                android:textSize="10dp"
+                android:textColor="@color/view_all"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/rv_content_sliders11"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="1dp"
+            android:background="@color/background_home_screen"
+            android:layout_height="wrap_content"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll12"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv12a"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:layout_marginLeft="5dp"
+                android:textAllCaps="false"
+                android:textSize="15dp"
+                android:textColor="@color/deals_of_the_day"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv12b"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textAllCaps="false"
+                android:textAlignment="textEnd"
+                android:textSize="10dp"
+                android:textColor="@color/view_all"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/rv_content_sliders12"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="1dp"
+            android:background="@color/background_home_screen"
+            android:layout_height="wrap_content"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll13"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv13a"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:layout_marginLeft="5dp"
+                android:textAllCaps="false"
+                android:textSize="15dp"
+                android:textColor="@color/deals_of_the_day"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv13b"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textAllCaps="false"
+                android:textAlignment="textEnd"
+                android:textSize="10dp"
+                android:textColor="@color/view_all"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/rv_content_sliders13"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="1dp"
+            android:background="@color/background_home_screen"
+            android:layout_height="wrap_content"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll14"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv14a"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:layout_marginLeft="5dp"
+                android:textAllCaps="false"
+                android:textSize="15dp"
+                android:textColor="@color/deals_of_the_day"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv14b"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textAllCaps="false"
+                android:textAlignment="textEnd"
+                android:textSize="10dp"
+                android:textColor="@color/view_all"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/rv_content_sliders14"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="1dp"
+            android:background="@color/background_home_screen"
+            android:layout_height="wrap_content"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll15"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv15a"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:layout_marginLeft="5dp"
+                android:textAllCaps="false"
+                android:textSize="15dp"
+                android:textColor="@color/deals_of_the_day"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv15b"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textAllCaps="false"
+                android:textAlignment="textEnd"
+                android:textSize="10dp"
+                android:textColor="@color/view_all"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/rv_content_sliders15"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="1dp"
+            android:background="@color/background_home_screen"
+            android:layout_height="wrap_content"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll16"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv16a"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:layout_marginLeft="5dp"
+                android:textAllCaps="false"
+                android:textSize="15dp"
+                android:textColor="@color/deals_of_the_day"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv16b"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textAllCaps="false"
+                android:textAlignment="textEnd"
+                android:textSize="10dp"
+                android:textColor="@color/view_all"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/rv_content_sliders16"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="1dp"
+            android:background="@color/background_home_screen"
+            android:layout_height="wrap_content"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll17"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv17a"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:layout_marginLeft="5dp"
+                android:textAllCaps="false"
+                android:textSize="15dp"
+                android:textColor="@color/deals_of_the_day"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv17b"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textAllCaps="false"
+                android:textAlignment="textEnd"
+                android:textSize="10dp"
+                android:textColor="@color/view_all"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/rv_content_sliders17"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="1dp"
+            android:background="@color/background_home_screen"
+            android:layout_height="wrap_content"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll18"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv18a"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:layout_marginLeft="5dp"
+                android:textAllCaps="false"
+                android:textSize="15dp"
+                android:textColor="@color/deals_of_the_day"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv18b"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textAllCaps="false"
+                android:textAlignment="textEnd"
+                android:textSize="10dp"
+                android:textColor="@color/view_all"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/rv_content_sliders18"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="1dp"
+            android:background="@color/background_home_screen"
+            android:layout_height="wrap_content"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll19"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv19a"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:layout_marginLeft="5dp"
+                android:textAllCaps="false"
+                android:textSize="15dp"
+                android:textColor="@color/deals_of_the_day"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv19b"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textAllCaps="false"
+                android:textAlignment="textEnd"
+                android:textSize="10dp"
+                android:textColor="@color/view_all"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/rv_content_sliders19"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="1dp"
+            android:background="@color/background_home_screen"
+            android:layout_height="wrap_content"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll20"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv20a"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:layout_marginLeft="5dp"
+                android:textAllCaps="false"
+                android:textSize="15dp"
+                android:textColor="@color/deals_of_the_day"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv20b"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textAllCaps="false"
+                android:textAlignment="textEnd"
+                android:textSize="10dp"
+                android:textColor="@color/view_all"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/rv_content_sliders20"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="1dp"
+            android:background="@color/background_home_screen"
+            android:layout_height="wrap_content"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 </ScrollView>

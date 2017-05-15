@@ -33,8 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:padding="10dp"
-                    android:layout_alignParentTop="true"
-                    android:scaleType="centerInside" />
+                    android:layout_alignParentTop="true" />
 
                 <TextView
                     android:id="@+id/itemName"

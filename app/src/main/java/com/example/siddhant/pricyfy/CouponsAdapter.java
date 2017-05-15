@@ -59,6 +59,8 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.ViewHold
         if(!str.isEmpty())
             Picasso.with(context).load(coupons.get(position).getImage_link()).into(holder.imageView);
         String title = coupons.get(position).getTitle();
+        if(title.length()>=50)
+            title = title.substring(0,50);
         holder.couponTitle.setAllCaps(true);
         holder.couponTitle.setText(title);
     }

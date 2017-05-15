@@ -1,10 +1,13 @@
 package com.example.siddhant.pricyfy;
 
+import java.net.URL;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -40,6 +43,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
@@ -101,7 +109,7 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view1);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view1);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
@@ -130,6 +138,30 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
             tv = (TextView)findViewById(R.id.tv2);
             tv.setText(name);
             tv.setClickable(false);
+            Bundle params = new Bundle();
+            params.putString("fields", "id,email,gender,cover,picture.type(large)");
+            new GraphRequest(AccessToken.getCurrentAccessToken(), "me", params, HttpMethod.GET,
+                    new GraphRequest.Callback()
+                    {
+                        @Override
+                        public void onCompleted(GraphResponse response) {
+                            if (response != null) {
+                                try {
+                                    JSONObject data = response.getJSONObject();
+                                    if (data.has("picture")) {
+                                        String profilePicUrl = data.getJSONObject("picture").getJSONObject("data").getString("url");
+                                        URL ss = new URL(profilePicUrl);
+                                        Bitmap profilePic= BitmapFactory.decodeStream(ss.openConnection().getInputStream());
+                                        View navHeaderView = navigationView.getHeaderView(0);
+                                        ImageView iv = (ImageView)navHeaderView.findViewById(R.id.profile_image);
+                                        iv.setImageBitmap(profilePic);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }).executeAsync();
         }
 
         if(isSignedInGoogle)
@@ -149,20 +181,35 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
         {
             View navHeaderView = navigationView.getHeaderView(0);
             String name = sharedPreferences.getString("name","No name defined");
-            String userId = sharedPreferences.getString("profilePicture",null);
-            URL imageURL = null;
-            try {
-                imageURL = new URL("https://graph.facebook.com/" + userId + "/picture?type=large");
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
             tv = (TextView)navHeaderView.findViewById(R.id.tv3);
             tv.setVisibility(View.GONE);
             tv = (TextView)navHeaderView.findViewById(R.id.tv2);
             tv.setText(name);
             tv.setClickable(false);
-            //  iv = (ImageView)navHeaderView.findViewById(R.id.imageView);
-            //  iv.setImageBitmap(profilePic);
+            Bundle params = new Bundle();
+            params.putString("fields", "id,email,gender,cover,picture.type(large)");
+            new GraphRequest(AccessToken.getCurrentAccessToken(), "me", params, HttpMethod.GET,
+                    new GraphRequest.Callback()
+                    {
+                        @Override
+                        public void onCompleted(GraphResponse response) {
+                            if (response != null) {
+                                try {
+                                    JSONObject data = response.getJSONObject();
+                                    if (data.has("picture")) {
+                                        String profilePicUrl = data.getJSONObject("picture").getJSONObject("data").getString("url");
+                                        URL ss = new URL(profilePicUrl);
+                                        Bitmap profilePic= BitmapFactory.decodeStream(ss.openConnection().getInputStream());
+                                        View navHeaderView = navigationView.getHeaderView(0);
+                                        ImageView iv = (ImageView)navHeaderView.findViewById(R.id.profile_image);
+                                        iv.setImageBitmap(profilePic);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }).executeAsync();
         }
         else
         {
@@ -188,6 +235,7 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
         editor.putBoolean("signedInFb", false);
         editor.putBoolean("signedInGoogle",false);
         editor.commit();
+        LoginManager.getInstance().logOut();
         Toast.makeText(getApplicationContext(), "Signed out", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this,splashScreen.class);
         i.putExtra("abc","abc");
@@ -200,9 +248,11 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
         editor.putBoolean("signedInFb", false);
         editor.putBoolean("signedInGoogle",false);
         editor.commit();
+        LoginManager.getInstance().logOut();
         Toast.makeText(getApplicationContext(), "Signed out", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this,splashScreen.class);
         i.putExtra("abc","abc");
+        LoginManager.getInstance().logOut();
         startActivity(i);
         finish();
     }
