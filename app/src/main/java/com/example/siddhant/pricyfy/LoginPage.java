@@ -74,7 +74,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         SignInButton sb = (SignInButton)findViewById(R.id.sign_in_button);
-        setGooglePlusButtonText(sb,"Sign in with Google");
+        setGooglePlusButtonText(sb,"Sign in with Google ");
 
         findViewById(R.id.sign_in_button).setOnClickListener((View.OnClickListener) this);
 
